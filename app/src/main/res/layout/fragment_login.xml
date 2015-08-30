@@ -1,41 +1,68 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                tools:context="com.rey.material.demo.LoginFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              tools:context="com.rey.material.demo.LoginFragment"
+              android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1.0"
-        android:gravity="center">
+        android:orientation="vertical"
+        android:padding="8dp">
 
-        <com.rey.material.widget.Button
-            android:id="@+id/button_bt_flat"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/bt_height"
-            android:layout_weight="0.4"
-            android:text="BUTTON1"
-            android:background="@null"
-            app:v_styleId="@array/button_flat"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="0.1"/>
+        <com.rey.material.widget.EditText
+            android:id="@+id/textfield_et_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Username"
+            app:et_inputId="@+id/textfield_et_label_input"
+            app:et_supportMode="none"
+            app:v_styleId="@array/edittext"/>
+        <com.rey.material.widget.EditText
+            android:id="@+id/textfield_et_helper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inputType="textPassword"
+            android:hint="Password"
+            app:et_inputId="@+id/textfield_et_helper_input"
+            app:et_supportMode="helper"
+            app:et_helper="Enter password"
+            app:v_styleId="@array/edittext"/>
 
-        <com.rey.material.widget.Button
-            android:id="@+id/button_bt_flat_color"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/bt_height"
-            android:layout_weight="0.4"
-            android:text="BUTTON2"
-            android:background="@null"
-            app:v_styleId="@array/button_flat_color"/>
+        
 
     </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.rey.material.widget.Button
+            android:id="@+id/button_bt_raise"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/bt_height"
+            android:text="BUTTON"
+            app:v_styleId="@array/button_raise"/>
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="1dp"/>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/button_bt_raise_color"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/bt_height"
+            android:text="BUTTON"
+            app:v_styleId="@array/button_raise_color"/>
+
+    </LinearLayout>
+
+</LinearLayout>

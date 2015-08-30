@@ -29,29 +29,24 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
-        Button bt_flat = (Button)v.findViewById(R.id.button_bt_flat);
-        Button bt_flat_color = (Button)v.findViewById(R.id.button_bt_flat_color);
+        Button button_bt_raise = (Button)v.findViewById(R.id.button_bt_raise);
+        Button button_bt_raise_color = (Button)v.findViewById(R.id.button_bt_raise_color);
 
 
 
-        bt_flat.setOnClickListener(new View.OnClickListener(){
+        button_bt_raise.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                mSnackBar.applyStyle(R.style.SnackBarSingleLine)
-//                        .show();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+                        .show();
 
             }
         });
 
-        bt_flat_color.setOnClickListener(new View.OnClickListener(){
+        button_bt_raise_color.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), MainActivity.class);
-//                startActivity(intent);
-                mSnackBar.applyStyle(R.style.SnackBarSingleLine)
-                        .show();
+                goToMainActivity(v);
 
             }
         });
@@ -61,7 +56,11 @@ public class LoginFragment extends Fragment {
     }
 
 
-
+    public void goToMainActivity(View v)
+    {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+    }
 
 
 }
