@@ -107,4 +107,9 @@
         <item name="cet_spanSpacing">4dp</item>
     </style>
 
+    <style name="DatePickerStyle" parent="Material.App.Dialog.DatePicker.Light">
+        <item name="dp_yearMin">1900</item>
+        <item name="dp_yearMax">2010</item>
+    </style>
+
 </resources>

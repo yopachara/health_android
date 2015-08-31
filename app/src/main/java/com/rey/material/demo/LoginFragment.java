@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 mSnackBar.applyStyle(R.style.SnackBarSingleLine)
                         .show();
+                goToSignup(v);
 
             }
         });
@@ -60,6 +63,15 @@ public class LoginFragment extends Fragment {
     {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
+    }
+
+    public void goToSignup(View v)
+    {
+        Fragment signupFragment = new SignupFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, signupFragment);
+        fragmentTransaction.commit();
     }
 
 

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.rey.material.app.ThemeManager;
 import com.rey.material.widget.Button;
@@ -34,9 +35,9 @@ public class LoginActivity extends AppCompatActivity  {
 
         mSnackBar = (SnackBar)findViewById(R.id.main_sn);
 
-        LoginFragment fragment = new LoginFragment();
+        LoginFragment loginFragment = new LoginFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container, fragment);
+        transaction.add(R.id.fragment_container, loginFragment);
         transaction.commit();
 
     }

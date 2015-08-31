@@ -724,7 +724,7 @@ public class DatePickerDialog extends Dialog {
             mYear = cal.get(Calendar.YEAR);
             mMinDay = mDay;
             mMinMonth = mMonth;
-            mMinYear = mYear - 12;
+            mMinYear = mYear - 90;
             mMaxDay = mDay;
             mMaxMonth = mMonth;
             mMaxYear = mYear + 12;
