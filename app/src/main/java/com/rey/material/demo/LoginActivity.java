@@ -1,5 +1,6 @@
 package com.rey.material.demo;
 
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.rey.material.app.ThemeManager;
 import com.rey.material.widget.Button;
 import com.rey.material.widget.SnackBar;
+
 
 
 public class LoginActivity extends AppCompatActivity  {

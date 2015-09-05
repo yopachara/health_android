@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     private ToolbarManager mToolbarManager;
     private SnackBar mSnackBar;
 
-	private Tab[] mItems = new Tab[]{Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS};
+	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     }
 
     public enum Tab {
+		HOME ("Home"),
 	    PROGRESS ("Progresses"),
 	    BUTTONS ("Buttons"),
         FAB ("FABs"),
@@ -167,8 +168,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         SLIDERS ("Sliders"),
         SPINNERS ("Spinners"),
 	    TEXTFIELDS ("TextFields"),
-	    SNACKBARS ("SnackBars");
-//        DIALOGS ("Dialogs");
+	    SNACKBARS ("SnackBars"),
+		DIALOGS ("Dialogs");
 	    private final String name;       
 
 	    private Tab(String s) {
@@ -310,8 +311,10 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     						setFragment(Tab.TEXTFIELDS, fragment);
     					else if(fragment instanceof SnackbarFragment)
     						setFragment(Tab.SNACKBARS, fragment);
-//                        else if(fragment instanceof DialogsFragment)
-//                            setFragment(Tab.DIALOGS, fragment);
+                        else if(fragment instanceof DialogsFragment)
+                            setFragment(Tab.DIALOGS, fragment);
+						else if(fragment instanceof HomeFragment)
+							setFragment(Tab.HOME, fragment);
     				}
     			}
     		}
@@ -354,9 +357,12 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 					case SNACKBARS:
 						mFragments[position] = SnackbarFragment.newInstance();
 						break;
-//                    case DIALOGS:
-//                        mFragments[position] = DialogsFragment.newInstance();
-//                        break;
+                    case DIALOGS:
+                        mFragments[position] = DialogsFragment.newInstance();
+                        break;
+					case HOME:
+						mFragments[position] = HomeFragment.newInstance();
+						break;
 				}
 			}
 						

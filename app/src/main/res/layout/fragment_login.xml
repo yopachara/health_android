@@ -63,6 +63,13 @@
             android:text="BUTTON"
             app:v_styleId="@array/button_raise_color"/>
 
+        <com.rey.material.widget.Button
+            android:id="@+id/testBut"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/bt_height"
+            android:text="test"
+            app:v_styleId="@array/button_raise"/>
+
     </LinearLayout>
 
 </LinearLayout>
