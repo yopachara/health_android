@@ -1,1 +1,2 @@
-include ':app', ':lib'
+include ':app', ':lib', ':decoview'
+project(':decoview').projectDir = new File('decoviewlib')
