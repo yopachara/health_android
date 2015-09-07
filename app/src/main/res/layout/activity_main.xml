@@ -30,7 +30,7 @@
                 android:clipToPadding="false"
                 app:v_styleId="@array/tab_indicator"/>
 
-            <com.rey.material.demo.CustomViewPager
+            <com.yopachara.health.demo.CustomViewPager
                 android:id="@+id/main_vp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -46,23 +46,36 @@
 
     </FrameLayout>
     
-    <FrameLayout 
+    <FrameLayout
         android:id="@+id/main_fl_drawer"
         android:layout_width="@dimen/drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:paddingTop="?attr/actionBarSize">
-        
-        <com.rey.material.widget.ListView
-            android:id="@+id/main_lv_drawer"
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"	        
-	        android:choiceMode="singleChoice"
-	        android:divider="@null"
-	        android:dividerHeight="0dp"
-	        android:listSelector="@android:color/transparent"
-            app:v_styleId="@array/listview"/>
-        
-    </FrameLayout>    
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_user"/>
+            <com.rey.material.widget.ListView
+                android:id="@+id/main_lv_drawer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:choiceMode="singleChoice"
+                android:textSize="5sp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:listSelector="@android:color/transparent"
+                app:v_styleId="@array/listview"/>
+
+
+        </LinearLayout>
+
+    </FrameLayout>
     
 </android.support.v4.widget.DrawerLayout>

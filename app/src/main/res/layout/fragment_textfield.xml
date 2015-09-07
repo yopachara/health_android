@@ -12,7 +12,7 @@
 	    android:orientation="vertical"
 	    android:padding="8dp">
 
-        <com.rey.material.app.ContactEditText
+        <com.yopachara.health.app.ContactEditText
             android:id="@+id/textfield_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

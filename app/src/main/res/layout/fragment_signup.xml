@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                tools:context="com.rey.material.demo.SignupFragment"
+                tools:context="com.yopachara.health.demo.SignupFragment"
                 android:orientation="vertical">
 
     <com.rey.material.widget.EditText
@@ -30,7 +30,7 @@
         app:et_helper="Enter password"
         app:v_styleId="@array/edittext"/>
 
-    <com.rey.material.app.ContactEditText
+    <com.yopachara.health.app.ContactEditText
         android:id="@+id/contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
