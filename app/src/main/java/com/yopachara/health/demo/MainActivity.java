@@ -26,6 +26,7 @@ import com.rey.material.app.ToolbarManager;
 import com.rey.material.drawable.ThemeDrawable;
 import com.rey.material.util.ThemeUtil;
 import com.rey.material.util.ViewUtil;
+import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
 
@@ -62,6 +63,14 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		vp = (CustomViewPager)findViewById(R.id.main_vp);
 		tpi = (TabPageIndicator)findViewById(R.id.main_tpi);
         mSnackBar = (SnackBar)findViewById(R.id.main_sn);
+		final FloatingActionButton fab_line = (FloatingActionButton)findViewById(R.id.fab_line);
+		fab_line.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				fab_line.setLineMorphingState((fab_line.getLineMorphingState() + 1) % 2, true);
+			}
+			Onscr
+		});
 
         mToolbarManager = new ToolbarManager(getDelegate(), mToolbar, R.id.tb_group_main, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
         mToolbarManager.setNavigationManager(new ToolbarManager.ThemableNavigationManager(R.array.navigation_drawer, getSupportFragmentManager(), mToolbar, dl_navigator) {
