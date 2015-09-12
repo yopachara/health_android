@@ -1,6 +1,7 @@
 package com.yopachara.health.demo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,17 +11,27 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+
+
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
+import com.rey.material.app.SimpleDialog;
 import com.rey.material.app.ThemeManager;
 import com.rey.material.app.ToolbarManager;
 import com.rey.material.drawable.ThemeDrawable;
@@ -48,6 +59,12 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     private ToolbarManager mToolbarManager;
     private SnackBar mSnackBar;
 
+	private SpeechRecognizer sr;
+	private static final String TAG = "MyStt3Activity";
+
+
+	private FloatingActionButton fab_line;
+
 	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
 	
 	@Override
@@ -63,36 +80,41 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		vp = (CustomViewPager)findViewById(R.id.main_vp);
 		tpi = (TabPageIndicator)findViewById(R.id.main_tpi);
         mSnackBar = (SnackBar)findViewById(R.id.main_sn);
-		final FloatingActionButton fab_line = (FloatingActionButton)findViewById(R.id.fab_line);
+		fab_line = (FloatingActionButton)findViewById(R.id.fab_line);
 		fab_line.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				fab_line.setLineMorphingState((fab_line.getLineMorphingState() + 1) % 2, true);
+				Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+				intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+				intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getApplication().getPackageName());
+				sr.startListening(intent);
+				Log.i("111111", "11111111");
 			}
-			Onscr
+
 		});
 
         mToolbarManager = new ToolbarManager(getDelegate(), mToolbar, R.id.tb_group_main, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
         mToolbarManager.setNavigationManager(new ToolbarManager.ThemableNavigationManager(R.array.navigation_drawer, getSupportFragmentManager(), mToolbar, dl_navigator) {
-            @Override
-            public void onNavigationClick() {
-                if(mToolbarManager.getCurrentGroup() != R.id.tb_group_main)
-                    mToolbarManager.setCurrentGroup(R.id.tb_group_main);
-                else
-                    dl_navigator.openDrawer(GravityCompat.START);
-            }
+			@Override
+			public void onNavigationClick() {
+				if (mToolbarManager.getCurrentGroup() != R.id.tb_group_main)
+					mToolbarManager.setCurrentGroup(R.id.tb_group_main);
+				else
+					dl_navigator.openDrawer(GravityCompat.START);
+			}
 
-            @Override
-            public boolean isBackState() {
-                return super.isBackState() || mToolbarManager.getCurrentGroup() != R.id.tb_group_main;
-            }
+			@Override
+			public boolean isBackState() {
+				return super.isBackState() || mToolbarManager.getCurrentGroup() != R.id.tb_group_main;
+			}
 
-            @Override
-            protected boolean shouldSyncDrawerSlidingProgress() {
-                return super.shouldSyncDrawerSlidingProgress() && mToolbarManager.getCurrentGroup() == R.id.tb_group_main;
-            }
+			@Override
+			protected boolean shouldSyncDrawerSlidingProgress() {
+				return super.shouldSyncDrawerSlidingProgress() && mToolbarManager.getCurrentGroup() == R.id.tb_group_main;
+			}
 
-        });
+		});
         mToolbarManager.registerOnToolbarGroupChangedListener(this);
 		
 		mDrawerAdapter = new DrawerAdapter(this);
@@ -103,28 +125,31 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		tpi.setViewPager(vp);
 		tpi.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-            @Override
-            public void onPageSelected(int position) {
-                mDrawerAdapter.setSelected(mItems[position]);
-                mSnackBar.dismiss();
-            }
+			@Override
+			public void onPageSelected(int position) {
+				mDrawerAdapter.setSelected(mItems[position]);
+				mSnackBar.dismiss();
+			}
 
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+			}
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
+			@Override
+			public void onPageScrollStateChanged(int state) {
+			}
 
-        });
+		});
 
         mDrawerAdapter.setSelected(Tab.PROGRESS);
 		vp.setCurrentItem(0);
 
         ViewUtil.setBackground(getWindow().getDecorView(), new ThemeDrawable(R.array.bg_window));
         ViewUtil.setBackground(mToolbar, new ThemeDrawable(R.array.bg_toolbar));
-    }
+
+		sr = SpeechRecognizer.createSpeechRecognizer(this);
+		sr.setRecognitionListener(new listener());
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -384,6 +409,91 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		@Override
         public int getCount() {
             return mFragments.length;
-        }
-    }
+		}
+	}
+
+	class listener implements RecognitionListener
+	{
+		private MainActivity mActivity;
+		public void onReadyForSpeech(Bundle params)
+		{
+			Log.d(TAG, "onReadyForSpeech");
+		}
+		public void onBeginningOfSpeech()
+		{
+			Log.d(TAG, "onBeginningOfSpeech");
+		}
+		public void onRmsChanged(float rmsdB)
+		{
+			Log.d(TAG, "onRmsChanged");
+		}
+		public void onBufferReceived(byte[] buffer)
+		{
+			Log.d(TAG, "onBufferReceived");
+		}
+		public void onEndOfSpeech()
+		{
+			Log.d(TAG, "onEndofSpeech");
+		}
+		public void onError(int error)
+		{
+			Log.d(TAG, "error " + error);
+			if(error == 4){
+				mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+						.text("โปรดเชื่อมต่ออินเตอร์เน็ต")
+						.show();
+			}
+//			mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+//					.text("error " + error)
+//					.show();
+		}
+		public void onResults(Bundle results)
+		{
+			String str = new String();
+			Log.d(TAG, "onResults " + results);
+			ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+			for (int i = 0; i < data.size(); i++)
+			{
+				Log.d(TAG, "result " + data.get(i));
+				str += data.get(i);
+			}
+			Dialog.Builder builder = null;
+			boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
+
+			builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog){
+				@Override
+				public void onPositiveActionClicked(DialogFragment fragment) {
+					Toast.makeText(MainActivity.this, "You have selected " + getSelectedValue() + " as phone ringtone.", Toast.LENGTH_SHORT).show();
+					super.onPositiveActionClicked(fragment);
+				}
+
+				@Override
+				public void onNegativeActionClicked(DialogFragment fragment) {
+					Toast.makeText(MainActivity.this, "Cancelled" , Toast.LENGTH_SHORT).show();
+					super.onNegativeActionClicked(fragment);
+				}
+			};
+			CharSequence[] cs = new CharSequence[data.size()];
+			data.toArray(cs);
+
+			((SimpleDialog.Builder)builder).items(cs,0)
+					.title("รายการอาหาร")
+					.positiveAction("เลือก")
+					.negativeAction("ยกเลิก");
+			DialogFragment fragment = DialogFragment.newInstance(builder);
+			fragment.show(getSupportFragmentManager(), null);
+
+			mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+					.text("results: "+String.valueOf(data))
+					.show();
+		}
+		public void onPartialResults(Bundle partialResults)
+		{
+			Log.d(TAG, "onPartialResults");
+		}
+		public void onEvent(int eventType, Bundle params)
+		{
+			Log.d(TAG, "onEvent " + eventType);
+		}
+	}
 }
