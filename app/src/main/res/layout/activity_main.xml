@@ -37,6 +37,15 @@
 
         </LinearLayout>
 
+        <com.rey.material.widget.FloatingActionButton
+            android:id="@+id/fab_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="5dp"
+            app:v_styleId="@array/fab_line"/>
+
         <com.rey.material.widget.SnackBar
             android:id="@+id/main_sn"
             android:layout_width="match_parent"
