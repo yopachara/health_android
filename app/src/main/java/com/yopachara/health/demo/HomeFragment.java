@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         DecoView arcView = (DecoView)v.findViewById(R.id.dynamicArcView);
-        TextView textValue = (TextView)v.findViewById(R.id.textValue);
+
         // Create background track
         arcView.addSeries(new SeriesItem.Builder(Color.argb(255, 218, 218, 218))
                 .setRange(0, 100, 100)
@@ -53,12 +53,14 @@ public class HomeFragment extends Fragment {
                 .setDuration(2000)
                 .build());
 
-        arcView.addEvent(new DecoEvent.Builder(25).setIndex(series1Index).setDelay(4000).build());
         final TextView textPercent = (TextView) v.findViewById(R.id.textValue);
         if (textPercent != null) {
             textPercent.setText("");
             addProgressListener(seriesItem1, textPercent, "%.0f%%");
-        }        arcView.addEvent(new DecoEvent.Builder(100).setIndex(series1Index).setDelay(10000).build());
+        }
+
+        arcView.addEvent(new DecoEvent.Builder(25).setIndex(series1Index).setDelay(4000).build());
+        arcView.addEvent(new DecoEvent.Builder(100).setIndex(series1Index).setDelay(10000).build());
         arcView.addEvent(new DecoEvent.Builder(14).setIndex(series1Index).setDelay(15000).build());
 
 

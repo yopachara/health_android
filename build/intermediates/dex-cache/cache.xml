@@ -2,66 +2,10 @@
 <items version="2" >
 
     <item
-        jar="/Users/yopachara/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
-        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-5ce348bdf842d74bcd8202d7ab0f6032ac18643f.jar" />
-    </item>
-    <item
-        jar="/Users/yopachara/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.0/7ff0e000d1e27e356567f56c92af3b8ab912636f/picasso-2.5.0.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="7ff0e000d1e27e356567f56c92af3b8ab912636f">
-        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/picasso-2.5.0-650354dd5593ab7d5dbe5bc1b768b883c92e73be.jar" />
-    </item>
-    <item
-        jar="/Users/yopachara/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/gson-2.3.1-2d949873fd92649f312a8c390fa16398f2f10f32.jar" />
-    </item>
-    <item
-        jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/classes-1582dcc1e6568eeaff2b86468f820be6b2ac472a.jar" />
-    </item>
-    <item
-        jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/libs/internal_impl-23.0.0.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
-        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-04a3f13f6b33d40431b3b9c7fb9453d2b0cd489e.jar" />
-    </item>
-    <item
-        jar="/Users/yopachara/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/library-2.4.0-58c199d8b45511eba024d1b5daa136ba062eac41.jar" />
-    </item>
-    <item
-        jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="97f7e239e86ef994de894818fdd8a71d2e89d6aa">
-        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/classes-2aa665a8418cff508a88edaf6d804974f6f47f3c.jar" />
-    </item>
-    <item
-        jar="/Users/yopachara/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="a681c044244d9fc375198588297a39ba78028423">
-        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-8e93018f107c6f2a1a7e02de8015f9a5b8dbe737.jar" />
-    </item>
-    <item
         jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.github.rey5137/lib/1.2.1/jars/classes.jar"
         jumboMode="false"
         revision="21.1.1"
-        sha1="961e74df710477e900dda34a84f05cb5f814c86b">
+        sha1="fa3cd24e8a8caa298330642ba93637180eeb524f">
         <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/classes-88bb0cf1645e3dbbf6b886647a2b5ef57fd0b7ae.jar" />
     </item>
     <item
@@ -72,11 +16,67 @@
         <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/classes-77ebd733d08c344e1bf8fec52ce0c537436ac7bc.jar" />
     </item>
     <item
+        jar="/Users/yopachara/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/library-2.4.0-58c199d8b45511eba024d1b5daa136ba062eac41.jar" />
+    </item>
+    <item
+        jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="e1fa5e1123997a55e3ed65b44892993ff4b58cfe">
+        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/classes-4e679db08ad09a8ec1640d380ff00a9b63ec3018.jar" />
+    </item>
+    <item
+        jar="/Users/yopachara/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.0/7ff0e000d1e27e356567f56c92af3b8ab912636f/picasso-2.5.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="7ff0e000d1e27e356567f56c92af3b8ab912636f">
+        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/picasso-2.5.0-650354dd5593ab7d5dbe5bc1b768b883c92e73be.jar" />
+    </item>
+    <item
+        jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/libs/internal_impl-23.0.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
+        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-04a3f13f6b33d40431b3b9c7fb9453d2b0cd489e.jar" />
+    </item>
+    <item
         jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.github.rey5137/decoview/1.2.1/jars/classes.jar"
         jumboMode="false"
         revision="21.1.1"
-        sha1="22816c91eed80b76a9cb52f2c0022909e0af2ed6">
+        sha1="e13d9981dde0b7e8704c10b2d36db6a691ce5c12">
         <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/classes-f3055d70aac5dff6fb75f1083936dc27cbdada96.jar" />
+    </item>
+    <item
+        jar="/Users/yopachara/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/gson-2.3.1-2d949873fd92649f312a8c390fa16398f2f10f32.jar" />
+    </item>
+    <item
+        jar="/Users/yopachara/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
+        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-5ce348bdf842d74bcd8202d7ab0f6032ac18643f.jar" />
+    </item>
+    <item
+        jar="/Users/yopachara/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-8e93018f107c6f2a1a7e02de8015f9a5b8dbe737.jar" />
+    </item>
+    <item
+        jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/classes-1582dcc1e6568eeaff2b86468f820be6b2ac472a.jar" />
     </item>
 
 </items>

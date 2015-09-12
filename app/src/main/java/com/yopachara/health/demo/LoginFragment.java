@@ -13,14 +13,14 @@ import android.view.ViewGroup;
 import com.rey.material.widget.Button;
 import com.rey.material.widget.EditText;
 import com.rey.material.widget.SnackBar;
+import com.yopachara.health.demo.Model.HealthModel;
+import com.yopachara.health.demo.Service.HealthService;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import com.yopachara.health.demo.API.healthAPI;
-import com.yopachara.health.demo.Model.healthModel;
 
 public class LoginFragment extends Fragment {
 
@@ -69,18 +69,17 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 RestAdapter restAdapter = new RestAdapter.Builder()
                         .setEndpoint(API).build();
-                healthAPI api = restAdapter.create(healthAPI.class);
+                HealthService api = restAdapter.create(HealthService.class);
 
-                api.getFeeds(new Callback<healthModel>() {
-
+                api.getFeeds(new Callback<HealthModel>() {
                     @Override
-                    public void success(healthModel healthModel, Response response) {
-                        textTest.setText(healthModel.getText()+healthModel.toString());
+                    public void success(HealthModel healthModel, Response response) {
+                        textTest.setText(healthModel.getTexts());
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-                        textTest.setText(error.getUrl()+error.getMessage());
+                        textTest.setText(error.getUrl() + error.getMessage());
                     }
                 });
             }
