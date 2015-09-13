@@ -5,14 +5,14 @@ package com.yopachara.health.demo.Model;
  */
 
 
-public class healthModel {
+public class HealthModel {
     private String message;
     /**
      *
      * @return
      * The login
      */
-    public String getText() {
+    public String getTexts() {
         return message;
     }
 
