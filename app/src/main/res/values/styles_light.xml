@@ -128,12 +128,14 @@
     <style name="LightFABIcon" parent="Material.Widget.FloatingActionButton.Light">
         <item name="rd_rippleColor">#33000000</item>
         <item name="fab_backgroundColor">@color/colorPrimary</item>
+        <item name="fab_iconSrc">@drawable/ic_voice</item>
     </style>
 
     <style name="LightFABLine" parent="Material.Widget.FloatingActionButton.Light">
         <item name="rd_rippleColor">#33000000</item>
         <item name="fab_backgroundColor">@color/colorPrimary</item>
         <item name="fab_iconLineMorphing">@style/LightFloatingActionButtonIcon</item>
+        <item name="fab_iconSrc">@drawable/ic_voice</item>
     </style>
 
     <style name="LightFAB" parent="Material.Drawable.Ripple.Touch.Light">
@@ -212,7 +214,7 @@
         <item name="tpi_indicatorHeight">3dp</item>
         <item name="tpi_indicatorColor">@color/colorAccent</item>
         <item name="android:textAppearance">@style/LightTabTextAppearance</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimaryA</item>
         <item name="tpi_mode">scroll</item>
     </style>
 

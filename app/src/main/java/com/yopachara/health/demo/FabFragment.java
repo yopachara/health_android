@@ -39,7 +39,7 @@ public class FabFragment extends Fragment{
         final FloatingActionButton fab_image = (FloatingActionButton)v.findViewById(R.id.fab_image);
         mDrawables[0] = v.getResources().getDrawable(R.drawable.ic_autorenew_white_24dp);
         mDrawables[1] = v.getResources().getDrawable(R.drawable.ic_done_white_24dp);
-        fab_image.setIcon(mDrawables[index], false);
+        fab_image.setIcon(mDrawables[index], true);
         fab_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>    
     
-    <color name="colorPrimary">#FF03A9F4</color>
-	<color name="colorPrimaryDark">#ff0171c9</color>
-	<color name="colorAccent">#FF00E5FF</color>	 
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryA">#00796b</color>
+    <color name="colorPrimaryDark">#ff0171c9</color>
+	<color name="colorAccent">#E0F2F1</color>
 	<color name="colorControlNormal">#FF78909C</color>  
 	<color name="colorControlActivated">#FF03A9F4</color>
 	<color name="colorSwitchThumbNormal">#FF78909C</color>

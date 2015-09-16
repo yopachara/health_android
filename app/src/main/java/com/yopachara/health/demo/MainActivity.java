@@ -2,6 +2,7 @@ package com.yopachara.health.demo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,20 +30,33 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 import com.rey.material.app.ThemeManager;
 import com.rey.material.app.ToolbarManager;
+import com.rey.material.drawable.LineMorphingDrawable;
 import com.rey.material.drawable.ThemeDrawable;
 import com.rey.material.util.ThemeUtil;
 import com.rey.material.util.ViewUtil;
 import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
+import com.yopachara.health.demo.Model.FoodModel;
+import com.yopachara.health.demo.Model.HealthModel;
+import com.yopachara.health.demo.Service.HealthService;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.TypedByteArray;
 
 public class MainActivity extends AppCompatActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
@@ -60,8 +74,12 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     private SnackBar mSnackBar;
 
 	private SpeechRecognizer sr;
-	private static final String TAG = "MyStt3Activity";
+	private static final String TAG = "Speech Recognizer";
+	private Drawable[] mDrawables = new Drawable[2];
+	private int index = 0;
 
+	String API = "http://pachara.me:3000";
+	Dialog.Builder builder = null;
 
 	private FloatingActionButton fab_line;
 
@@ -84,12 +102,14 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		fab_line.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mDrawables[1] = v.getResources().getDrawable(R.drawable.ic_voice);
+				mDrawables[0] = v.getResources().getDrawable(R.drawable.ic_done_white_24dp);
 				fab_line.setLineMorphingState((fab_line.getLineMorphingState() + 1) % 2, true);
 				Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 				intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 				intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getApplication().getPackageName());
 				sr.startListening(intent);
-				Log.i("111111", "11111111");
+				Log.i("RecognizerIntent", "startListening");
 			}
 
 		});
@@ -412,9 +432,89 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		}
 	}
 
+	private void postSearch(String txt){
+		RestAdapter restAdapter = new RestAdapter.Builder()
+				.setEndpoint(API).build();
+		HealthService api = restAdapter.create(HealthService.class);
+
+		api.postSearch(txt, new Callback<FoodModel>() {
+
+
+			@Override
+			public void success(FoodModel foodModel, Response response) {
+				ArrayList<FoodModel.Foods> text = foodModel.getObjects();
+				//Log.d("Response",text.get(0).getName());
+				createDialog(text);
+//				mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+//						.text(text)
+//						.show();
+//				Log.d("Success", text);
+
+
+
+
+
+			}
+
+			@Override
+			public void failure(RetrofitError error) {
+				mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+						.text(error.toString())
+						.show();
+				Log.d("Error", error.toString());
+
+			}
+		});
+	}
+
+	private void createDialog(ArrayList<FoodModel.Foods> dialog){
+
+		boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
+
+		builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog){
+			@Override
+			public void onPositiveActionClicked(DialogFragment fragment) {
+				postSearch(getSelectedValue().toString());
+				super.onPositiveActionClicked(fragment);
+			}
+
+			@Override
+			public void onNegativeActionClicked(DialogFragment fragment) {
+				super.onNegativeActionClicked(fragment);
+			}
+		};
+//		CharSequence[] cs = new CharSequence[dialog.size()];
+//		dialog.toArray(cs);
+
+
+
+		ArrayList<String> listing = new ArrayList<String>();
+		FoodModel.Foods item;
+		for(int i=0;i<dialog.size();i++)
+		{
+			listing.add(dialog.get(i).getName());
+			//getPath is a method in the customtype class which will return value in string format
+
+		}
+		final CharSequence[] cs = listing.toArray(new CharSequence[listing.size()]);
+
+		
+		((SimpleDialog.Builder)builder).items(cs,0)
+				.title("รายการอาหาร")
+				.positiveAction("เลือก")
+				.negativeAction("ยกเลิก");
+		DialogFragment fragment = DialogFragment.newInstance(builder);
+		fragment.show(getSupportFragmentManager(), null);
+
+		mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+				.text("results: "+String.valueOf(dialog))
+				.show();
+	}
+
 	class listener implements RecognitionListener
 	{
 		private MainActivity mActivity;
+		Dialog.Builder builder = null;
 		public void onReadyForSpeech(Bundle params)
 		{
 			Log.d(TAG, "onReadyForSpeech");
@@ -451,25 +551,25 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		{
 			String str = new String();
 			Log.d(TAG, "onResults " + results);
-			ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+			final ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 			for (int i = 0; i < data.size(); i++)
 			{
 				Log.d(TAG, "result " + data.get(i));
 				str += data.get(i);
 			}
-			Dialog.Builder builder = null;
 			boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
 
 			builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog){
 				@Override
 				public void onPositiveActionClicked(DialogFragment fragment) {
-					Toast.makeText(MainActivity.this, "You have selected " + getSelectedValue() + " as phone ringtone.", Toast.LENGTH_SHORT).show();
+					Toast.makeText(MainActivity.this, "คุณได้เลือก " + getSelectedValue(), Toast.LENGTH_SHORT).show();
+					postSearch(getSelectedValue().toString());
 					super.onPositiveActionClicked(fragment);
 				}
 
 				@Override
 				public void onNegativeActionClicked(DialogFragment fragment) {
-					Toast.makeText(MainActivity.this, "Cancelled" , Toast.LENGTH_SHORT).show();
+					Toast.makeText(MainActivity.this, "ยกเลิก" , Toast.LENGTH_SHORT).show();
 					super.onNegativeActionClicked(fragment);
 				}
 			};
@@ -487,12 +587,10 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 					.text("results: "+String.valueOf(data))
 					.show();
 		}
-		public void onPartialResults(Bundle partialResults)
-		{
+		public void onPartialResults(Bundle partialResults) {
 			Log.d(TAG, "onPartialResults");
 		}
-		public void onEvent(int eventType, Bundle params)
-		{
+		public void onEvent(int eventType, Bundle params) {
 			Log.d(TAG, "onEvent " + eventType);
 		}
 	}
