@@ -24,5 +24,6 @@ public interface HealthService {
     postSearch(@Field("search") String txt,Callback<FoodModel> response);
 
     @GET("/api/foods/")
-    public void getFoods(Callback<HealthModel> response);
-}   
+    public void getFoods(Callback<FoodModel> response);
+
+}

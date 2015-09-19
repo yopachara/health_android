@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
 	private FloatingActionButton fab_line;
 
-	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
+	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -213,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
     public enum Tab {
 		HOME ("Home"),
+		FOODS ("Foods"),
 	    PROGRESS ("Progresses"),
 	    BUTTONS ("Buttons"),
         FAB ("FABs"),
@@ -349,6 +351,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     				for(Fragment fragment : mActive){
     					if(fragment instanceof ProgressFragment)
     						setFragment(Tab.PROGRESS, fragment);
+						else if(fragment instanceof FoodFragment)
+							setFragment(Tab.FOODS, fragment);
     					else if(fragment instanceof ButtonFragment)
     						setFragment(Tab.BUTTONS, fragment);
                         else if(fragment instanceof FabFragment)
@@ -415,6 +419,9 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 					case HOME:
 						mFragments[position] = HomeFragment.newInstance();
 						break;
+					case FOODS:
+						mFragments[position] = FoodFragment.newInstance();
+						break;
 				}
 			}
 						
@@ -445,6 +452,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 				ArrayList<FoodModel.Foods> text = foodModel.getObjects();
 				//Log.d("Response",text.get(0).getName());
 				createDialog(text);
+				Snackbar.make(getWindow().getDecorView().getRootView(), "Hello Snackbar", Snackbar.LENGTH_LONG).show();
 //				mSnackBar.applyStyle(R.style.SnackBarSingleLine)
 //						.text(text)
 //						.show();

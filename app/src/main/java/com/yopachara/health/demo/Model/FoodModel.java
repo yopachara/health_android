@@ -13,7 +13,7 @@ public class FoodModel {
     @SerializedName("result")
     private ArrayList<Foods> foods;
 
-    public ArrayList getObjects() {
+    public ArrayList<Foods> getObjects() {
         return foods;
     }
 

@@ -3,6 +3,7 @@ package com.yopachara.health.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -41,7 +42,7 @@ public class LoginFragment extends Fragment {
 
         Button button_bt_raise = (Button)v.findViewById(R.id.button_bt_raise);
         Button button_bt_raise_color = (Button)v.findViewById(R.id.button_bt_raise_color);
-        final EditText textTest = (EditText)v.findViewById(R.id.textfield_et_label);
+        final TextInputLayout textTest = (TextInputLayout)v.findViewById(R.id.usernameWrapper);
         Button testBut = (Button)v.findViewById(R.id.testBut);
 
 
@@ -74,12 +75,12 @@ public class LoginFragment extends Fragment {
                 api.getFeeds(new Callback<HealthModel>() {
                     @Override
                     public void success(HealthModel healthModel, Response response) {
-                        textTest.setText(healthModel.getTexts());
+                        textTest.setHint(healthModel.getTexts());
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-                        textTest.setText(error.getUrl() + error.getMessage());
+                        textTest.setHint(error.toString());
                     }
                 });
             }
