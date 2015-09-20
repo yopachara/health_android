@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rey.material.widget.Button;
-import com.rey.material.widget.EditText;
 import com.rey.material.widget.SnackBar;
-import com.yopachara.health.demo.Model.HealthModel;
+import com.yopachara.health.demo.Model.FoodModel;
+import com.yopachara.health.demo.Model.HistoryModel;
 import com.yopachara.health.demo.Service.HealthService;
 
 import retrofit.Callback;
@@ -72,10 +72,10 @@ public class LoginFragment extends Fragment {
                         .setEndpoint(API).build();
                 HealthService api = restAdapter.create(HealthService.class);
 
-                api.getFeeds(new Callback<HealthModel>() {
+                api.getFeeds(new Callback<FoodModel>() {
                     @Override
-                    public void success(HealthModel healthModel, Response response) {
-                        textTest.setHint(healthModel.getTexts());
+                    public void success(FoodModel foodModel, Response response) {
+                        textTest.getEditText().setText(foodModel.getMessage());
                     }
 
                     @Override

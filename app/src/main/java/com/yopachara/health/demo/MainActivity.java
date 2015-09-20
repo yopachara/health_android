@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -31,14 +30,11 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 import com.rey.material.app.ThemeManager;
 import com.rey.material.app.ToolbarManager;
-import com.rey.material.drawable.LineMorphingDrawable;
 import com.rey.material.drawable.ThemeDrawable;
 import com.rey.material.util.ThemeUtil;
 import com.rey.material.util.ViewUtil;
@@ -46,18 +42,15 @@ import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
 import com.yopachara.health.demo.Model.FoodModel;
-import com.yopachara.health.demo.Model.HealthModel;
 import com.yopachara.health.demo.Service.HealthService;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.mime.TypedByteArray;
 
 public class MainActivity extends AppCompatActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
@@ -84,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
 	private FloatingActionButton fab_line;
 
-	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
+	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     public enum Tab {
 		HOME ("Home"),
 		FOODS ("Foods"),
+		HISTORYS ("Historys"),
 	    PROGRESS ("Progresses"),
 	    BUTTONS ("Buttons"),
         FAB ("FABs"),
@@ -353,6 +347,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     						setFragment(Tab.PROGRESS, fragment);
 						else if(fragment instanceof FoodFragment)
 							setFragment(Tab.FOODS, fragment);
+						else if(fragment instanceof HistoryFragment)
+							setFragment(Tab.HISTORYS, fragment);
     					else if(fragment instanceof ButtonFragment)
     						setFragment(Tab.BUTTONS, fragment);
                         else if(fragment instanceof FabFragment)
@@ -421,6 +417,9 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 						break;
 					case FOODS:
 						mFragments[position] = FoodFragment.newInstance();
+						break;
+					case HISTORYS:
+						mFragments[position] = HistoryFragment.newInstance();
 						break;
 				}
 			}

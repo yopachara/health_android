@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:textSize="14sp"
+            android:text="name"/>
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="top|right"
+            android:textSize="14sp"
+            android:text="username"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/club"
+            android:layout_toEndOf="@+id/club"/>
+
+
+        <TextView
+            android:id="@+id/club"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:text="club"
+            android:textSize="10sp"/>
+
+
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

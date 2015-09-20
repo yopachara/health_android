@@ -2,7 +2,6 @@ package com.yopachara.health.demo;
 
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +26,7 @@ public class FoodFragment extends Fragment {
 
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private FoodAdapter mAdapter;
     private FoodModel foodModel;
     String API = "http://pachara.me:3000";
     SnackBar mSnackBar;
@@ -44,14 +43,14 @@ public class FoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_food, container, false);
 
-        getFoods();
+        getFoods(v);
 
 
 
         return v;
     }
 
-    private void getFoods(){
+    private void getFoods(final View v){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API).build();
         HealthService api = restAdapter.create(HealthService.class);
@@ -67,15 +66,15 @@ public class FoodFragment extends Fragment {
 
 
 
-                mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.foodList);
+                mRecyclerView = (RecyclerView) v.findViewById(R.id.foodList);
 
                 mRecyclerView.setHasFixedSize(true);
-
-                mLayoutManager = new LinearLayoutManager(getView().getContext());
+                mLayoutManager = new LinearLayoutManager(v.getContext());
                 mRecyclerView.setLayoutManager(mLayoutManager);
 
-                mAdapter = new CustomAdapter(getActivity(), foods);
+                mAdapter = new FoodAdapter(v.getContext() , foods);
                 mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setHasFixedSize(true);
 
 
             }

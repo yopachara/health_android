@@ -21,6 +21,11 @@ public class FoodModel {
         return foods.getClass().getName();
     }
 
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
 
     public class Foods {
 
