@@ -2,6 +2,7 @@ package com.yopachara.health.demo;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     private Context mContext;
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public TextView mTextView;
         public TextView name;
         public TextView date;
@@ -31,7 +32,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         private ViewHolder(View view) {
             super(view);
             view.setOnClickListener(this);
-
+            view.setOnLongClickListener(this);
 
             name = (TextView) view.findViewById(R.id.name);
             date = (TextView) view.findViewById(R.id.club);
@@ -41,26 +42,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), "position = " + getPosition(), Toast.LENGTH_SHORT).show();
+            Log.d("History Short Click", getPosition()+view.toString());
+            Toast.makeText(view.getContext(), "Short click position = " + getPosition(), Toast.LENGTH_SHORT).show();
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            Log.d("History Long Click", getPosition()+view.toString());
+            Toast.makeText(view.getContext(), "Long click position = " + getPosition(), Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+
     }
-
-
-
-
-//    public static class ViewHolder extends RecyclerView.ViewHolder {
-//        public TextView name;
-//        public TextView date;
-//        public TextView username;
-//
-//        public ViewHolder(View view) {
-//            super(view);
-//
-//            name = (TextView) view.findViewById(R.id.name);
-//            date = (TextView) view.findViewById(R.id.club);
-//            username = (TextView) view.findViewById(R.id.username);
-//        }
-//    }
 
     public HistoryAdapter(Context context, ArrayList<HistoryModel.History> dataset) {
         mPlayers = dataset;
