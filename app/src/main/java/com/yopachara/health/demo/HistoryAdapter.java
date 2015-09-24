@@ -18,8 +18,7 @@ import java.util.List;
  * Created by yopachara on 9/20/15 AD.
  */
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
-
-    private List<HistoryModel.History> mPlayers;
+    private List<HistoryModel.History> history;
     private Context mContext;
 
 
@@ -57,7 +56,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     }
 
     public HistoryAdapter(Context context, ArrayList<HistoryModel.History> dataset) {
-        mPlayers = dataset;
+        history = dataset;
         mContext = context;
     }
 
@@ -74,17 +73,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        HistoryModel.History player = mPlayers.get(position);
-
+        HistoryModel.History player = history.get(position);
         viewHolder.name.setText(player.getName());
         viewHolder.date.setText(player.getDate());
         viewHolder.username.setText(player.getUsername());
-
     }
 
     @Override
     public int getItemCount() {
-        return mPlayers.size();
+        return history.size();
     }
 
 
