@@ -37,6 +37,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             date = (TextView) view.findViewById(R.id.club);
             username = (TextView) view.findViewById(R.id.username);
 
+
         }
 
         @Override

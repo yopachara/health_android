@@ -42,11 +42,14 @@ import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
 import com.yopachara.health.demo.Model.FoodModel;
+import com.yopachara.health.demo.Model.HistoryModel;
 import com.yopachara.health.demo.Service.HealthService;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -54,8 +57,8 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
-	private DrawerLayout dl_navigator;
-	private FrameLayout fl_drawer;
+	@Bind(R.id.main_dl) DrawerLayout dl_navigator;
+	@Bind(R.id.main_fl_drawer) FrameLayout fl_drawer;
 	private ListView lv_drawer;
 	private CustomViewPager vp;
 	private TabPageIndicator tpi;
@@ -84,9 +87,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_main);
-				
-		dl_navigator = (DrawerLayout)findViewById(R.id.main_dl);
-		fl_drawer = (FrameLayout)findViewById(R.id.main_fl_drawer);
+		ButterKnife.bind(this);
+
 		lv_drawer = (ListView)findViewById(R.id.main_lv_drawer);
 		mToolbar = (Toolbar)findViewById(R.id.main_toolbar);
 		vp = (CustomViewPager)findViewById(R.id.main_vp);
@@ -452,15 +454,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 				//Log.d("Response",text.get(0).getName());
 				createDialog(text);
 				Snackbar.make(getWindow().getDecorView().getRootView(), "Hello Snackbar", Snackbar.LENGTH_LONG).show();
-//				mSnackBar.applyStyle(R.style.SnackBarSingleLine)
-//						.text(text)
-//						.show();
-//				Log.d("Success", text);
-
-
-
-
-
+				Log.d("Success",response.getBody().toString());
 			}
 
 			@Override
@@ -474,6 +468,27 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		});
 	}
 
+	private void postHistory(String foodname, String username){
+		RestAdapter restAdapter = new RestAdapter.Builder()
+				.setEndpoint(API).build();
+		HealthService api = restAdapter.create(HealthService.class);
+
+		api.postHistory(username, foodname, new Callback<HistoryModel>() {
+			@Override
+			public void success(HistoryModel historyModel, Response response) {
+				Log.d("Success",response.getBody().toString());
+			}
+
+			@Override
+			public void failure(RetrofitError error) {
+				mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+						.text(error.toString())
+						.show();
+				Log.d("Error", error.toString());
+			}
+		});
+	}
+
 	private void createDialog(ArrayList<FoodModel.Foods> dialog){
 
 		boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
@@ -481,7 +496,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog){
 			@Override
 			public void onPositiveActionClicked(DialogFragment fragment) {
-				postSearch(getSelectedValue().toString());
+				//postSearch(getSelectedValue().toString());
+				postHistory(getSelectedValue().toString(),"yopachara");
 				super.onPositiveActionClicked(fragment);
 			}
 

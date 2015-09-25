@@ -3,6 +3,7 @@ package com.yopachara.health.demo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class HistoryFragment extends Fragment {
     private HistoryModel historyModel;
     String API = "http://pachara.me:3000";
     SnackBar mSnackBar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     public static HistoryFragment newInstance() {
@@ -42,9 +44,16 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_history, container, false);
+        final View v = inflater.inflate(R.layout.fragment_history, container, false);
         this.getHistory(v);
-
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                getHistory(v);
+            }
+        });
 
 
         return v;
@@ -57,7 +66,7 @@ public class HistoryFragment extends Fragment {
         HealthService api = restAdapter.create(HealthService.class);
 
         api.getHistorys(new Callback<HistoryModel>() {
-
+            
             @Override
             public void success(HistoryModel historyModel, Response response) {
                 ArrayList<HistoryModel.History> history = historyModel.getObjects();
@@ -73,6 +82,7 @@ public class HistoryFragment extends Fragment {
 
                 mAdapter = new HistoryAdapter(getActivity(), history);
                 mRecyclerView.setAdapter(mAdapter);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override

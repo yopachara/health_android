@@ -28,4 +28,12 @@ public interface HealthService {
     @GET("/api/history")
     public void getHistorys(Callback<HistoryModel> response);
 
+    @FormUrlEncoded
+    @POST("/api/history")
+    public void postHistory(@Field("username")String username,@Field("foodname")String foodname, Callback<HistoryModel> response);
+
+
+    //TODO: Do signup service and do usermodel
+    //@POST("/api/user")
+    //public void postUser(@Field("username")String username,@Field("password")String password, Callback)
 }
