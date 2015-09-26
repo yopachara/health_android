@@ -5,11 +5,15 @@ package com.yopachara.health.demo.Service;
  */
 import com.yopachara.health.demo.Model.FoodModel;
 import com.yopachara.health.demo.Model.HistoryModel;
+import com.yopachara.health.demo.Model.UserModel;
+
+import java.sql.Timestamp;
 
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.Header;
 import retrofit.http.POST;
 
 
@@ -30,10 +34,21 @@ public interface HealthService {
 
     @FormUrlEncoded
     @POST("/api/history")
-    public void postHistory(@Field("username")String username,@Field("foodname")String foodname, Callback<HistoryModel> response);
+    public void postHistory(@Field("username")String username,
+                            @Field("foodname")String foodname,
+                            Callback<HistoryModel> response);
 
+    @FormUrlEncoded
+    @POST("/api/user")
+    public void postUser(@Field("username")String username,
+                         @Field("password")String password,
+                         @Field("sex")String sex,
+                         @Field("weight")int weight,
+                         @Field("height")int height,
+                         @Field("birthdate")Timestamp birthdate,
+                         @Field("type")String type,
+                         Callback<UserModel> response);
 
-    //TODO: Do signup service and do usermodel
-    //@POST("/api/user")
-    //public void postUser(@Field("username")String username,@Field("password")String password, Callback)
+    @GET("/api/users")
+    public void getUser(@Header("Authorization") String authorization, Callback<UserModel> callback);
 }

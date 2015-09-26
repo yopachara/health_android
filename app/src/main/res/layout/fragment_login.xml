@@ -69,7 +69,14 @@
             android:id="@+id/button_bt_raise"
             android:layout_width="100dp"
             android:layout_height="@dimen/bt_height"
-            android:text="BUTTON"
+            android:text="SIGNUP"
+            app:v_styleId="@array/button_raise"/>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/login_but"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/bt_height"
+            android:text="LOGIN"
             app:v_styleId="@array/button_raise"/>
 
         <View

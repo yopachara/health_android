@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 	private FloatingActionButton fab_line;
 
 	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		});
 
         mToolbarManager = new ToolbarManager(getDelegate(), mToolbar, R.id.tb_group_main, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
-        mToolbarManager.setNavigationManager(new ToolbarManager.ThemableNavigationManager(R.array.navigation_drawer, getSupportFragmentManager(), mToolbar, dl_navigator) {
+		mToolbarManager.setNavigationManager(new ToolbarManager.ThemableNavigationManager(R.array.navigation_drawer, getSupportFragmentManager(), mToolbar, dl_navigator) {
 			@Override
 			public void onNavigationClick() {
 				if (mToolbarManager.getCurrentGroup() != R.id.tb_group_main)
@@ -165,7 +165,11 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
 		sr = SpeechRecognizer.createSpeechRecognizer(this);
 		sr.setRecognitionListener(new listener());
+
+
 	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -477,6 +481,9 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 			@Override
 			public void success(HistoryModel historyModel, Response response) {
 				Log.d("Success",response.getBody().toString());
+				mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+						.text(response.toString())
+						.show();
 			}
 
 			@Override
