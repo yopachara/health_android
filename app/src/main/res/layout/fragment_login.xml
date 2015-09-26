@@ -87,7 +87,7 @@
             android:id="@+id/button_bt_raise_color"
             android:layout_width="100dp"
             android:layout_height="@dimen/bt_height"
-            android:text="BUTTON"
+            android:text="GO TO APP"
             app:v_styleId="@array/button_raise_color"/>
 
         <com.rey.material.widget.Button

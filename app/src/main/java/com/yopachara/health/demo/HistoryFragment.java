@@ -45,12 +45,17 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_history, container, false);
-        this.getHistory(v);
+        if (historyModel != null) {
+            Log.d("Check Value in model", historyModel.getObjects().get(0).getName());
+        } else {
+            Log.d("Fail", "history model is null");
+        }
+        getHistory(v);
+
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Refresh items
                 getHistory(v);
             }
         });
@@ -60,13 +65,11 @@ public class HistoryFragment extends Fragment {
     }
 
 
-    private void getHistory(final View v){
+    private void getHistory(final View v) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API).build();
         HealthService api = restAdapter.create(HealthService.class);
-
         api.getHistorys(new Callback<HistoryModel>() {
-            
             @Override
             public void success(HistoryModel historyModel, Response response) {
                 ArrayList<HistoryModel.History> history = historyModel.getObjects();
@@ -89,8 +92,9 @@ public class HistoryFragment extends Fragment {
             public void failure(RetrofitError error) {
 
                 Log.d("Error", error.toString());
-
+                mSwipeRefreshLayout.setRefreshing(false);
             }
+
         });
     }
 }

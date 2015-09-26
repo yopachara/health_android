@@ -80,7 +80,9 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
 	private FloatingActionButton fab_line;
 
-	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
+	//private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
+	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS};
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		
 		mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mItems);
 		vp.setAdapter(mPagerAdapter);
+		vp.setOffscreenPageLimit(3);
 		tpi.setViewPager(vp);
 		tpi.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 

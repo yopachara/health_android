@@ -3,6 +3,7 @@ package com.yopachara.health.demo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class FoodFragment extends Fragment {
     private FoodModel foodModel;
     String API = "http://pachara.me:3000";
     SnackBar mSnackBar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public static FoodFragment newInstance() {
         FoodFragment fragment = new FoodFragment();
@@ -41,16 +43,21 @@ public class FoodFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_food, container, false);
-
+        final View v = inflater.inflate(R.layout.fragment_food, container, false);
         getFoods(v);
 
-
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getFoods(v);
+            }
+        });
 
         return v;
     }
 
-    private void getFoods(final View v){
+    public void getFoods(final View v){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API).build();
         HealthService api = restAdapter.create(HealthService.class);
@@ -75,6 +82,7 @@ public class FoodFragment extends Fragment {
                 mAdapter = new FoodAdapter(v.getContext() , foods);
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView.setHasFixedSize(true);
+                mSwipeRefreshLayout.setRefreshing(false);
 
 
             }
@@ -83,8 +91,10 @@ public class FoodFragment extends Fragment {
             public void failure(RetrofitError error) {
 
                 Log.d("Error", error.toString());
+                mSwipeRefreshLayout.setRefreshing(false);
 
             }
+
         });
     }
 

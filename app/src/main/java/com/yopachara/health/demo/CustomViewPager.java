@@ -30,4 +30,7 @@ public class CustomViewPager extends ViewPager{
             return true;
         return false;
     }
+
+
+
 }
