@@ -39,13 +39,21 @@ public class HistoryModel {
         @SerializedName("date")
         private String date;
 
+        @SerializedName("cal")
+        private String cal;
+
+        @SerializedName("protein")
+        private String protein;
+
+        @SerializedName("fat")
+        private String fat;
+
+        @SerializedName("carbo")
+        private String carbo;
+
 
         public String getId() {
             return id;
-        }
-
-        public String getName() {
-            return this.foodname;
         }
 
         public String getDate() {
@@ -54,6 +62,26 @@ public class HistoryModel {
 
         public String getUsername() {
             return username;
+        }
+
+        public String getCal() {
+            return cal;
+        }
+
+        public String getFoodname() {
+            return foodname;
+        }
+
+        public String getProtein() {
+            return protein;
+        }
+
+        public String getFat() {
+            return fat;
+        }
+
+        public String getCarbo() {
+            return carbo;
         }
 
     }

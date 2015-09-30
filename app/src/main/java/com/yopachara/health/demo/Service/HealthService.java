@@ -36,6 +36,10 @@ public interface HealthService {
     @POST("/api/history")
     public void postHistory(@Field("username")String username,
                             @Field("foodname")String foodname,
+                            @Field("cal")float cal,
+                            @Field("protein")float protein,
+                            @Field("carbo")float carbo,
+                            @Field("fat")float fat,
                             Callback<HistoryModel> response);
 
     @FormUrlEncoded
