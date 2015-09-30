@@ -30,6 +30,8 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 
 
+import com.hookedonplay.decoviewlib.DecoView;
+import com.hookedonplay.decoviewlib.events.DecoEvent;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
@@ -475,12 +477,12 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		});
 	}
 
-	private void postHistory(String foodname, String username){
+	private void postHistory(String foodname, String username, float cal, float carbo, float fat, float protein){
 		RestAdapter restAdapter = new RestAdapter.Builder()
 				.setEndpoint(API).build();
 		HealthService api = restAdapter.create(HealthService.class);
 
-		api.postHistory(username, foodname, new Callback<HistoryModel>() {
+		api.postHistory(username, foodname, cal, protein, carbo, fat, new Callback<HistoryModel>() {
 			@Override
 			public void success(HistoryModel historyModel, Response response) {
 				Log.d("Success",response.getBody().toString());
@@ -499,7 +501,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		});
 	}
 
-	private void createDialog(ArrayList<FoodModel.Foods> dialog){
+	private void createDialog(final ArrayList<FoodModel.Foods> dialog){
 
 		boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
 
@@ -507,7 +509,23 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 			@Override
 			public void onPositiveActionClicked(DialogFragment fragment) {
 				//postSearch(getSelectedValue().toString());
-				postHistory(getSelectedValue().toString(),"yopachara");
+				//TODO: Do correct username
+				postHistory(dialog.get(getSelectedIndex()).getName(),
+						"yopachara",
+						dialog.get(getSelectedIndex()).getCal(),
+						dialog.get(getSelectedIndex()).getCarbo(),
+						dialog.get(getSelectedIndex()).getFat(),
+						dialog.get(getSelectedIndex()).getProtein());
+//				FragmentManager fm = getSupportFragmentManager();
+//
+//				HomeFragment homeFragment = (HomeFragment)fm.findFragmentById(R.id.fragment_home);
+//				if (homeFragment != null) {
+//					homeFragment.addDeco(90);
+//					Log.d("Success",homeFragment.toString());
+//				} else {
+//					Log.d("Error"," homeFragment is null");
+//				}
+
 				super.onPositiveActionClicked(fragment);
 			}
 
