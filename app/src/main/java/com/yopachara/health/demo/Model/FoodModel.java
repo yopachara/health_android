@@ -39,15 +39,15 @@ public class FoodModel {
         @SerializedName("classifier")
         private String classifier;
         @SerializedName("cal")
-        private double cal;
+        private float cal;
         @SerializedName("protein")
-        private double protein;
+        private float protein;
         @SerializedName("carbo")
-        private double carbo;
+        private float carbo;
         @SerializedName("fat")
-        private double fat;
+        private float fat;
         @SerializedName("weight")
-        private double weight;
+        private float weight;
 
         public String getId() {
             return id;
@@ -65,23 +65,23 @@ public class FoodModel {
             return classifier;
         }
 
-        public double getCal() {
+        public float getCal() {
             return cal;
         }
 
-        public double getProtein() {
+        public float getProtein() {
             return protein;
         }
 
-        public double getCarbo() {
+        public float getCarbo() {
             return carbo;
         }
 
-        public double getFat() {
+        public float getFat() {
             return fat;
         }
 
-        public double getWeight() {
+        public float getWeight() {
             return weight;
         }
 
