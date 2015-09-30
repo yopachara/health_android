@@ -27,6 +27,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         public TextView name;
         public TextView date;
         public TextView username;
+        public TextView cal;
+        public TextView pro;
+        public TextView fat;
+        public TextView carbo;
 
         private ViewHolder(View view) {
             super(view);
@@ -34,8 +38,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             view.setOnLongClickListener(this);
 
             name = (TextView) view.findViewById(R.id.name);
-            date = (TextView) view.findViewById(R.id.club);
+            date = (TextView) view.findViewById(R.id.date);
             username = (TextView) view.findViewById(R.id.username);
+            cal = (TextView) view.findViewById(R.id.cal);
+            pro = (TextView) view.findViewById(R.id.pro);
+            fat = (TextView) view.findViewById(R.id.fat);
+            carbo = (TextView) view.findViewById(R.id.carbo);
 
 
         }
@@ -75,9 +83,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         HistoryModel.History player = history.get(position);
-        viewHolder.name.setText(player.getName());
+        viewHolder.name.setText(player.getFoodname());
         viewHolder.date.setText(player.getDate());
         viewHolder.username.setText(player.getUsername());
+        viewHolder.cal.setText(player.getCal());
+        viewHolder.fat.setText(player.getFat());
+        viewHolder.carbo.setText(player.getCarbo());
+        viewHolder.pro.setText(player.getProtein());
+
     }
 
     @Override

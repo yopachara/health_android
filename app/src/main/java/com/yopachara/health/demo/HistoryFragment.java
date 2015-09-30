@@ -46,7 +46,7 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_history, container, false);
         if (historyModel != null) {
-            Log.d("Check Value in model", historyModel.getObjects().get(0).getName());
+            Log.d("Check Value in model", historyModel.getObjects().get(0).getFoodname());
         } else {
             Log.d("Fail", "history model is null");
         }
