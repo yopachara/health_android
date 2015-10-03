@@ -52,7 +52,7 @@ public class HistoryFragment extends Fragment {
         }
         getHistory(v);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeHistoryContainer);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

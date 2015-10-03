@@ -32,6 +32,9 @@ public interface HealthService {
     @GET("/api/history")
     public void getHistorys(Callback<HistoryModel> response);
 
+    @GET("/api/historytoday")
+    public void getHistoryToday(Callback<HistoryModel> response);
+
     @FormUrlEncoded
     @POST("/api/history")
     public void postHistory(@Field("username")String username,

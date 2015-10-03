@@ -3,8 +3,12 @@ package com.yopachara.health.demo.Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
+import java.text.ParseException;
 
 /**
  * Created by yopachara on 9/5/15 AD.
@@ -60,6 +64,20 @@ public class HistoryModel {
             return date;
         }
 
+        public Date getDateFormat() {
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            try {
+                Date date1 = simpleDateFormat.parse(getDate());
+                return  date1;
+            } catch (ParseException e) {              // Insert this block.
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return  null;
+            }
+
+        }
+
         public String getUsername() {
             return username;
         }
@@ -82,6 +100,22 @@ public class HistoryModel {
 
         public String getCarbo() {
             return carbo;
+        }
+
+        public int getCalInt() {
+            return  Integer.parseInt(cal);
+        }
+
+        public int getProteinInt() {
+            return Integer.parseInt(protein);
+        }
+
+        public int getFatInt() {
+            return Integer.parseInt(fat);
+        }
+
+        public int getCarboInt() {
+            return Integer.parseInt(carbo);
         }
 
     }

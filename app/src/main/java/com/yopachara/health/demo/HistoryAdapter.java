@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import com.yopachara.health.demo.Model.HistoryModel;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +86,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         HistoryModel.History player = history.get(position);
+
         viewHolder.name.setText(player.getFoodname());
         viewHolder.date.setText(player.getDate());
         viewHolder.username.setText(player.getUsername());

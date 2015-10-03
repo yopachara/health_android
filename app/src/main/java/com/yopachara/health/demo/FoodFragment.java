@@ -46,7 +46,7 @@ public class FoodFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_food, container, false);
         getFoods(v);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeFoodContainer);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
