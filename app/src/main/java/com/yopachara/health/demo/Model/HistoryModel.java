@@ -103,19 +103,19 @@ public class HistoryModel {
         }
 
         public int getCalInt() {
-            return  Integer.parseInt(cal);
+            return Integer.parseInt(cal);
         }
 
-        public int getProteinInt() {
-            return Integer.parseInt(protein);
+        public float getProteinInt() {
+            return Float.parseFloat(protein);
         }
 
-        public int getFatInt() {
-            return Integer.parseInt(fat);
+        public float getFatInt() {
+            return Float.parseFloat(fat);
         }
 
-        public int getCarboInt() {
-            return Integer.parseInt(carbo);
+        public float getCarboInt() {
+            return Float.parseFloat(carbo);
         }
 
     }
