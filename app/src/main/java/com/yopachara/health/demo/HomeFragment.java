@@ -46,6 +46,10 @@ public class HomeFragment extends Fragment {
     private int fatIndex;
     private int proteinIndex;
     private int carboIndex;
+
+    private float fatPercent;
+    private float proteinPercent;
+    private float carboPercent;
     int totalcal = 0;
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -137,14 +141,14 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void calculateNutrition(ArrayList<HistoryModel.History> histories){
+    public void calculateNutrition(ArrayList<HistoryModel.History> histories){
         int cal= 0;
         float protein = 0;
         float fat = 0;
         float carbo = 0;
         if(histories.size()==0){
             Log.d("Success", "today is no food");
-//                    addDeco(cal);
+            createEvents(cal,protein,fat,carbo);
         }
         for(int i=0;i<histories.size();i++){
             cal = cal+histories.get(i).getCalInt();
@@ -162,6 +166,10 @@ public class HomeFragment extends Fragment {
                 float persentFat = (fat*9*100)/1814;
                 float persentProtein = (protein*4*100)/1814;
                 float persentCarbo = (carbo*4*100)/1814;
+                fatPercent = persentFat;
+                proteinPercent = persentProtein;
+                carboPercent = persentCarbo;
+
                 Log.d("Persent","Fat "+persentFat+" Pro "+persentProtein+" Carb "+persentCarbo);
                 createEvents(persentCal, persentProtein, persentFat, persentCarbo);
             }
@@ -204,7 +212,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void createBackSeries(View v) {
-        SeriesItem seriesItem = new SeriesItem.Builder(Color.argb(255, 162, 184, 154))
+        SeriesItem seriesItem = new SeriesItem.Builder(Color.argb(255, 226,233,223))
                 .setRange(0, mSeriesMax, 0)
                 .setInitialVisibility(true)
                 .build();
@@ -218,12 +226,12 @@ public class HomeFragment extends Fragment {
                 .setInitialVisibility(false)
                 .build();
 
-        final TextView textPercentage = (TextView) v.findViewById(R.id.proteinText);
+        final TextView textPercentage = (TextView) v.findViewById(R.id.fatText);
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                float percentFilled = ((currentPosition - seriesItem.getMinValue()) / (seriesItem.getMaxValue() - seriesItem.getMinValue()));
-                textPercentage.setText(String.format("Protein %.0f%%", percentFilled * 100f));
+                float percentFilled = (percentComplete/100)*fatPercent;
+                textPercentage.setText(String.format("Fat %.0f%%", percentFilled*100f));
             }
 
             @Override
@@ -233,32 +241,35 @@ public class HomeFragment extends Fragment {
         });
 
 
-//        final TextView textToGo = (TextView) v.findViewById(R.id.textRemaining);
-//        seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
-//            @Override
-//            public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-//                textToGo.setText(String.format("%.1f Km to goal", seriesItem.getMaxValue() - currentPosition));
-//
-//            }
-//
-//            @Override
-//            public void onSeriesItemDisplayProgress(float percentComplete) {
-//
-//            }
-//        });
+        final TextView textToGo = (TextView) v.findViewById(R.id.totalcal);
+        seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
+            @Override
+            public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
+                textToGo.setText(String.format("%.1f Cal left", ((seriesItem.getMaxValue() - currentPosition)/100)*1814));
 
-//        final TextView textActivity1 = (TextView) findViewById(R.id.textActivity1);
-//        seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
-//            @Override
-//            public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-//                textActivity1.setText(String.format("%.0f Km", currentPosition));
-//            }
-//
-//            @Override
-//            public void onSeriesItemDisplayProgress(float percentComplete) {
-//
-//            }
-//        });
+            }
+
+            @Override
+            public void onSeriesItemDisplayProgress(float percentComplete) {
+
+            }
+        });
+
+        final TextView textActivity1 = (TextView) v.findViewById(R.id.textValue);
+        final TextView textCal = (TextView) v.findViewById(R.id.calText);
+        seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
+            @Override
+            public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
+                textActivity1.setText(String.format("%.0f Cal", (currentPosition/100)*1814));
+                textCal.setText(String.format("%.0f Cal", (currentPosition/100)*1814));
+
+            }
+
+            @Override
+            public void onSeriesItemDisplayProgress(float percentComplete) {
+
+            }
+        });
 
         fatIndex = mDecoView.addSeries(seriesItem);
     }
@@ -269,12 +280,12 @@ public class HomeFragment extends Fragment {
                 .setInitialVisibility(false)
                 .build();
 
-        final TextView textActivity2 = (TextView) v.findViewById(R.id.fatText);
+        final TextView textActivity2 = (TextView) v.findViewById(R.id.proteinText);
 
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textActivity2.setText(String.format("Fat %.0f%%", currentPosition));
+                textActivity2.setText(String.format("Protein %.0f%%", (percentComplete/100)*proteinPercent*100f));
             }
 
             @Override
@@ -309,14 +320,14 @@ public class HomeFragment extends Fragment {
         carboIndex = mDecoView.addSeries(seriesItem);
     }
 
-    private void createEvents(int cal,float protein,float fat,float carbo) {
+    private void createEvents(int cal, float protein, float fat, float carbo) {
         Log.d("Para CreateEvents","Fat "+fat+" Pro "+protein+" Carb "+carbo);
         float persentFat = fat+carbo+protein;
         float persentPro = protein+carbo;
         float persentCarb = carbo;
-        Log.d("CreateEvents","Fat "+persentFat+" Pro "+persentPro+" Carb "+persentCarb);
+        Log.d("CreateEvents", "Fat " + persentFat + " Pro " + persentPro + " Carb " + persentCarb);
         mDecoView.executeReset();
-
+//        mDecoView.deleteAll();
         mDecoView.addEvent(new DecoEvent.Builder(mSeriesMax)
                 .setIndex(mBackIndex)
                 .setDuration(3000)
@@ -325,7 +336,19 @@ public class HomeFragment extends Fragment {
 
         mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_OUT)
                 .setIndex(fatIndex)
+                .setDuration(1600)
+                .setDelay(1250)
+                .build());
+        mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_OUT)
+                .setIndex(proteinIndex)
+                .setDuration(1800)
+                .setEffectRotations(1)
+                .setDelay(1250)
+                .build());
+        mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_OUT)
+                .setIndex(carboIndex)
                 .setDuration(2000)
+                .setEffectRotations(2)
                 .setDelay(1250)
                 .build());
 
@@ -334,26 +357,14 @@ public class HomeFragment extends Fragment {
                 .setDelay(3250)
                 .build());
 
-        mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_OUT)
-                .setIndex(proteinIndex)
-                .setDuration(1000)
-                .setEffectRotations(1)
-                .setDelay(5000)
-                .build());
-
         mDecoView.addEvent(new DecoEvent.Builder(persentPro)
                 .setIndex(proteinIndex)
-                .setDelay(8500)
+                .setDelay(3500)
                 .build());
 
-        mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_OUT)
+        mDecoView.addEvent(new DecoEvent.Builder(persentCarb)
                 .setIndex(carboIndex)
-                .setDuration(1000)
-                .setEffectRotations(1)
-                .setDelay(9000)
-                .build());
-
-        mDecoView.addEvent(new DecoEvent.Builder(persentCarb).setIndex(carboIndex).setDelay(14000).build());
+                .setDelay(3750).build());
 
 //        mDecoView.addEvent(new DecoEvent.Builder(0).setIndex(carboIndex).setDelay(18000).build());
 //

@@ -489,6 +489,9 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 				mSnackBar.applyStyle(R.style.SnackBarSingleLine)
 						.text(response.toString())
 						.show();
+				HomeFragment fragment = new HomeFragment();
+
+				fragment.getRefreshDeco();
 			}
 
 			@Override

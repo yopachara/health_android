@@ -249,9 +249,7 @@ abstract public class ChartSeries {
         mValueAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (changeColors) {
-                    mColorAnimate = null;
-                }
+                if (changeColors)
 
                 event.notifyEndListener();
             }
