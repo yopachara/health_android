@@ -36,6 +36,8 @@ public class HomeFragment extends Fragment {
     protected boolean mUpdateListeners = true;
     DecoView calDeco;
     DecoView mDecoView;
+    ArrayList<UserModel.User> users;
+
     /**
      * Maximum value for each data series in the {@link DecoView}. This can be different for each
      * data series, in this example we are applying the same all data series
@@ -51,8 +53,18 @@ public class HomeFragment extends Fragment {
     private float proteinPercent;
     private float carboPercent;
     int totalcal = 0;
-    public static HomeFragment newInstance() {
+    private static final String USER_KEY = "user_key";
+    private UserModel.User mUser;
+    int weight;
+    int height;
+    Float bmr;
+    Float bmi;
+
+    public static HomeFragment newInstance(UserModel.User user) {
         HomeFragment fragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(USER_KEY, user);
+        fragment.setArguments(bundle);
 
         return fragment;
     }
@@ -62,11 +74,18 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        mUser = (UserModel.User) getArguments().getSerializable(USER_KEY);
 //        calDeco = (DecoView)v.findViewById(R.id.dynamicArcView);
         mDecoView = (DecoView)v.findViewById(R.id.dynamicArcView);
-
-
         final TextView text_totalcal = (TextView) v.findViewById(R.id.totalcal);
+//        UserModel.User user = users.get(0);
+        weight = mUser.getWeight();
+        height = mUser.getHeight();
+        bmr = mUser.getBmr();
+        bmi = mUser.getBmi();
+
+        Log.d("User information","Weight "+weight+" Height "+height);
+
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeHomeContainer);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -162,10 +181,10 @@ public class HomeFragment extends Fragment {
                 Log.d("Fat","total is "+fat);
                 Log.d("Carbohyhrate","total is "+carbo);
                 totalcal = cal;
-                int persentCal = (cal*100)/1814;
-                float persentFat = (fat*9*100)/1814;
-                float persentProtein = (protein*4*100)/1814;
-                float persentCarbo = (carbo*4*100)/1814;
+                int persentCal = (cal*100)/Math.round(bmr);
+                float persentFat = (fat*9*100)/bmr;
+                float persentProtein = (protein*4*100)/bmr;
+                float persentCarbo = (carbo*4*100)/bmr;
                 fatPercent = persentFat;
                 proteinPercent = persentProtein;
                 carboPercent = persentCarbo;

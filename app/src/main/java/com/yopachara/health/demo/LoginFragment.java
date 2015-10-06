@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.rey.material.widget.Button;
+import com.rey.material.widget.EditText;
 import com.rey.material.widget.SnackBar;
 import com.yopachara.health.demo.Model.FoodModel;
 import com.yopachara.health.demo.Model.HistoryModel;
@@ -39,6 +40,10 @@ public class LoginFragment extends Fragment {
 
     String API = "http://pachara.me:3000";
 
+    ArrayList<UserModel.User> users;
+    TextInputLayout usernameText;
+    TextInputLayout passwordText;
+
     public static LoginFragment newInstance(){
         LoginFragment fragment = new LoginFragment();
 
@@ -55,7 +60,10 @@ public class LoginFragment extends Fragment {
         Button login_but = (Button)v.findViewById(R.id.login_but);
         final TextInputLayout textTest = (TextInputLayout)v.findViewById(R.id.usernameWrapper);
         Button testBut = (Button)v.findViewById(R.id.testBut);
+        usernameText = (TextInputLayout)v.findViewById(R.id.usernameWrapper);
+        passwordText = (TextInputLayout)v.findViewById(R.id.passwordWrapper);
 
+        users = new ArrayList<UserModel.User>();
 
 
         button_bt_raise.setOnClickListener(new View.OnClickListener(){
@@ -71,7 +79,7 @@ public class LoginFragment extends Fragment {
         button_bt_raise_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMainActivity(v);
+//                goToMainActivity(v);
 
             }
         });
@@ -86,7 +94,8 @@ public class LoginFragment extends Fragment {
                 api.getFeeds(new Callback<FoodModel>() {
                     @Override
                     public void success(FoodModel foodModel, Response response) {
-                        textTest.getEditText().setText(foodModel.getMessage());
+//                        ArrayList<UserModel.User> users = user.getObjects();
+                        Log.d("Success", users.get(1).getUsername());
                     }
 
                     @Override
@@ -100,7 +109,7 @@ public class LoginFragment extends Fragment {
         login_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postLogin("jaiin","jaiin");
+                postLogin("yopachara","yopachara");
             }
         });
 
@@ -112,9 +121,11 @@ public class LoginFragment extends Fragment {
     }
 
 
-    public void goToMainActivity(View v)
+    public void goToMainActivity(View v,String username,String password)
     {
         Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("password", password);
         startActivity(intent);
     }
 
@@ -127,7 +138,7 @@ public class LoginFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
-    public void postLogin(String username,String password){
+    public void postLogin(final String username, final String password){
         String basicAuth = "Basic " + Base64.encodeToString(String.format("%s:%s", username, password).getBytes(), Base64.NO_WRAP);
         Log.d("Auth",basicAuth);
         Gson gson = new GsonBuilder()
@@ -140,9 +151,13 @@ public class LoginFragment extends Fragment {
         api.getUser(basicAuth, new Callback<UserModel>() {
             @Override
             public void success(UserModel userModel, Response response) {
-                ArrayList<UserModel.User> users = userModel.getObjects();
+                users = userModel.getObjects();
                 Log.d("Success", "user size " +users.size());
-                Log.d("Username", users.get(0).getUsername());
+                int size = users.size()-1;
+                Log.d("Username", users.get(size).getUsername()+" "+users.get(size).getCreateAt());
+
+                Log.d("Username EditText",usernameText.getEditText().getText().toString());
+                goToMainActivity(getView(),username,password);
             }
 
             @Override

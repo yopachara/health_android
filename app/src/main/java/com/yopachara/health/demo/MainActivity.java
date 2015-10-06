@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +31,8 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 import com.rey.material.app.Dialog;
@@ -45,6 +48,7 @@ import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
 import com.yopachara.health.demo.Model.FoodModel;
 import com.yopachara.health.demo.Model.HistoryModel;
+import com.yopachara.health.demo.Model.UserModel;
 import com.yopachara.health.demo.Service.HealthService;
 
 import java.lang.reflect.Field;
@@ -56,6 +60,7 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 
 public class MainActivity extends AppCompatActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
@@ -76,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 	private static final String TAG = "Speech Recognizer";
 	private Drawable[] mDrawables = new Drawable[2];
 	private int index = 0;
+	public ArrayList<UserModel.User> users;
 
 	String API = "http://pachara.me:3000";
 	Dialog.Builder builder = null;
@@ -92,6 +98,15 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
+
+		Bundle bundle = getIntent().getExtras();
+		if (bundle != null) {
+			String username = bundle.getString("username");
+			String password = bundle.getString("password");
+			postLogin(username,password);
+			String result = username;
+			Toast.makeText(this, "Login complete : " + result, Toast.LENGTH_SHORT).show();
+		}
 
 		lv_drawer = (ListView)findViewById(R.id.main_lv_drawer);
 		mToolbar = (Toolbar)findViewById(R.id.main_toolbar);
@@ -140,33 +155,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		mDrawerAdapter = new DrawerAdapter(this);
 		lv_drawer.setAdapter(mDrawerAdapter);
 		
-		mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mItems);
-		vp.setAdapter(mPagerAdapter);
-		vp.setOffscreenPageLimit(3);
-		tpi.setViewPager(vp);
-		tpi.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-			@Override
-			public void onPageSelected(int position) {
-				mDrawerAdapter.setSelected(mItems[position]);
-				mSnackBar.dismiss();
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int state) {
-			}
-
-		});
-
-        mDrawerAdapter.setSelected(Tab.PROGRESS);
-		vp.setCurrentItem(0);
-
-        ViewUtil.setBackground(getWindow().getDecorView(), new ThemeDrawable(R.array.bg_window));
-        ViewUtil.setBackground(mToolbar, new ThemeDrawable(R.array.bg_toolbar));
 
 		sr = SpeechRecognizer.createSpeechRecognizer(this);
 		sr.setRecognitionListener(new listener());
@@ -174,7 +163,64 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
 	}
 
+	public void postLogin(final String username, final String password){
+		String basicAuth = "Basic " + Base64.encodeToString(String.format("%s:%s", username, password).getBytes(), Base64.NO_WRAP);
+		Log.d("Auth",basicAuth);
+		Gson gson = new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+				.create();
+		RestAdapter restAdapter = new RestAdapter.Builder()
+				.setConverter(new GsonConverter(gson))
+				.setEndpoint(API).build();
+		HealthService api = restAdapter.create(HealthService.class);
+		api.getUserID(basicAuth,username, new Callback<UserModel>() {
+			@Override
+			public void success(UserModel userModel, Response response) {
+				users = userModel.getObjects();
+				Log.d("Success Main", "user size " +users.size());
+				int size = users.size()-1;
+				Log.d("Username", users.get(size).getUsername()+" "+users.get(size).getCreateAt());
 
+
+				mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mItems, users.get(0));
+				vp.setAdapter(mPagerAdapter);
+				vp.setOffscreenPageLimit(3);
+				tpi.setViewPager(vp);
+				tpi.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+					@Override
+					public void onPageSelected(int position) {
+						mDrawerAdapter.setSelected(mItems[position]);
+						mSnackBar.dismiss();
+					}
+
+					@Override
+					public void onPageScrolled(int arg0, float arg1, int arg2) {
+					}
+
+					@Override
+					public void onPageScrollStateChanged(int state) {
+					}
+
+				});
+
+				mDrawerAdapter.setSelected(Tab.PROGRESS);
+				vp.setCurrentItem(0);
+
+				ViewUtil.setBackground(getWindow().getDecorView(), new ThemeDrawable(R.array.bg_window));
+				ViewUtil.setBackground(mToolbar, new ThemeDrawable(R.array.bg_toolbar));
+
+
+			}
+
+			@Override
+			public void failure(RetrofitError error) {
+				Log.d("Fail",error.toString());
+
+			}
+		});
+
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -329,7 +375,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		
 		Fragment[] mFragments;
 		Tab[] mTabs; 
-				
+		UserModel.User user;
 		private static final Field sActiveField;
 		
 		static {
@@ -343,10 +389,11 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 			sActiveField = f;
 		}
 		
-        public PagerAdapter(FragmentManager fm, Tab[] tabs) {
+        public PagerAdapter(FragmentManager fm, Tab[] tabs, UserModel.User users) {
             super(fm);    
             mTabs = tabs;
             mFragments = new Fragment[mTabs.length];
+			user = users;
        
             
             //dirty way to get reference of cached fragment
@@ -424,7 +471,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                         mFragments[position] = DialogsFragment.newInstance();
                         break;
 					case HOME:
-						mFragments[position] = HomeFragment.newInstance();
+						mFragments[position] = HomeFragment.newInstance(user);
 						break;
 					case FOODS:
 						mFragments[position] = FoodFragment.newInstance();
