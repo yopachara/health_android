@@ -2,6 +2,7 @@ package com.yopachara.health.demo.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +22,7 @@ public class UserModel {
         return user.getClass().getName();
     }
 
-    public class User {
+    public class User implements Serializable {
 
 
         @SerializedName("_id")
@@ -50,6 +51,12 @@ public class UserModel {
 
         @SerializedName("type")
         private String type;
+
+        @SerializedName("bmr")
+        private Float bmr;
+
+        @SerializedName("bmi")
+        private Float bmi;
 
         public String getId() {
             return id;
@@ -93,6 +100,14 @@ public class UserModel {
 
         public String getType() {
             return type;
+        }
+
+        public Float getBmr() {
+            return bmr;
+        }
+
+        public Float getBmi() {
+            return bmi;
         }
 
     }
