@@ -15,6 +15,7 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.POST;
+import retrofit.http.Path;
 
 
 public interface HealthService {
@@ -57,5 +58,11 @@ public interface HealthService {
                          Callback<UserModel> response);
 
     @GET("/api/users")
-    public void getUser(@Header("Authorization") String authorization, Callback<UserModel> callback);
+    public void getUser(@Header("Authorization") String authorization,
+                        Callback<UserModel> callback);
+
+    @GET("/api/users/{userid}")
+    public void getUserID(@Header("Authorization") String authorization,
+                          @Path("userid")String username,
+                          Callback<UserModel> callback);
 }
