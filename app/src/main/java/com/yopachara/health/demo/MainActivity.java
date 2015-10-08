@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
 	private FloatingActionButton fab_line;
 
-	//private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
+//	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
 	private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS};
 
 

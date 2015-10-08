@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import com.rey.material.widget.Button;
 import com.rey.material.widget.EditText;
 import com.rey.material.widget.RadioButton;
 import com.rey.material.widget.SnackBar;
+import com.rey.material.widget.Spinner;
 
 import java.text.SimpleDateFormat;
 
@@ -45,8 +48,37 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
         bt_date.setOnClickListener(this);
 
+        final EditText username = (EditText)v.findViewById(R.id.username);
+        final EditText password = (EditText)v.findViewById(R.id.password);
+
+
         male = (RadioButton)v.findViewById(R.id.switches_rb1);
         female = (RadioButton)v.findViewById(R.id.switches_rb2);
+
+        final Spinner spn_height = (Spinner)v.findViewById(R.id.spinner_height);
+        Spinner spn_weight = (Spinner)v.findViewById(R.id.spinner_weight);
+        Spinner spn_exercise = (Spinner)v.findViewById(R.id.spinner_exercise);
+
+        String[] itemsHeight = new String[50];
+        for(int i = 0; i < itemsHeight.length; i++)
+            itemsHeight[i] = String.valueOf(i + 151)+" cm";
+        ArrayAdapter<String> adapterHeight = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsHeight);
+
+        String[] itemsWeight = new String[75];
+        for(int i = 0; i < itemsWeight.length; i++)
+            itemsWeight[i] = String.valueOf(i + 31)+" kg";
+        ArrayAdapter<String> adapterWeight = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsWeight);
+
+        String[] itemsExercise = new String[] {"Little","3 times/week","4 times/week","5 times/week","Daily"};
+
+        ArrayAdapter<String> adapterExercise = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsExercise);
+
+        adapterHeight.setDropDownViewResource(R.layout.row_spn_dropdown);
+        adapterWeight.setDropDownViewResource(R.layout.row_spn_dropdown);
+        adapterExercise.setDropDownViewResource(R.layout.row_spn_dropdown);
+        spn_height.setAdapter(adapterHeight);
+        spn_weight.setAdapter(adapterWeight);
+        spn_exercise.setAdapter(adapterExercise);
 
         CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
 
@@ -74,8 +106,24 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        Button signup = (Button)v.findViewById(R.id.signup);
+
+        signup.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.d("Signup","Username : "+username.getText()+" Password : "+password.getText());
+                Log.d("Radio But","Male: "+male.isChecked()+" Female: "+female.isChecked());
+                Log.d("Height", spn_height.getSelectedItem()+"");
+            }
+        });
+
 
         lActicvity = (LoginActivity)getActivity();
+
+
+
+
+
 
         return v;
     }

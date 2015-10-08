@@ -55,6 +55,8 @@ public interface HealthService {
                          @Field("height")int height,
                          @Field("birthdate")Timestamp birthdate,
                          @Field("type")String type,
+                         @Field("bmr")int bmr,
+                         @Field("bmi")int bmi,
                          Callback<UserModel> response);
 
     @GET("/api/users")

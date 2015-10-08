@@ -1,12 +1,11 @@
 <RelativeLayout
     android:id="@+id/fragment_home"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.rey.material.demo.HomeFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context="com.rey.material.demo.HomeFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeHomeContainer"
@@ -14,119 +13,134 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.5"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
-
-
-                <com.hookedonplay.decoviewlib.DecoView
-                    android:id="@+id/dynamicArcView"
-                    android:layout_width="match_parent"
-                    android:layout_height="382dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"/>
-
-                <TextView
-                    android:id="@+id/totalcal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_horizontal"
-                    android:text="totalcal"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="@dimen/abc_text_size_large_material"/>
-
-                <TextView
-                    android:id="@+id/textValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="percent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="@dimen/abc_text_size_large_material"
-                    android:layout_above="@+id/totalcal"
-                    android:layout_centerHorizontal="true"/>
-            </RelativeLayout>
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.4"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="1">
 
-                <android.support.v7.widget.CardView
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.41"
+                    android:orientation="vertical">
+
+
+                    <com.hookedonplay.decoviewlib.DecoView
+                        android:id="@+id/dynamicArcView"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"/>
+
+                    <TextView
+                        android:id="@+id/totalcal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_horizontal"
+                        android:text="totalcal"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="@dimen/abc_text_size_large_material"/>
+
+                    <TextView
+                        android:id="@+id/textValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/totalcal"
+                        android:layout_centerHorizontal="true"
+                        android:text="percent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="@dimen/abc_text_size_large_material"/>
+                </RelativeLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    app:cardElevation="3dp"
-                    app:cardCornerRadius="3dp">
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
 
-                    <RelativeLayout
+
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="170dp"
+                        app:cardCornerRadius="3dp"
+                        app:cardElevation="3dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
 
-                        <TextView
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="cal"
-                            android:id="@+id/calText"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"/>
+                            android:layout_height="match_parent">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="fat"
-                            android:id="@+id/fatText"
-                            android:layout_below="@+id/calText"
-                            android:layout_alignRight="@+id/calText"
-                            android:layout_alignEnd="@+id/calText"/>
+                            <TextView
+                                android:id="@+id/calText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:text="cal"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="protein"
-                            android:id="@+id/proteinText"
-                            android:layout_below="@+id/fatText"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"/>
+                            <TextView
+                                android:id="@+id/fatText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignEnd="@+id/calText"
+                                android:layout_alignRight="@+id/calText"
+                                android:layout_below="@+id/calText"
+                                android:text="fat"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="carbo"
-                            android:id="@+id/carboText"
-                            android:layout_below="@+id/proteinText"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"/>
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/proteinText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/fatText"
+                                android:text="protein"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-                </android.support.v7.widget.CardView>
+                            <TextView
+                                android:id="@+id/carboText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/proteinText"
+                                android:text="carbo"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        </RelativeLayout>
+
+                    </android.support.v7.widget.CardView>
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
-
-        </LinearLayout>
-
-
+        </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 

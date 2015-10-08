@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
     DecoView calDeco;
     DecoView mDecoView;
     ArrayList<UserModel.User> users;
+    TextView textActivity1;
 
     /**
      * Maximum value for each data series in the {@link DecoView}. This can be different for each
@@ -167,7 +168,8 @@ public class HomeFragment extends Fragment {
         float carbo = 0;
         if(histories.size()==0){
             Log.d("Success", "today is no food");
-            createEvents(cal,protein,fat,carbo);
+            textActivity1.setText("Today is no food");
+            createEvents(cal, protein, fat, carbo);
         }
         for(int i=0;i<histories.size();i++){
             cal = cal+histories.get(i).getCalInt();
@@ -274,7 +276,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        final TextView textActivity1 = (TextView) v.findViewById(R.id.textValue);
+        textActivity1 = (TextView) v.findViewById(R.id.textValue);
         final TextView textCal = (TextView) v.findViewById(R.id.calText);
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
