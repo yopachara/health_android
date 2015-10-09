@@ -278,12 +278,32 @@ public class HomeFragment extends Fragment {
 
         textActivity1 = (TextView) v.findViewById(R.id.textValue);
         final TextView textCal = (TextView) v.findViewById(R.id.calText);
+        final View cal1 = (View)v.findViewById(R.id.cal1);
+        final View cal2 = (View)v.findViewById(R.id.cal2);
+        final View cal3 = (View)v.findViewById(R.id.cal3);
+        final View cal4 = (View)v.findViewById(R.id.cal4);
+        final View cal5 = (View)v.findViewById(R.id.cal5);
+
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
                 textActivity1.setText(String.format("%.0f Cal", (currentPosition/100)*1814));
                 textCal.setText(String.format("%.0f Cal", (currentPosition/100)*1814));
-
+                if(currentPosition>=10) {
+                    cal1.setBackgroundResource(R.drawable.circle_black);
+                }
+                if(currentPosition>=30) {
+                    cal2.setBackgroundResource(R.drawable.circle_black);
+                }
+                if(currentPosition>=50) {
+                    cal3.setBackgroundResource(R.drawable.circle_black);
+                }
+                if(currentPosition>=70) {
+                    cal4.setBackgroundResource(R.drawable.circle_black);
+                }
+                if(currentPosition>=90) {
+                    cal5.setBackgroundResource(R.drawable.circle_black);
+                }
             }
 
             @Override
