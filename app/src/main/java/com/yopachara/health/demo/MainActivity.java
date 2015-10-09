@@ -532,13 +532,15 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 		api.postHistory(username, foodname, cal, protein, carbo, fat, new Callback<HistoryModel>() {
 			@Override
 			public void success(HistoryModel historyModel, Response response) {
-				Log.d("Success",response.getBody().toString());
+				Log.d("Success", response.getBody().toString());
 				mSnackBar.applyStyle(R.style.SnackBarSingleLine)
 						.text(response.toString())
 						.show();
-				HomeFragment fragment = new HomeFragment();
 
-				fragment.getRefreshDeco();
+				Fragment currentFragment = (Fragment) vp.getAdapter().instantiateItem(vp,0);//gets current fragment
+				//now you have to cast it to your fragment, let's say it's name is SenapatiFragment
+
+				((HomeFragment)currentFragment).getRefreshDeco();
 			}
 
 			@Override
@@ -566,15 +568,6 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 						dialog.get(getSelectedIndex()).getCarbo(),
 						dialog.get(getSelectedIndex()).getFat(),
 						dialog.get(getSelectedIndex()).getProtein());
-//				FragmentManager fm = getSupportFragmentManager();
-//
-//				HomeFragment homeFragment = (HomeFragment)fm.findFragmentById(R.id.fragment_home);
-//				if (homeFragment != null) {
-//					homeFragment.addDeco(90);
-//					Log.d("Success",homeFragment.toString());
-//				} else {
-//					Log.d("Error"," homeFragment is null");
-//				}
 
 				super.onPositiveActionClicked(fragment);
 			}
