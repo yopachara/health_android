@@ -1,10 +1,11 @@
-<RelativeLayout android:id="@+id/fragment_home"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context="com.rey.material.demo.HomeFragment">
+<RelativeLayout
+    android:id="@+id/fragment_home"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rey.material.demo.HomeFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeHomeContainer"
@@ -12,45 +13,235 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-
-            <com.hookedonplay.decoviewlib.DecoView
-                android:id="@+id/dynamicArcView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="382dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="1">
 
-            <TextView
-                android:id="@+id/totalcal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="totalcal"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="@dimen/abc_text_size_large_material"
-                android:layout_alignBottom="@+id/dynamicArcView"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="160dp"/>
-
-            <TextView
-                android:id="@+id/textValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="persent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="@dimen/abc_text_size_large_material"
-                android:layout_above="@+id/totalcal"
-                android:layout_alignLeft="@+id/totalcal"
-                android:layout_alignStart="@+id/totalcal"/>
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.41"
+                    android:orientation="vertical">
 
 
+                    <com.hookedonplay.decoviewlib.DecoView
+                        android:id="@+id/dynamicArcView"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="totalcal"
+
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="30sp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="130dp"/>
+
+                        <TextView
+                            android:id="@+id/totalcal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="calleft"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="19sp"
+                            android:layout_gravity="center_horizontal"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
+
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        app:cardCornerRadius="3dp"
+                        app:cardElevation="3dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/calText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:text="cal"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="19dp"
+                                android:layout_marginLeft="15dp"
+                                android:orientation="horizontal">
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="85dp"
+                                      android:layout_marginStart="85dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal1"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal2"
+
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal3"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal4"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal5"
+                                    />
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:id="@+id/fatText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignEnd="@+id/calText"
+                                android:layout_alignRight="@+id/calText"
+                                android:layout_below="@+id/calText"
+                                android:text="fat"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="53dp"
+                                android:layout_marginLeft="15dp"
+                                android:orientation="horizontal">
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:id="@+id/fat1"
+                                      android:layout_marginLeft="85dp"
+                                      android:layout_marginStart="85dp"
+                                      android:elevation="3dp"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:id="@+id/fat2"
+                                      android:elevation="3dp"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:id="@+id/fat3"
+                                      android:elevation="3dp"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/fat4"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/fat5"
+                                    />
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/proteinText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/fatText"
+                                android:text="protein"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                            <TextView
+                                android:id="@+id/carboText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/proteinText"
+                                android:text="carbo"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        </RelativeLayout>
+
+                    </android.support.v7.widget.CardView>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </RelativeLayout>

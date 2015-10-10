@@ -10,6 +10,7 @@ import com.yopachara.health.demo.Model.UserModel;
 import java.sql.Timestamp;
 
 import retrofit.Callback;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -35,6 +36,10 @@ public interface HealthService {
 
     @GET("/api/historytoday")
     public void getHistoryToday(Callback<HistoryModel> response);
+
+    @DELETE("/api/history/{historyid}")
+    public void delHistoryID(@Path("historyid")String historyid,
+                             Callback<HistoryModel> callback);
 
     @FormUrlEncoded
     @POST("/api/history")
@@ -67,4 +72,5 @@ public interface HealthService {
     public void getUserID(@Header("Authorization") String authorization,
                           @Path("userid")String username,
                           Callback<UserModel> callback);
+    
 }

@@ -1,6 +1,7 @@
 package com.yopachara.health.demo;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment {
     int height;
     Float bmr;
     Float bmi;
+    Typeface font;
 
     public static HomeFragment newInstance(UserModel.User user) {
         HomeFragment fragment = new HomeFragment();
@@ -84,7 +86,7 @@ public class HomeFragment extends Fragment {
         height = mUser.getHeight();
         bmr = mUser.getBmr();
         bmi = mUser.getBmi();
-
+        font = Typeface.createFromAsset(getContext().getAssets(), "supermarket.ttf");
         Log.d("User information","Weight "+weight+" Height "+height);
 
 
@@ -96,34 +98,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        // Create background track
-//        calDeco.addSeries(new SeriesItem.Builder(Color.argb(255,162,184,154))
-//                .setRange(0, 100, 100)
-//                .setInitialVisibility(false)
-//                .setLineWidth(32f)
-//                .build());
-//
-//
-//        //Create data series track
-//        SeriesItem calSeries = new SeriesItem.Builder(Color.argb(255, 64, 196, 0))
-//                .setRange(0, 100, 0)
-//                .setLineWidth(32f)
-//                .build();
-//
-//
-//        calIndex = calDeco.addSeries(calSeries);
-//
-//
-//        calDeco.addEvent(new DecoEvent.Builder(DecoEvent.EventType.EVENT_SHOW, true)
-//                .setDelay(1000)
-//                .setDuration(2000)
-//                .build());
-//
-//        final TextView textPercent = (TextView) v.findViewById(R.id.textValue);
-//        if (textPercent != null) {
-//            textPercent.setText("");
-//            addProgressListener(calSeries, textPercent,text_totalcal, "%.0f%%");
-//        }
 
         // Create required data series on the DecoView
         createBackSeries(v);
@@ -248,11 +222,33 @@ public class HomeFragment extends Fragment {
                 .build();
 
         final TextView textPercentage = (TextView) v.findViewById(R.id.fatText);
+        textPercentage.setTypeface(font);
+        final View fat1 = (View)v.findViewById(R.id.fat1);
+        final View fat2 = (View)v.findViewById(R.id.fat2);
+        final View fat3 = (View)v.findViewById(R.id.fat3);
+        final View fat4 = (View)v.findViewById(R.id.fat4);
+        final View fat5 = (View)v.findViewById(R.id.fat5);
+
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                float percentFilled = (percentComplete/100)*fatPercent;
-                textPercentage.setText(String.format("Fat %.0f%%", percentFilled*100f));
+                float percentFilled = (percentComplete/100)*fatPercent*100f;
+                textPercentage.setText(String.format("ไขมัน %.0f%%", percentFilled));
+                if(percentFilled>=20) {
+                    fat1.setBackgroundResource(R.drawable.circle_black);
+                }
+                if(percentFilled>=40) {
+                    fat2.setBackgroundResource(R.drawable.circle_black);
+                }
+                if(percentFilled>=60) {
+                    fat3.setBackgroundResource(R.drawable.circle_black);
+                }
+                if(percentFilled>=80) {
+                    fat4.setBackgroundResource(R.drawable.circle_black);
+                }
+                if(percentFilled>=100) {
+                    fat5.setBackgroundResource(R.drawable.circle_black);
+                }
             }
 
             @Override
@@ -263,10 +259,11 @@ public class HomeFragment extends Fragment {
 
 
         final TextView textToGo = (TextView) v.findViewById(R.id.totalcal);
+        textToGo.setTypeface(font);
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textToGo.setText(String.format("%.1f Cal left", ((seriesItem.getMaxValue() - currentPosition)/100)*1814));
+                textToGo.setText(String.format("%s เหลือแคลอรี่", ((seriesItem.getMaxValue() - currentPosition)/100)*1814));
 
             }
 
@@ -287,21 +284,23 @@ public class HomeFragment extends Fragment {
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textActivity1.setText(String.format("%.0f Cal", (currentPosition/100)*1814));
-                textCal.setText(String.format("%.0f Cal", (currentPosition/100)*1814));
-                if(currentPosition>=10) {
+                textActivity1.setText(String.format("%.0f แคลอรี่", (currentPosition/100)*1814));
+                textCal.setText(String.format("%.0f แคลอรี่", (currentPosition/100)*1814));
+                textActivity1.setTypeface(font);
+                textCal.setTypeface(font);
+                if(currentPosition>=20) {
                     cal1.setBackgroundResource(R.drawable.circle_black);
                 }
-                if(currentPosition>=30) {
+                if(currentPosition>=40) {
                     cal2.setBackgroundResource(R.drawable.circle_black);
                 }
-                if(currentPosition>=50) {
+                if(currentPosition>=60) {
                     cal3.setBackgroundResource(R.drawable.circle_black);
                 }
-                if(currentPosition>=70) {
+                if(currentPosition>=80) {
                     cal4.setBackgroundResource(R.drawable.circle_black);
                 }
-                if(currentPosition>=90) {
+                if(currentPosition>=100) {
                     cal5.setBackgroundResource(R.drawable.circle_black);
                 }
             }
@@ -322,11 +321,12 @@ public class HomeFragment extends Fragment {
                 .build();
 
         final TextView textActivity2 = (TextView) v.findViewById(R.id.proteinText);
+        textActivity2.setTypeface(font);
 
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textActivity2.setText(String.format("Protein %.0f%%", (percentComplete/100)*proteinPercent*100f));
+                textActivity2.setText(String.format("โปรตีน %.0f%%", (percentComplete/100)*proteinPercent*100f));
             }
 
             @Override
@@ -345,11 +345,12 @@ public class HomeFragment extends Fragment {
                 .build();
 
         final TextView textActivity3 = (TextView) v.findViewById(R.id.carboText);
+        textActivity3.setTypeface(font);
 
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textActivity3.setText(String.format("Carbohydrate %.0f%%", currentPosition));
+                textActivity3.setText(String.format("คาร์โบไฮเดรต %.0f%%", currentPosition));
             }
 
             @Override

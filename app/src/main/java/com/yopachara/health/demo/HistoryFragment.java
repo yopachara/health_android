@@ -64,7 +64,6 @@ public class HistoryFragment extends Fragment {
         return v;
     }
 
-
     private void getHistory(final View v) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API).build();
@@ -97,4 +96,6 @@ public class HistoryFragment extends Fragment {
 
         });
     }
+
+
 }
