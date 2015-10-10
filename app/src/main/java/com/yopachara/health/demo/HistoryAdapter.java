@@ -1,5 +1,7 @@
 package com.yopachara.health.demo;
 
+import android.app.Activity;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
+import com.rey.material.app.SimpleDialog;
+import com.rey.material.app.ThemeManager;
 import com.yopachara.health.demo.Model.HistoryModel;
 import com.yopachara.health.demo.Service.HealthService;
 
@@ -29,6 +35,7 @@ import retrofit.client.Response;
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
     private ArrayList<HistoryModel.History> history;
     private Context mContext;
+    FragmentManager fragmentManager;
     RecyclerView recyclerView;
     private HistoryModel historyModel;
 
@@ -46,8 +53,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         private List<HistoryModel.History> history;
         private HistoryAdapter ha;
         String API = "http://pachara.me:3000";
-
-        private ViewHolder(View view) {
+        Dialog.Builder builder = null;
+        FragmentManager fragmentManager;
+        private ViewHolder(View view,FragmentManager fragmentManagers) {
             super(view);
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
@@ -59,6 +67,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             pro = (TextView) view.findViewById(R.id.pro);
             fat = (TextView) view.findViewById(R.id.fat);
             carbo = (TextView) view.findViewById(R.id.carbo);
+            fragmentManager = fragmentManagers;
 
 
         }
@@ -72,10 +81,38 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         @Override
         public boolean onLongClick(View view) {
             Log.d("History Long Click", getPosition() + view.toString());
-            Toast.makeText(view.getContext(), "Delete food history = " + name, Toast.LENGTH_SHORT).show();
-            delHistory(id);
+            Toast.makeText(view.getContext(), "Delete food history = " + name.getText(), Toast.LENGTH_SHORT).show();
+            createDialog(id,view);
+
             return true;
 
+
+        }
+
+        private void createDialog(final String id,View view) {
+            boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
+
+            builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog){
+                @Override
+                public void onPositiveActionClicked(DialogFragment fragment) {
+                    super.onPositiveActionClicked(fragment);
+                    delHistory(id);
+                }
+
+                @Override
+                public void onNegativeActionClicked(DialogFragment fragment) {
+                    super.onNegativeActionClicked(fragment);
+                }
+            };
+
+            ((SimpleDialog.Builder) builder)
+                    .message(name.getText()+" is add on "+date.getText())
+                    .title("You want to delete food history?")
+                    .positiveAction("Yes")
+                    .negativeAction("No");
+            DialogFragment fragment = DialogFragment.newInstance(builder);
+
+            fragment.show(fragmentManager ,null);
 
         }
         private void delHistory(String id) {
@@ -99,9 +136,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     }
 
-    public HistoryAdapter(Context context, ArrayList<HistoryModel.History> dataset) {
+    public HistoryAdapter(Context context, ArrayList<HistoryModel.History> dataset,FragmentManager fragmentManagers) {
         history = dataset;
         mContext = context;
+        fragmentManager = fragmentManagers;
+
     }
 
     @Override
@@ -109,7 +148,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         View view = LayoutInflater.from(mContext)
                 .inflate(R.layout.recycler_history_row, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view,fragmentManager);
         return viewHolder;
     }
 

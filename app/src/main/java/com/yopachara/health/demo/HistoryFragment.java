@@ -64,7 +64,7 @@ public class HistoryFragment extends Fragment {
         return v;
     }
 
-    private void getHistory(final View v) {
+    public void getHistory(final View v) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API).build();
         HealthService api = restAdapter.create(HealthService.class);
@@ -77,12 +77,12 @@ public class HistoryFragment extends Fragment {
 
                 mRecyclerView = (RecyclerView) v.findViewById(R.id.historyList);
 
-                mRecyclerView.setHasFixedSize(true);
+//                mRecyclerView.setHasFixedSize(true);
 
                 mLayoutManager = new LinearLayoutManager(getActivity());
                 mRecyclerView.setLayoutManager(mLayoutManager);
 
-                mAdapter = new HistoryAdapter(getActivity(), history);
+                mAdapter = new HistoryAdapter(getActivity(), history,getFragmentManager());
                 mRecyclerView.setAdapter(mAdapter);
                 mSwipeRefreshLayout.setRefreshing(false);
             }
