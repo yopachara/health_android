@@ -44,10 +44,10 @@ public class UserModel {
         private int height;
 
         @SerializedName("birthdate")
-        private Timestamp birthdate;
+        private String birthdate;
 
         @SerializedName("createAt")
-        private Date createAt;
+        private String createAt;
 
         @SerializedName("type")
         private String type;
@@ -90,11 +90,11 @@ public class UserModel {
             return height;
         }
 
-        public Timestamp getBirthdate() {
+        public String getBirthdate() {
             return birthdate;
         }
 
-        public Date getCreateAt() {
+        public String getCreateAt() {
             return createAt;
         }
 
