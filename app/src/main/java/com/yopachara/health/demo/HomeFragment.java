@@ -263,7 +263,7 @@ public class HomeFragment extends Fragment {
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textToGo.setText(String.format("%s เหลือแคลอรี่", ((seriesItem.getMaxValue() - currentPosition)/100)*1814));
+                textToGo.setText(String.format("%.0f เหลือแคลอรี่", ((seriesItem.getMaxValue() - currentPosition)/100)*1814));
 
             }
 

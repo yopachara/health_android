@@ -58,7 +58,7 @@ public interface HealthService {
                          @Field("sex")String sex,
                          @Field("weight")int weight,
                          @Field("height")int height,
-                         @Field("birthdate")Timestamp birthdate,
+                         @Field("birthdate")String birthdate,
                          @Field("type")String type,
                          @Field("bmr")int bmr,
                          @Field("bmi")int bmi,

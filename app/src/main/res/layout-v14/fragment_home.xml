@@ -51,7 +51,7 @@
                             android:text="totalcal"
 
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textSize="@dimen/abc_text_size_large_material"
+                            android:textSize="30sp"
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center"
                             android:layout_marginTop="130dp"/>
@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content"
                             android:text="calleft"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textSize="14sp"
+                            android:textSize="19sp"
                             android:layout_gravity="center_horizontal"/>
 
 
@@ -103,52 +103,52 @@
                                 android:layout_marginLeft="15dp"
                                 android:layout_marginTop="15dp"
                                 />
-                           <LinearLayout
-                               android:layout_width="match_parent"
-                               android:layout_height="match_parent"
-                               android:layout_marginTop="19dp"
-                               android:layout_marginLeft="15dp"
-                               android:orientation="horizontal">
-                               <View android:layout_width="15dp"
-                                     android:layout_height="15dp"
-                                     android:background="@drawable/circle"
-                                     android:layout_marginLeft="85dp"
-                                     android:layout_marginStart="85dp"
-                                     android:elevation="3dp"
-                                     android:id="@+id/cal1"
-                                   />
-                               <View android:layout_width="15dp"
-                                     android:layout_height="15dp"
-                                     android:background="@drawable/circle"
-                                     android:layout_marginLeft="30dp"
-                                     android:layout_marginStart="30dp"
-                                     android:elevation="3dp"
-                                     android:id="@+id/cal2"
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="19dp"
+                                android:layout_marginLeft="15dp"
+                                android:orientation="horizontal">
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="85dp"
+                                      android:layout_marginStart="85dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal1"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal2"
 
-                                   />
-                               <View android:layout_width="15dp"
-                                     android:layout_height="15dp"
-                                     android:background="@drawable/circle"
-                                     android:layout_marginLeft="30dp"
-                                     android:layout_marginStart="30dp"
-                                     android:elevation="3dp"
-                                     android:id="@+id/cal3"
-                                   />
-                               <View android:layout_width="15dp"
-                                     android:layout_height="15dp"
-                                     android:background="@drawable/circle"
-                                     android:layout_marginLeft="30dp"
-                                     android:elevation="3dp"
-                                     android:id="@+id/cal4"
-                                   />
-                               <View android:layout_width="15dp"
-                                     android:layout_height="15dp"
-                                     android:background="@drawable/circle"
-                                     android:layout_marginLeft="30dp"
-                                     android:elevation="3dp"
-                                     android:id="@+id/cal5"
-                                   />
-                           </LinearLayout>
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal3"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal4"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/cal5"
+                                    />
+                            </LinearLayout>
 
 
                             <TextView
@@ -171,6 +171,7 @@
                                 <View android:layout_width="15dp"
                                       android:layout_height="15dp"
                                       android:background="@drawable/circle"
+                                      android:id="@+id/fat1"
                                       android:layout_marginLeft="85dp"
                                       android:layout_marginStart="85dp"
                                       android:elevation="3dp"
@@ -180,6 +181,7 @@
                                       android:background="@drawable/circle"
                                       android:layout_marginLeft="30dp"
                                       android:layout_marginStart="30dp"
+                                      android:id="@+id/fat2"
                                       android:elevation="3dp"
                                     />
                                 <View android:layout_width="15dp"
@@ -187,6 +189,7 @@
                                       android:background="@drawable/circle"
                                       android:layout_marginLeft="30dp"
                                       android:layout_marginStart="30dp"
+                                      android:id="@+id/fat3"
                                       android:elevation="3dp"
                                     />
                                 <View android:layout_width="15dp"
@@ -194,12 +197,14 @@
                                       android:background="@drawable/circle"
                                       android:layout_marginLeft="30dp"
                                       android:elevation="3dp"
+                                      android:id="@+id/fat4"
                                     />
                                 <View android:layout_width="15dp"
                                       android:layout_height="15dp"
                                       android:background="@drawable/circle"
                                       android:layout_marginLeft="30dp"
                                       android:elevation="3dp"
+                                      android:id="@+id/fat5"
                                     />
                             </LinearLayout>
                             <TextView
