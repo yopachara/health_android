@@ -21,8 +21,19 @@ import com.rey.material.widget.EditText;
 import com.rey.material.widget.RadioButton;
 import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.Spinner;
+import com.yopachara.health.demo.Model.UserModel;
+import com.yopachara.health.demo.Service.HealthService;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 
 import java.text.SimpleDateFormat;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class SignupFragment extends Fragment implements View.OnClickListener {
@@ -30,6 +41,10 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     private LoginActivity lActicvity;
     RadioButton male;
     RadioButton female;
+    String API = "http://pachara.me:3000";
+    int day;
+    int month;
+    int year;
 
     public static SignupFragment newInstance() {
         SignupFragment fragment = new SignupFragment();
@@ -56,17 +71,17 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         female = (RadioButton)v.findViewById(R.id.switches_rb2);
 
         final Spinner spn_height = (Spinner)v.findViewById(R.id.spinner_height);
-        Spinner spn_weight = (Spinner)v.findViewById(R.id.spinner_weight);
+        final Spinner spn_weight = (Spinner)v.findViewById(R.id.spinner_weight);
         Spinner spn_exercise = (Spinner)v.findViewById(R.id.spinner_exercise);
 
         String[] itemsHeight = new String[50];
         for(int i = 0; i < itemsHeight.length; i++)
-            itemsHeight[i] = String.valueOf(i + 151)+" cm";
+            itemsHeight[i] = String.valueOf(i + 151);
         ArrayAdapter<String> adapterHeight = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsHeight);
 
         String[] itemsWeight = new String[75];
         for(int i = 0; i < itemsWeight.length; i++)
-            itemsWeight[i] = String.valueOf(i + 31)+" kg";
+            itemsWeight[i] = String.valueOf(i + 31);
         ArrayAdapter<String> adapterWeight = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsWeight);
 
         String[] itemsExercise = new String[] {"Little","3 times/week","4 times/week","5 times/week","Daily"};
@@ -111,19 +126,19 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         signup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                int height = Integer.parseInt(spn_weight.getSelectedItem().toString());
+                int weight = Integer.parseInt(spn_height.getSelectedItem().toString());
                 Log.d("Signup","Username : "+username.getText()+" Password : "+password.getText());
                 Log.d("Radio But","Male: "+male.isChecked()+" Female: "+female.isChecked());
-                Log.d("Height", spn_height.getSelectedItem()+"");
+                Log.d("Height", spn_height.getSelectedItem().toString());
+                Log.d("Age",""+calculateAge());
+                Log.d("BMR", calculateBmr(height, weight, calculateAge())+"");
+                Log.d("BMI", calculateBmi(weight, height)+"");
             }
         });
 
 
         lActicvity = (LoginActivity)getActivity();
-
-
-
-
-
 
         return v;
     }
@@ -140,7 +155,8 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                     public void onPositiveActionClicked(DialogFragment fragment) {
                         DatePickerDialog dialog = (DatePickerDialog)fragment.getDialog();
                         String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
-                        Toast.makeText(lActicvity, "Date is " + date, Toast.LENGTH_SHORT).show();
+                        day = dialog.getDay(); month = dialog.getMonth()+1; year = dialog.getYear();
+                        Toast.makeText(lActicvity, "Date is " + day + " "+ month+" "+ year, Toast.LENGTH_SHORT).show();
                         EditText test = (EditText)getView().findViewById(R.id.birthdate);
                         test.setText(date);
                         Button asd = (Button)getView().findViewById(R.id.dialog_bt_date);
@@ -170,6 +186,53 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, loginFragment);
         fragmentTransaction.commit();
+    }
+
+    private int calculateAge(){
+        LocalDate birthdate = new LocalDate (year, month, day);          //Birth date
+        LocalDate now = new LocalDate();                    //Today's date
+        Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
+        //Now access the values as below
+        System.out.println("Day "+period.getDays());
+        System.out.println("Month " + period.getMonths());
+        System.out.println("Year " + period.getYears());
+        return  period.getYears();
+    }
+
+    private double calculateBmr(int weight, int height, int age){
+        double bmr;
+        if (male.isChecked()==true){
+            bmr = 66.5 + (13.75*weight) + (5.003*height) - (6.775 * age);
+        } else {
+            bmr = 655.1 + (9.563*weight) + (1.85 * height ) - (4.676 * age );
+        }
+        return bmr;
+    }
+
+    private double calculateBmi(int weight, int height){
+        double bmi;
+        bmi = weight/((height/100.00)*(height/100.00));
+        return bmi;
+    }
+
+    public void postSignup(String username, String password, String sex, int weight, int height, String birthdate, int bmr, int bmi){
+        String type = "Android";
+        Log.d("Signup",username);
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(API).build();
+        HealthService api = restAdapter.create(HealthService.class);
+        api.postUser(username, password, sex, weight, height, birthdate, type, bmr, bmi, new Callback<UserModel>() {
+            @Override
+            public void success(UserModel userModel, Response response) {
+                UserModel.User user = userModel.getObjects().get(0);
+                Log.d("Success",user.getUsername()+""+user.getCreateAt());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d("Fail",error.toString());
+            }
+        });
     }
 
 
