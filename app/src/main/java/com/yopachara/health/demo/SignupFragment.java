@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,9 +43,10 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     RadioButton male;
     RadioButton female;
     String API = "http://pachara.me:3000";
-    int day;
-    int month;
-    int year;
+    int day = 0;
+    int month = 0;
+    int year = 0;
+    EditText et_date;
 
     public static SignupFragment newInstance() {
         SignupFragment fragment = new SignupFragment();
@@ -53,38 +55,54 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_signup, container, false);
+        final View v = inflater.inflate(R.layout.fragment_signup, container, false);
 
-        Button bt_date = (Button)v.findViewById(R.id.dialog_bt_date);
+        Button bt_date = (Button) v.findViewById(R.id.dialog_bt_date);
+        et_date = (EditText) v.findViewById(R.id.birthdate);
 
         bt_date.setOnClickListener(this);
+        et_date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    et_date.setInputType(InputType.TYPE_NULL);
+                    datePicker(view);
+                }
+            }
+        });
+//        et_date.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
-        final EditText username = (EditText)v.findViewById(R.id.username);
-        final EditText password = (EditText)v.findViewById(R.id.password);
+        final EditText username = (EditText) v.findViewById(R.id.username);
+        final EditText password = (EditText) v.findViewById(R.id.password);
 
 
-        male = (RadioButton)v.findViewById(R.id.switches_rb1);
-        female = (RadioButton)v.findViewById(R.id.switches_rb2);
+        male = (RadioButton) v.findViewById(R.id.switches_rb1);
+        female = (RadioButton) v.findViewById(R.id.switches_rb2);
 
-        final Spinner spn_height = (Spinner)v.findViewById(R.id.spinner_height);
-        final Spinner spn_weight = (Spinner)v.findViewById(R.id.spinner_weight);
-        Spinner spn_exercise = (Spinner)v.findViewById(R.id.spinner_exercise);
+        final Spinner spn_height = (Spinner) v.findViewById(R.id.spinner_height);
+        final Spinner spn_weight = (Spinner) v.findViewById(R.id.spinner_weight);
+        final Spinner spn_exercise = (Spinner) v.findViewById(R.id.spinner_exercise);
 
         String[] itemsHeight = new String[50];
-        for(int i = 0; i < itemsHeight.length; i++)
+        for (int i = 0; i < itemsHeight.length; i++)
             itemsHeight[i] = String.valueOf(i + 151);
         ArrayAdapter<String> adapterHeight = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsHeight);
 
         String[] itemsWeight = new String[75];
-        for(int i = 0; i < itemsWeight.length; i++)
+        for (int i = 0; i < itemsWeight.length; i++)
             itemsWeight[i] = String.valueOf(i + 31);
         ArrayAdapter<String> adapterWeight = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsWeight);
 
-        String[] itemsExercise = new String[] {"Little","3 times/week","4 times/week","5 times/week","Daily"};
+        String[] itemsExercise = new String[]{"ออกกำลังกายน้อยมาก", "1-3 ครั้งต่อสัปดาห์", "4-5 ครั้งต่อสัปดาห์", "6-7 ครั้งต่อสัปดาห์", "วันละ 2 ครั้งขึ้นไป"};
+        String[] itemsPlans = new String[]{"คงสภาพ", "สร้างกล้ามเนื้อ", "ลดน้ำหนัก"};
 
         ArrayAdapter<String> adapterExercise = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsExercise);
 
@@ -99,7 +117,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     male.setChecked(male == buttonView);
                     female.setChecked(female == buttonView);
                 }
@@ -111,7 +129,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         male.setOnCheckedChangeListener(listener);
         female.setOnCheckedChangeListener(listener);
 
-        Button back = (Button)v.findViewById(R.id.back);
+        Button back = (Button) v.findViewById(R.id.back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,24 +139,25 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        Button signup = (Button)v.findViewById(R.id.signup);
+        Button signup = (Button) v.findViewById(R.id.signup);
 
-        signup.setOnClickListener(new View.OnClickListener(){
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int height = Integer.parseInt(spn_weight.getSelectedItem().toString());
                 int weight = Integer.parseInt(spn_height.getSelectedItem().toString());
-                Log.d("Signup","Username : "+username.getText()+" Password : "+password.getText());
-                Log.d("Radio But","Male: "+male.isChecked()+" Female: "+female.isChecked());
+                Log.d("Signup", "Username : " + username.getText() + " Password : " + password.getText());
+                Log.d("Radio But", "Male: " + male.isChecked() + " Female: " + female.isChecked());
                 Log.d("Height", spn_height.getSelectedItem().toString());
-                Log.d("Age",""+calculateAge());
-                Log.d("BMR", calculateBmr(height, weight, calculateAge())+"");
-                Log.d("BMI", calculateBmi(weight, height)+"");
+                Log.d("Age", "" + calculateAge());
+                Log.d("BMR", calculateBmr(height, weight, calculateAge()) + "");
+                Log.d("BMI", calculateBmi(height, weight) + "");
+                Log.d("TDEE", calculateTdee(spn_exercise.getSelectedItemPosition(), calculateBmr(height, weight, calculateAge())) + "");
             }
         });
 
 
-        lActicvity = (LoginActivity)getActivity();
+        lActicvity = (LoginActivity) getActivity();
 
         return v;
     }
@@ -147,26 +166,28 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         Dialog.Builder builder = null;
 
         boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.dialog_bt_date:
-                builder = new DatePickerDialog.Builder(isLightTheme ? R.style.Material_App_Dialog_DatePicker_Light :  R.style.Material_App_Dialog_DatePicker){
+                builder = new DatePickerDialog.Builder(isLightTheme ? R.style.Material_App_Dialog_DatePicker_Light : R.style.Material_App_Dialog_DatePicker) {
                     @Override
 
                     public void onPositiveActionClicked(DialogFragment fragment) {
-                        DatePickerDialog dialog = (DatePickerDialog)fragment.getDialog();
+                        DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
                         String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
-                        day = dialog.getDay(); month = dialog.getMonth()+1; year = dialog.getYear();
-                        Toast.makeText(lActicvity, "Date is " + day + " "+ month+" "+ year, Toast.LENGTH_SHORT).show();
-                        EditText test = (EditText)getView().findViewById(R.id.birthdate);
+                        day = dialog.getDay();
+                        month = dialog.getMonth() + 1;
+                        year = dialog.getYear();
+                        Toast.makeText(lActicvity, "Date is " + day + " " + month + " " + year, Toast.LENGTH_SHORT).show();
+                        EditText test = (EditText) getView().findViewById(R.id.birthdate);
                         test.setText(date);
-                        Button asd = (Button)getView().findViewById(R.id.dialog_bt_date);
+                        Button asd = (Button) getView().findViewById(R.id.dialog_bt_date);
                         asd.setText(date);
                         super.onPositiveActionClicked(fragment);
                     }
 
                     @Override
                     public void onNegativeActionClicked(DialogFragment fragment) {
-                        Toast.makeText(lActicvity, "Cancelled" , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(lActicvity, "Cancelled", Toast.LENGTH_SHORT).show();
                         super.onNegativeActionClicked(fragment);
                     }
                 };
@@ -174,13 +195,49 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                         .negativeAction("CANCEL");
                 break;
 
+
         }
         DialogFragment fragment = DialogFragment.newInstance(builder);
         fragment.show(getFragmentManager(), null);
     }
 
-    public void goToLogin(View v)
-    {
+    public void datePicker(final View v) {
+        Dialog.Builder builder = null;
+
+        boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
+
+        builder = new DatePickerDialog.Builder(isLightTheme ? R.style.Material_App_Dialog_DatePicker_Light : R.style.Material_App_Dialog_DatePicker) {
+            @Override
+
+            public void onPositiveActionClicked(DialogFragment fragment) {
+                DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
+                String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
+                day = dialog.getDay();
+                month = dialog.getMonth() + 1;
+                year = dialog.getYear();
+                Toast.makeText(lActicvity, "Date is " + day + " " + month + " " + year, Toast.LENGTH_SHORT).show();
+                EditText test = (EditText) getView().findViewById(R.id.birthdate);
+                test.setText(date);
+                Button asd = (Button) getView().findViewById(R.id.dialog_bt_date);
+                asd.setText(date);
+                super.onPositiveActionClicked(fragment);
+            }
+
+            @Override
+            public void onNegativeActionClicked(DialogFragment fragment) {
+                Toast.makeText(lActicvity, "Cancelled", Toast.LENGTH_SHORT).show();
+                super.onNegativeActionClicked(fragment);
+            }
+        };
+        builder.positiveAction("OK")
+                .negativeAction("CANCEL");
+
+
+        DialogFragment fragment = DialogFragment.newInstance(builder);
+        fragment.show(getFragmentManager(), null);
+    }
+
+    public void goToLogin(View v) {
         Fragment loginFragment = new LoginFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -188,36 +245,67 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         fragmentTransaction.commit();
     }
 
-    private int calculateAge(){
-        LocalDate birthdate = new LocalDate (year, month, day);          //Birth date
-        LocalDate now = new LocalDate();                    //Today's date
-        Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
-        //Now access the values as below
-        System.out.println("Day "+period.getDays());
-        System.out.println("Month " + period.getMonths());
-        System.out.println("Year " + period.getYears());
-        return  period.getYears();
+    private int calculateAge() {
+        if (year != 0 && month != 0 && day != 0) {
+            LocalDate birthdate = new LocalDate(year, month, day);          //Birth date
+            LocalDate now = new LocalDate();                    //Today's date
+            Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
+            //Now access the values as below
+            Log.d("Age", "Year " + period.getYears() + " Month " + period.getMonths() + " Day " + period.getDays());
+            return period.getYears();
+        } else {
+            return 0;
+        }
+
     }
 
-    private double calculateBmr(int weight, int height, int age){
+    private double calculateBmr(int weight, int height, int age) {
         double bmr;
-        if (male.isChecked()==true){
-            bmr = 66.5 + (13.75*weight) + (5.003*height) - (6.775 * age);
+        if (male.isChecked() == true) {
+            bmr = 66.5 + (13.75 * weight) + (5.003 * height) - (6.775 * age);
         } else {
-            bmr = 655.1 + (9.563*weight) + (1.85 * height ) - (4.676 * age );
+            bmr = 655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age);
         }
         return bmr;
     }
 
-    private double calculateBmi(int weight, int height){
+    private double calculateBmi(int weight, int height) {
         double bmi;
-        bmi = weight/((height/100.00)*(height/100.00));
+        double dHeight = (double) height / 100;
+        Log.d("dHeight", dHeight + "");
+        bmi = weight / (dHeight * dHeight);
         return bmi;
     }
 
-    public void postSignup(String username, String password, String sex, int weight, int height, String birthdate, int bmr, int bmi){
+    private double calculateTdee(int index, double bmr) {
+        double tdee = 0;
+        switch (index) {
+            case 0:
+                tdee = 1.2 * bmr;
+                break;
+            case 1:
+                tdee = 1.375 * bmr;
+                break;
+            case 2:
+                tdee = 1.55 * bmr;
+                break;
+            case 3:
+                tdee = 1.7 * bmr;
+                break;
+            case 4:
+                tdee = 1.9 * bmr;
+                break;
+            default:
+                tdee = bmr;
+                break;
+
+        }
+        return tdee;
+    }
+
+    public void postSignup(String username, String password, String sex, int weight, int height, String birthdate, int bmr, int bmi) {
         String type = "Android";
-        Log.d("Signup",username);
+        Log.d("Signup", username);
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API).build();
         HealthService api = restAdapter.create(HealthService.class);
@@ -225,16 +313,15 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
             @Override
             public void success(UserModel userModel, Response response) {
                 UserModel.User user = userModel.getObjects().get(0);
-                Log.d("Success",user.getUsername()+""+user.getCreateAt());
+                Log.d("Success", user.getUsername() + "" + user.getCreateAt());
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Log.d("Fail",error.toString());
+                Log.d("Fail", error.toString());
             }
         });
     }
-
 
 
 }

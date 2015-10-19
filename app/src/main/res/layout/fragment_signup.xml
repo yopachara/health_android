@@ -1,48 +1,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                tools:context="com.yopachara.health.demo.SignupFragment"
-                android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.yopachara.health.demo.SignupFragment">
 
     <com.rey.material.widget.EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:inputType="textMultiLine"
         android:hint="Username"
+        android:inputType="textMultiLine"
         app:et_inputId="@+id/et_userName"
-        app:et_supportMode="charCounter"
+        app:et_labelTextSize="25sp"
         app:et_supportMaxChars="15"
-        app:v_styleId="@array/edittext"
-        app:et_labelTextSize="25sp"/>
+        app:et_supportMode="charCounter"
+        app:v_styleId="@array/edittext"/>
 
     <com.rey.material.widget.EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:inputType="textPassword"
         android:hint="Input with helper + error"
+        android:inputType="textPassword"
+        app:et_helper="Enter password"
         app:et_inputId="@+id/et_password"
         app:et_supportMode="helperWithError"
-        app:et_helper="Enter password"
         app:v_styleId="@array/edittext"/>
 
     <com.yopachara.health.app.ContactEditText
         android:id="@+id/contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:completionThreshold="2"
+        android:dropDownSelector="@drawable/abc_list_selector_background_transition_holo_light"
         android:hint="Contact"
         android:imeOptions="actionNext|flagNoEnterAction|flagNoExtractUi"
-        android:dropDownSelector="@drawable/abc_list_selector_background_transition_holo_light"
+        android:inputType="number"
+        app:cet_spanFontFamily="asset:FreeSans.ttf"
         app:et_inputId="@+id/textfield_et_contact_input"
         app:et_supportMode="none"
-        app:cet_spanFontFamily="asset:FreeSans.ttf"
-        android:completionThreshold="2"
         app:v_styleId="@array/edittext_contact"/>
 
     <com.rey.material.widget.EditText
@@ -50,11 +50,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:inputType="textMultiLine"
         android:hint="birthdate"
+        android:focusable="false"
+        android:inputType="textMultiLine"
         app:et_inputId="@+id/et_birthdate"
-        app:et_supportMode="charCounter"
         app:et_supportMaxChars="20"
+        app:et_supportMode="charCounter"
         app:v_styleId="@array/edittext"/>
 
     <com.rey.material.widget.Button
@@ -62,60 +63,73 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="#FF000000"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
         android:gravity="center"
         android:text="DATE"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+        android:textColor="#FF000000"
         app:v_styleId="@array/button_raise"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1">
+
         <com.rey.material.widget.TextView
             android:layout_width="0dp"
-            android:layout_weight="0.4"
             android:layout_height="wrap_content"
-            app:v_styleId="@array/text_title"
-            android:text="Sex"/>
+            android:layout_weight="0.4"
+            android:text="Sex"
+            app:v_styleId="@array/text_title"/>
 
         <com.rey.material.widget.RadioButton
             android:id="@+id/switches_rb1"
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="wrap_content"
-            android:text="Male"
+            android:layout_weight="0.3"
             android:checked="true"
             android:gravity="center_vertical"
+            android:text="Male"
             app:v_styleId="@array/radio_button"/>
 
         <com.rey.material.widget.RadioButton
             android:id="@+id/switches_rb2"
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="wrap_content"
-            android:text="Female"
+            android:layout_weight="0.3"
             android:checked="false"
             android:gravity="center_vertical"
+            android:text="Female"
             app:v_styleId="@array/radio_button"/>
     </LinearLayout>
 
-    <com.rey.material.widget.Spinner
-        android:id="@+id/spinner_height"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minWidth="128dp"
-        android:padding="8dp"
-        app:spn_label="Height"
-        app:v_styleId="@array/spinner"/>
-    <com.rey.material.widget.Spinner
-        android:id="@+id/spinner_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="128dp"
-        android:padding="8dp"
-        app:spn_label="Weight"
-        app:v_styleId="@array/spinner"/>
+        android:orientation="horizontal">
+
+        <com.rey.material.widget.Spinner
+            android:id="@+id/spinner_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="128dp"
+            android:padding="8dp"
+            app:spn_label="Height"
+            app:v_styleId="@array/spinner"/>
+
+        <com.rey.material.widget.Spinner
+            android:id="@+id/spinner_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:minWidth="128dp"
+            android:padding="8dp"
+            app:spn_label="Weight"
+            app:v_styleId="@array/spinner"/>
+
+    </LinearLayout>
+
+
     <com.rey.material.widget.Spinner
         android:id="@+id/spinner_exercise"
         android:layout_width="wrap_content"
@@ -124,28 +138,30 @@
         android:padding="8dp"
         app:spn_label="Exercise Level"
         app:v_styleId="@array/spinner"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <com.rey.material.widget.Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BACK"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+            android:textColor="#FF000000"
+            app:v_styleId="@array/button_raise"/>
 
-    <com.rey.material.widget.Button
-    android:id="@+id/back"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:textColor="#FF000000"
-    android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
-    android:layout_gravity="center"
-    android:text="BACK"
-    app:v_styleId="@array/button_raise"/>
+        <com.rey.material.widget.Button
+            android:id="@+id/signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGNUP"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+            android:textColor="#FF000000"
+            app:v_styleId="@array/button_raise"/>
+    </LinearLayout>
 
-    <com.rey.material.widget.Button
-        android:id="@+id/signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="#FF000000"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
-        android:layout_gravity="center"
-        android:text="SIGNUP"
-        app:v_styleId="@array/button_raise"/>
 
 
 </LinearLayout>
