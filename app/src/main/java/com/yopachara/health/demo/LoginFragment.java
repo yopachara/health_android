@@ -69,10 +69,9 @@ public class LoginFragment extends Fragment {
         button_bt_raise.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                mSnackBar.applyStyle(R.style.SnackBarSingleLine)
-                        .show();
+//                mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+//                        .show();
                 goToSignup(v);
-
             }
         });
 
