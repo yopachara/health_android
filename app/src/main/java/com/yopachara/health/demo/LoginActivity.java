@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.rey.material.app.ThemeManager;
 import com.rey.material.widget.SnackBar;
 
@@ -15,6 +16,7 @@ public class LoginActivity extends AppCompatActivity  {
     //Button bt_flat = (Button)v.findViewById(R.id.button_bt_flat);
 
     private SnackBar mSnackBar;
+    private LineChart mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

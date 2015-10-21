@@ -1,49 +1,55 @@
 package com.yopachara.health.demo;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.rey.material.widget.SnackBar;
+import com.yopachara.health.demo.Model.HistoryModel;
+import com.yopachara.health.demo.Service.HealthService;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ChartFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ChartFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ChartFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
-    private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChartFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ChartFragment newInstance(String param1, String param2) {
+public class ChartFragment extends Fragment implements OnChartValueSelectedListener {
+
+    private LineChart mChart;
+    private HistoryAdapter mAdapter;
+    private HistoryModel historyModel;
+    String API = "http://pachara.me:3000";
+    SnackBar mSnackBar;
+    int totalcal = 0;
+
+    public static ChartFragment newInstance() {
         ChartFragment fragment = new ChartFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -54,56 +60,227 @@ public class ChartFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chart, container, false);
-    }
+        final View v = inflater.inflate(R.layout.fragment_chart, container, false);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
+        mChart = (LineChart) v.findViewById(R.id.chart1);
+        mChart.setOnChartValueSelectedListener(this);
+
+        // no description text
+        mChart.setDescription("");
+        mChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+        // enable touch gestures
+        mChart.setTouchEnabled(true);
+
+        mChart.setDragDecelerationFrictionCoef(0.9f);
+
+        // enable scaling and dragging
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+        mChart.setDrawGridBackground(false);
+        mChart.setHighlightPerDragEnabled(true);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        mChart.setPinchZoom(true);
+
+        // set an alternative background color
+        mChart.setBackgroundColor(Color.LTGRAY);
+
+        // add data
+//        setData(20, 30);
+
+        mChart.animateX(2500);
+
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "supermarket.ttf");
+
+        // get the legend (only possible after setting data)
+        Legend l = mChart.getLegend();
+
+        // modify the legend ...
+        // l.setPosition(LegendPosition.LEFT_OF_CHART);
+        l.setForm(Legend.LegendForm.LINE);
+        l.setTypeface(tf);
+        l.setTextSize(11f);
+        l.setTextColor(Color.WHITE);
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+//        l.setYOffset(11f);
+
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setTypeface(tf);
+        xAxis.setTextSize(12f);
+        xAxis.setTextColor(Color.WHITE);
+        xAxis.setDrawGridLines(false);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setSpaceBetweenLabels(1);
+
+        YAxis rightAxis = mChart.getAxisRight();
+        rightAxis.setTypeface(tf);
+        rightAxis.setTextColor(ColorTemplate.getHoloBlue());
+        rightAxis.setAxisMaxValue(2500f);
+        rightAxis.setDrawGridLines(true);
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.setTypeface(tf);
+        leftAxis.setTextColor(Color.RED);
+        leftAxis.setAxisMaxValue(2500);
+        leftAxis.setStartAtZero(false);
+        leftAxis.setAxisMinValue(-200);
+        leftAxis.setDrawGridLines(false);
+
+        getHistory(v);
+
+        return v;
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onNothingSelected() {
+        Log.i("Nothing selected", "Nothing selected.");
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+        Log.i("Entry selected", e.toString());
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+    private void setData(int count, float range, ArrayList<Entry> chart) {
+
+        ArrayList<String> xVals = new ArrayList<String>();
+        for (int i = 0; i < count; i++) {
+            xVals.add((i) + "");
+        }
+
+        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+
+        for (int i = 0; i < count; i++) {
+            float mult = range / 2f;
+            float val = (float) (Math.random() * mult) + 50;// + (float)
+            // ((mult *
+            // 0.1) / 10);
+            yVals1.add(new Entry(val, i));
+        }
+
+        // create a dataset and give it a type
+        LineDataSet set1 = new LineDataSet(chart, "DataSet 1");
+        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set1.setColor(ColorTemplate.getHoloBlue());
+        set1.setCircleColor(Color.WHITE);
+        set1.setLineWidth(2f);
+        set1.setCircleSize(3f);
+        set1.setFillAlpha(65);
+        set1.setFillColor(ColorTemplate.getHoloBlue());
+        set1.setHighLightColor(Color.rgb(244, 117, 117));
+        set1.setDrawCircleHole(false);
+        //set1.setFillFormatter(new MyFillFormatter(0f));
+//        set1.setDrawHorizontalHighlightIndicator(false);
+//        set1.setVisible(false);
+//        set1.setCircleHoleColor(Color.WHITE);
+
+//        ArrayList<Entry> yVals2 = new ArrayList<Entry>();
+//
+//        for (int i = 0; i < count; i++) {
+//            float mult = range;
+//            float val = (float) (Math.random() * mult) + 450;// + (float)
+//            // ((mult *
+//            // 0.1) / 10);
+//            yVals2.add(new Entry(val, i));
+//        }
+//
+//        // create a dataset and give it a type
+//        LineDataSet set2 = new LineDataSet(yVals2, "DataSet 2");
+//        set2.setAxisDependency(YAxis.AxisDependency.RIGHT);
+//        set2.setColor(Color.RED);
+//        set2.setCircleColor(Color.WHITE);
+//        set2.setLineWidth(2f);
+//        set2.setCircleSize(3f);
+//        set2.setFillAlpha(65);
+//        set2.setFillColor(Color.RED);
+//        set2.setDrawCircleHole(false);
+//        set2.setHighLightColor(Color.rgb(244, 117, 117));
+//        //set2.setFillFormatter(new MyFillFormatter(900f));
+
+        ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
+//        dataSets.add(set2);
+        dataSets.add(set1); // add the datasets
+
+        // create a data object with the datasets
+        LineData data = new LineData(xVals, dataSets);
+        data.setValueTextColor(Color.WHITE);
+        data.setValueTextSize(9f);
+
+        // set data
+        mChart.setData(data);
+    }
+
+    public void getHistory(final View v) {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(API).build();
+        HealthService api = restAdapter.create(HealthService.class);
+        api.getHistorys(new Callback<HistoryModel>() {
+            @Override
+            public void success(HistoryModel historyModel, Response response) {
+                ArrayList<HistoryModel.History> history = historyModel.getObjects();
+
+                Log.d("Success", "History size " + history.size());
+
+                final HashMap<Integer, Integer> classes = new HashMap<Integer, Integer>();
+
+                for(int i = 0 ;i < history.size()-1;i++){
+                    Log.d("Date",history.get(i).getDate());
+
+                    String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+                    SimpleDateFormat format = new SimpleDateFormat(pattern);
+                    try {
+                        Date date = format.parse(history.get(i).getDate());
+                        Log.d("Date Format",date.toString());
+                        Log.d("Day", date.getDate() + "");
+                        int x = date.getDate();
+                        int cal = Integer.parseInt(history.get(i).getCal());
+
+                        if (!classes.containsKey(x)) {
+                            classes.put(x,cal );
+                        }else {
+                            classes.put(x, classes.get(x) + cal);
+                        }
+
+
+                    } catch (java.text.ParseException e) {
+                        //handle exception
+                        Log.d("Error ",e.toString());
+                    }
+
+                    totalcal = totalcal+ Integer.parseInt(history.get(i).getCal());
+                }
+                ArrayList<Entry> chart = new ArrayList<Entry>();
+                int count = 0;
+                for (Map.Entry<Integer, Integer> entry : classes.entrySet()) {
+                    Log.d("Class " + entry.getKey(), " total " + entry.getValue() + " cals.");
+
+                    chart.add(new Entry(entry.getValue(),count));
+                    count++;
+
+                }
+                int size = classes.size();
+                setData(size,size,chart);
+                Log.d("Dict",classes.get(21)+"");
+                Log.d("TOTALCAL", totalcal+"");
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+                Log.d("Error", error.toString());
+            }
+
+        });
     }
 
 }

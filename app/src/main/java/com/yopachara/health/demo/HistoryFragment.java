@@ -16,7 +16,14 @@ import com.rey.material.widget.SnackBar;
 import com.yopachara.health.demo.Model.HistoryModel;
 import com.yopachara.health.demo.Service.HealthService;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Locale;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -33,7 +40,7 @@ public class HistoryFragment extends Fragment {
     String API = "http://pachara.me:3000";
     SnackBar mSnackBar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
+    int totalcal = 0;
 
     public static HistoryFragment newInstance() {
         HistoryFragment fragment = new HistoryFragment();
@@ -85,6 +92,34 @@ public class HistoryFragment extends Fragment {
                 mAdapter = new HistoryAdapter(getActivity(), history,getFragmentManager());
                 mRecyclerView.setAdapter(mAdapter);
                 mSwipeRefreshLayout.setRefreshing(false);
+//                final HashMap<Integer, Integer> classes = new HashMap<Integer, Integer>();
+//
+//                for(int i = 0 ;i < history.size()-1;i++){
+//                    Log.d("Date",history.get(i).getDate());
+//
+//                    String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+//                    SimpleDateFormat format = new SimpleDateFormat(pattern);
+//                    try {
+//                        Date date = format.parse(history.get(i).getDate());
+//                        Log.d("Date Format",date.toString());
+//                        Log.d("Day", date.getDate() + "");
+//                        int x = date.getDate();
+//                        int cal = Integer.parseInt(history.get(i).getCal());
+//
+//                        if (!classes.containsKey(x)) {
+//                            classes.put(x,cal );
+//                        }else {
+//                            classes.put(x, classes.get(x) + cal);
+//                        }
+//
+//
+//                    } catch (java.text.ParseException e) {
+//                        //handle exception
+//                        Log.d("Error ",e.toString());
+//                    }
+//
+//                    totalcal = totalcal+ Integer.parseInt(history.get(i).getCal());
+//                }
             }
 
             @Override
@@ -96,6 +131,8 @@ public class HistoryFragment extends Fragment {
 
         });
     }
+
+
 
 
 }

@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     private FloatingActionButton fab_line;
 
 //    private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
-    private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS};
+    private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.CHARTS};
 
 
     @Override
@@ -278,6 +278,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         HOME("Home"),
         FOODS("Foods"),
         HISTORYS("Historys"),
+        CHARTS("Charts"),
         PROGRESS("Progresses"),
         BUTTONS("Buttons"),
         FAB("FABs"),
@@ -437,6 +438,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                             setFragment(Tab.DIALOGS, fragment);
                         else if (fragment instanceof HomeFragment)
                             setFragment(Tab.HOME, fragment);
+                        else if (fragment instanceof ChartFragment)
+                            setFragment(Tab.CHARTS, fragment);
                     }
                 }
             } catch (Exception e) {
@@ -490,6 +493,9 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                         break;
                     case HISTORYS:
                         mFragments[position] = HistoryFragment.newInstance();
+                        break;
+                    case CHARTS:
+                        mFragments[position] = ChartFragment.newInstance();
                         break;
                 }
             }
