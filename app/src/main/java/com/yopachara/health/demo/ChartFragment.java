@@ -26,11 +26,17 @@ import com.rey.material.widget.SnackBar;
 import com.yopachara.health.demo.Model.HistoryModel;
 import com.yopachara.health.demo.Service.HealthService;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -151,11 +157,11 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         Log.i("Entry selected", e.toString());
     }
 
-    private void setData(int count, float range, ArrayList<Entry> chart) {
+    private void setData(int count, float range, ArrayList<Entry> chart, ArrayList<String> index) {
 
         ArrayList<String> xVals = new ArrayList<String>();
         for (int i = 0; i < count; i++) {
-            xVals.add((i) + "");
+            xVals.add((index.get(i)) + "");
         }
 
         ArrayList<Entry> yVals1 = new ArrayList<Entry>();
@@ -229,25 +235,27 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
             public void success(HistoryModel historyModel, Response response) {
                 ArrayList<HistoryModel.History> history = historyModel.getObjects();
 
-                Log.d("Success", "History size " + history.size());
+                Log.d("Success", "Chart size " + history.size());
 
-                final HashMap<Integer, Integer> classes = new HashMap<Integer, Integer>();
+                final HashMap<Date, Integer> classes = new HashMap<Date, Integer>();
 
                 for(int i = 0 ;i < history.size()-1;i++){
                     Log.d("Date",history.get(i).getDate());
 
                     String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+                    String patternShort = "yyyy-MM-dd";
                     SimpleDateFormat format = new SimpleDateFormat(pattern);
+                    SimpleDateFormat formatShort = new SimpleDateFormat(patternShort);
+
                     try {
                         Date date = format.parse(history.get(i).getDate());
-                        Log.d("Date Format",date.toString());
                         Log.d("Day", date.getDate() + "");
-                        int x = date.getDate();
+                        Date x = formatShort.parse(date.getYear()+"-"+date.getMonth()+"-"+date.getDate());
                         int cal = Integer.parseInt(history.get(i).getCal());
 
                         if (!classes.containsKey(x)) {
                             classes.put(x,cal );
-                        }else {
+                        } else {
                             classes.put(x, classes.get(x) + cal);
                         }
 
@@ -260,16 +268,20 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
                     totalcal = totalcal+ Integer.parseInt(history.get(i).getCal());
                 }
                 ArrayList<Entry> chart = new ArrayList<Entry>();
+                ArrayList<String> index = new ArrayList<String>();
                 int count = 0;
-                for (Map.Entry<Integer, Integer> entry : classes.entrySet()) {
-                    Log.d("Class " + entry.getKey(), " total " + entry.getValue() + " cals.");
+                //Map<Integer,Integer> s = sortByValue(classes);
+                Map<Date, Integer> treeMap = new TreeMap<Date, Integer>(classes);
 
+                for (Map.Entry<Date, Integer> entry : treeMap.entrySet()) {
+                    Log.d("Day " + entry.getKey(), " total " + entry.getValue() + " cals.");
+                    index.add(entry.getKey().getDate()+"/"+entry.getKey().getMonth());
                     chart.add(new Entry(entry.getValue(),count));
                     count++;
 
                 }
                 int size = classes.size();
-                setData(size,size,chart);
+                setData(size,size,chart,index);
                 Log.d("Dict",classes.get(21)+"");
                 Log.d("TOTALCAL", totalcal+"");
             }
@@ -281,6 +293,42 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
             }
 
         });
+    }
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue( Map<K, V> map ) {
+        List<Map.Entry<K, V>> list =
+                new LinkedList<>( map.entrySet() );
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+            @Override
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list)
+        {
+            result.put( entry.getKey(), entry.getValue() );
+        }
+        return result;
+    }
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByKey( Map<K, V> map ) {
+        List<Map.Entry<K, V>> list =
+                new LinkedList<>( map.entrySet() );
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+            @Override
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list)
+        {
+            result.put( entry.getKey(), entry.getValue() );
+        }
+        return result;
     }
 
 }
