@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +47,7 @@ import com.rey.material.util.ThemeUtil;
 import com.rey.material.util.ViewUtil;
 import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
+import com.rey.material.widget.Switch;
 import com.rey.material.widget.TabPageIndicator;
 import com.yopachara.health.demo.Model.FoodModel;
 import com.yopachara.health.demo.Model.HistoryModel;
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
     String API = "http://pachara.me:3000";
     Dialog.Builder builder = null;
+    boolean doubleBackToExitPressedOnce = false;
 
     private FloatingActionButton fab_line;
 
@@ -130,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
             }
 
         });
-
         mToolbarManager = new ToolbarManager(getDelegate(), mToolbar, R.id.tb_group_main, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
         mToolbarManager.setNavigationManager(new ToolbarManager.ThemableNavigationManager(R.array.navigation_drawer, getSupportFragmentManager(), mToolbar, dl_navigator) {
             @Override
@@ -162,6 +165,31 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         sr.setRecognitionListener(new listener());
 
 
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+//        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+        mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+                .text("Please click BACK again to exit")
+                .duration(2000)
+                .show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
     public void postLogin(final String username, final String password) {
@@ -194,12 +222,28 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                         mDrawerAdapter.setSelected(mItems[position]);
                         mSnackBar.dismiss();
                         Log.d("onPageSelected", "Position " + position);
-                        float currentY = fab_line.getY();
-                        if (position == 0) {
-                            fab_line.setY(750);
-                        }
-                        if (position >= 1) {
-                            fab_line.setY(1100);
+//                        float currentY = fab_line.getY();
+                        switch(position){
+                            case 0: {
+                                mToolbar.setTitle("Home");
+                                fab_line.setY(750);
+                                break;
+                            }
+                            case 1: {
+                                mToolbar.setTitle("Foods");
+                                fab_line.setY(1100);
+                                break;
+                            }
+                            case 2: {
+                                mToolbar.setTitle("History");
+                                fab_line.setY(1100);
+                                break;
+                            }
+                            case 3: {
+                                mToolbar.setTitle("Statistic");
+                                fab_line.setY(1100);
+                                break;
+                            }
                         }
                     }
 
