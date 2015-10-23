@@ -175,7 +175,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         }
 
         // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(chart, "DataSet 1");
+        LineDataSet set1 = new LineDataSet(chart, "แคลอรี่");
         set1.setAxisDependency(YAxis.AxisDependency.LEFT);
         set1.setColor(ColorTemplate.getHoloBlue());
         set1.setCircleColor(Color.WHITE);
@@ -275,14 +275,14 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
 
                 for (Map.Entry<Date, Integer> entry : treeMap.entrySet()) {
                     Log.d("Day " + entry.getKey(), " total " + entry.getValue() + " cals.");
-                    index.add(entry.getKey().getDate()+"/"+entry.getKey().getMonth());
+                    index.add(entry.getKey().getDate()+"");
                     chart.add(new Entry(entry.getValue(),count));
                     count++;
 
                 }
                 int size = classes.size();
                 setData(size,size,chart,index);
-                Log.d("Dict",classes.get(21)+"");
+                Log.d("Size",size+"");
                 Log.d("TOTALCAL", totalcal+"");
             }
 
