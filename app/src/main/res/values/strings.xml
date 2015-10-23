@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">health</string>
-
+    <string name="action_search">Search</string>
     <string name="rd_repeat">Repeat</string>
     <string name="rd_daily">Daily</string>
     <string name="rd_weekly">Weekly</string>
