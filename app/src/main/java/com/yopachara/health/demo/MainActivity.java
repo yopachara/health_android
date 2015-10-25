@@ -244,6 +244,11 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                                 fab_line.setY(1100);
                                 break;
                             }
+                            case 4: {
+                                mToolbar.setTitle("Profile");
+                                fab_line.setY(1100);
+                                break;
+                            }
                         }
                     }
 

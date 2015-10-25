@@ -58,7 +58,7 @@ public class ContactEditText extends EditText{
 
     private HashMap<String, Recipient> mRecipientMap;
 
-    private int mDefaultAvatarId = R.drawable.ic_user;
+    private int mDefaultAvatarId = R.drawable.ic_user_simple;
     private int mSpanHeight;
     private int mSpanMaxWidth;
     private int mSpanPaddingLeft;

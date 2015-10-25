@@ -27,8 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:clipToPadding="false"
-                android:paddingLeft="60dp"
-                android:translationZ="3dp"
+                android:elevation="4dp"
                 app:v_styleId="@array/tab_indicator"/>
 
             <com.yopachara.health.demo.CustomViewPager
@@ -74,7 +73,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_user"/>
+                android:src="@drawable/ic_user_simple"/>
 
             <com.rey.material.widget.ListView
                 android:id="@+id/main_lv_drawer"

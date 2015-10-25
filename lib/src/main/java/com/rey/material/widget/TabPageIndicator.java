@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -278,41 +279,42 @@ public class TabPageIndicator extends HorizontalScrollView implements ViewPager.
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        TextView tv = getTabView(mSelectedPosition);
+        ImageView tv = getTabView(mSelectedPosition);
         if(tv != null)
             updateIndicator(tv.getLeft(), tv.getMeasuredWidth());
     }
 
-    private CheckedTextView getTabView(int position){
-    	return (CheckedTextView)mTabContainer.getChildAt(position);
+
+    private ImageView getTabView(int position){
+        return (ImageView)mTabContainer.getChildAt(position);
     }
-    
+
     private void animateToTab(final int position) {
-    	if(getTabView(position) == null)
-    		return;
-    	
-        if (mTabAnimSelector != null) 
+        final ImageView tv = getTabView(position);
+        if(tv == null)
+            return;
+
+        if (mTabAnimSelector != null)
             removeCallbacks(mTabAnimSelector);
-        
+
         mTabAnimSelector = new Runnable() {
             public void run() {
-                CheckedTextView tv = getTabView(position);
-            	if(!mScrolling) {
-                    updateIndicator(tv.getLeft(), tv.getMeasuredWidth());
-                }
-            	          
+                if(!mScrolling)
+                    updateIndicator(tv.getLeft(), tv.getWidth());
+
                 smoothScrollTo(tv.getLeft() - (getWidth() - tv.getWidth()) / 2 + getPaddingLeft(), 0);
                 mTabAnimSelector = null;
             }
         };
-        
         post(mTabAnimSelector);
     }
 
-    /**
-     * Set a listener will be called when the current page is changed.
-     * @param listener The {@link android.support.v4.view.ViewPager.OnPageChangeListener} will be called.
-     */
+
+
+        /**
+         * Set a listener will be called when the current page is changed.
+         * @param listener The {@link android.support.v4.view.ViewPager.OnPageChangeListener} will be called.
+         */
 	public void setOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
         mListener = listener;
     }
@@ -372,40 +374,39 @@ public class TabPageIndicator extends HorizontalScrollView implements ViewPager.
 			canvas.drawRect(getPaddingLeft(), getHeight() - mIndicatorHeight, getPaddingLeft() + mTabContainer.getChildAt(0).getWidth(), getHeight(), mPaint);		
 	}
 
-	@Override
-	public void onPageScrollStateChanged(int state) {
-		if(state == ViewPager.SCROLL_STATE_IDLE){
-			mScrolling = false;
-			TextView tv = getTabView(mSelectedPosition);
-			if(tv != null) {
+    @Override
+    public void onPageScrollStateChanged(int state) {
+        if(state == ViewPager.SCROLL_STATE_IDLE){
+            mScrolling = false;
+            ImageView tv = getTabView(mSelectedPosition);
+            if(tv != null)
                 updateIndicator(tv.getLeft(), tv.getMeasuredWidth());
-            }
-		}
-		else
-			mScrolling = true;
-		
-		if (mListener != null)
-			mListener.onPageScrollStateChanged(state);
-	}
+        }
+        else
+            mScrolling = true;
 
-	@Override
-	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-		if (mListener != null)
-            mListener.onPageScrolled(position, positionOffset, positionOffsetPixels);  
-		
-		CheckedTextView tv_scroll = getTabView(position);
-		CheckedTextView tv_next = getTabView(position + 1);
-		
-		if(tv_scroll != null && tv_next != null){
-			int width_scroll = tv_scroll.getMeasuredWidth();
-			int width_next = tv_next.getMeasuredWidth();
-			float distance = (width_scroll + width_next) / 2f;
-					
-			int width =  (int)(width_scroll + (width_next - width_scroll) * positionOffset + 0.5f);
-			int offset = (int)(tv_scroll.getLeft() + width_scroll / 2f + distance * positionOffset - width / 2f + 0.5f);
-			updateIndicator(offset, width);
-		}		
-	}
+        if (mListener != null)
+            mListener.onPageScrollStateChanged(state);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        if (mListener != null)
+            mListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+
+        ImageView tv_scroll = getTabView(position);
+        ImageView tv_next = getTabView(position + 1);
+
+        if(tv_scroll != null && tv_next != null){
+            int width_scroll = tv_scroll.getWidth();
+            int width_next = tv_next.getWidth();
+            float distance = (width_scroll + width_next) / 2f;
+
+            int width =  (int)(width_scroll + (width_next - width_scroll) * positionOffset + 0.5f);
+            int offset = (int)(tv_scroll.getLeft() + width_scroll / 2f + distance * positionOffset - width / 2f + 0.5f);
+            updateIndicator(offset, width);
+        }
+    }
 
 	@Override
 	public void onPageSelected(int position) {		
@@ -427,22 +428,24 @@ public class TabPageIndicator extends HorizontalScrollView implements ViewPager.
      * Set the current page of this TabPageIndicator.
      * @param position The position of current page.
      */
-	public void setCurrentItem(int position) {
-		if(mSelectedPosition != position){
-			CheckedTextView tv = getTabView(mSelectedPosition);	
-			if(tv != null)
-				tv.setChecked(false);
-		}
-		
-		mSelectedPosition = position;		
-		CheckedTextView tv = getTabView(mSelectedPosition);				
-		if(tv != null)
-			tv.setChecked(true);	
-		
-		animateToTab(position);
-	}
-	
-	private void notifyDataSetChanged() {
+    public void setCurrentItem(int position) {
+        if(mSelectedPosition != position){
+            ImageView tv = getTabView(mSelectedPosition);
+            if(tv != null) {
+                //tv.setChecked(false);
+            }
+        }
+
+        mSelectedPosition = position;
+        ImageView tv = getTabView(mSelectedPosition);
+        if(tv != null) {
+            //tv.setChecked(true);
+        }
+
+        animateToTab(position);
+    }
+
+    private void notifyDataSetChanged() {
         mTabContainer.removeAllViews();
 
         PagerAdapter adapter = mViewPager.getAdapter();
@@ -453,80 +456,112 @@ public class TabPageIndicator extends HorizontalScrollView implements ViewPager.
 
         for (int i = 0; i < count; i++) {
             CharSequence title = adapter.getPageTitle(i);
-            if (title == null)
+            int img=0;
+            if (title == null) {
                 title = "NULL";
+            }else{
+                img= R.drawable.ic_launcher;
+                switch (i){
+                    case 0:
+                        img = R.drawable.ic_home;
+                        break;
+                    case 1:
+                        img = R.drawable.ic_food;
+                        break;
+                    case 2:
+                        img = R.drawable.ic_history;
+                        break;
+                    case 3:
+                        img = R.drawable.ic_chart;
+                        break;
+                    case 4:
+                        img = R.drawable.ic_user;
+                        break;
+                }
 
-            CheckedTextView tv = new CheckedTextView(getContext());
-            tv.setCheckMarkDrawable(null);
-            tv.setText(title);
-            tv.setGravity(Gravity.CENTER);
-            tv.setTextAppearance(getContext(), mTextAppearance);
-            if(mTabSingleLine)
-                tv.setSingleLine(true);
-            else {
-                tv.setSingleLine(false);
-                tv.setMaxLines(2);
             }
-            tv.setEllipsize(TruncateAt.END);
+
+            ImageView tv = new ImageView(getContext());
+            tv.setImageResource(img);
+            //            tv.setCheckMarkDrawable(null);
+            //            tv.setText(title);
+            //            tv.setGravity(Gravity.CENTER);
+            //            tv.setTextAppearance(getContext(), mTextAppearance);
+            //            tv.setSingleLine(true);
+            //            tv.setEllipsize(TextUtils.TruncateAt.END);
             tv.setOnClickListener(this);
             tv.setTag(i);
             if(mTabRippleStyle > 0)
                 ViewUtil.setBackground(tv, new RippleDrawable.Builder(getContext(), mTabRippleStyle).build());
 
-            tv.setPadding(mTabPadding, 0, mTabPadding, 0);
-            mTabContainer.addView(tv, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        }
-        
-        setCurrentItem(mSelectedPosition);
-        requestLayout();
-	}
-	
-	private void notifyDataSetInvalidated() {
-		PagerAdapter adapter = mViewPager.getAdapter();
-		final int count = adapter.getCount();
-        for (int i = 0; i < count; i++) {
-        	TextView tv = getTabView(i);
-        	
-        	CharSequence title = adapter.getPageTitle(i);
-            if (title == null) 
-                title = "NULL";            
-            
-            tv.setText(title);
-        }
-        
-        requestLayout();
-	}
-	
-	private void addTemporaryTab(){
-		for (int i = 0; i < 3; i++) {
-            CharSequence title = null;
-            if (i == 0) 
-                title = "TAB ONE";        
-            else if (i == 1) 
-                title = "TAB TWO";
-            else if (i == 2) 
-                title = "TAB THREE";
-            
-            CheckedTextView tv = new CheckedTextView(getContext());
-            tv.setCheckMarkDrawable(null);
-            tv.setText(title);
-            tv.setGravity(Gravity.CENTER);
-            tv.setTextAppearance(getContext(), mTextAppearance);
-            tv.setSingleLine(true);
-            tv.setEllipsize(TruncateAt.END);
-            tv.setTag(i);
-            tv.setChecked(i == 0);
             if(mMode == MODE_SCROLL){
-            	tv.setPadding(mTabPadding, 0, mTabPadding, 0);
-            	mTabContainer.addView(tv, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                tv.setPadding(mTabPadding, 0, mTabPadding, 0);
+                mTabContainer.addView(tv, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
             }
             else if(mMode == MODE_FIXED){
-            	LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
-            	params.weight = 1f;
-            	mTabContainer.addView(tv, params);            	
-            }            	
-        } 	
-	}
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
+                params.weight = 1f;
+                mTabContainer.addView(tv, params);
+            }
+
+        }
+
+        setCurrentItem(mSelectedPosition);
+        requestLayout();
+    }
+
+    private void notifyDataSetInvalidated() {
+        PagerAdapter adapter = mViewPager.getAdapter();
+        final int count = adapter.getCount();
+        for (int i = 0; i < count; i++) {
+            ImageView tv = getTabView(i);
+
+            CharSequence title = adapter.getPageTitle(i);
+            if (title == null)
+                title = "NULL";
+
+            // tv.setText(title);
+            tv.setImageResource(R.drawable.ic_launcher);
+            if(i==1){
+                tv.setImageResource(R.drawable.ic_voice);
+            }
+
+        }
+
+        requestLayout();
+    }
+
+    private void addTemporaryTab(){
+        for (int i = 0; i < 3; i++) {
+            CharSequence title = null;
+            if (i == 0)
+                title = "TAB ONE";
+            else if (i == 1)
+                title = "TAB TWO";
+            else if (i == 2)
+                title = "TAB THREE";
+
+            ImageView tv = new ImageView(getContext());
+            tv.setImageResource(R.drawable.ic_launcher);
+            //            tv.setCheckMarkDrawable(null);
+            //            tv.setText(title);
+            //            tv.setGravity(Gravity.CENTER);
+            //            tv.setTextAppearance(getContext(), mTextAppearance);
+            //            tv.setSingleLine(true);
+            //            tv.setEllipsize(TextUtils.TruncateAt.END);
+            tv.setTag(i);
+            //            tv.setChecked(i == 0);
+            if(mMode == MODE_SCROLL){
+                tv.setPadding(mTabPadding, 0, mTabPadding, 0);
+                mTabContainer.addView(tv, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            }
+            else if(mMode == MODE_FIXED){
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
+                params.weight = 1f;
+                mTabContainer.addView(tv, params);
+            }
+        }
+    }
 
     private class TabContainerLayout extends FrameLayout{
 
