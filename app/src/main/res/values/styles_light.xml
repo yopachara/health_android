@@ -209,7 +209,7 @@
     <!-- TabPageIndicator Style-->
 
     <style  name="LightTabPageIndicator"  parent="Material.Widget.TabPageIndicator">
-        <item name="tpi_tabPadding">12dp</item>
+        <item name="tpi_tabPadding">10dp</item>
         <item name="tpi_tabRipple">@style/LightTabRippleStyle</item>
         <item name="tpi_indicatorHeight">3dp</item>
         <item name="tpi_indicatorColor">@color/colorAccent</item>

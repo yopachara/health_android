@@ -46,14 +46,18 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ChartFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ChartFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HistoryFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HistoryFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_food.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_food.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ProfileFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ProfileFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/SignupFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/SignupFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_signup.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_signup.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles_light.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles_light.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="health_android.iws" />
@@ -95,427 +99,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FoodFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodFragment.java">
+      <file leaf-file-name="HomeFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HomeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state vertical-scroll-proportion="-7.4074073">
+              <caret line="224" column="39" selection-start-line="224" selection-start-column="35" selection-end-line="224" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfileFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ProfileFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4753577">
+              <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1489#1605#0" expanded="true" />
-                <element signature="e#1604#1605#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Handler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/os/Handler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="395" column="25" selection-start-line="395" selection-start-column="25" selection-end-line="395" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#31377#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#4519#4520#0" expanded="false" />
-                <element signature="e#4552#4553#0" expanded="false" />
-                <element signature="e#5003#5004#0" expanded="false" />
-                <element signature="e#5040#5041#0" expanded="false" />
-                <element signature="e#5218#5219#0" expanded="false" />
-                <element signature="e#5259#5260#0" expanded="false" />
-                <element signature="e#5605#5606#0" expanded="false" />
-                <element signature="e#5650#5651#0" expanded="false" />
-                <element signature="e#6442#6443#0" expanded="false" />
-                <element signature="e#6475#6476#0" expanded="false" />
-                <element signature="e#10258#10259#0" expanded="false" />
-                <element signature="e#10301#10302#0" expanded="false" />
-                <element signature="e#10614#10615#0" expanded="false" />
-                <element signature="e#10663#10664#0" expanded="false" />
-                <element signature="e#12859#12860#0" expanded="false" />
-                <element signature="e#12922#12923#0" expanded="false" />
-                <element signature="e#20193#20194#0" expanded="false" />
-                <element signature="e#20245#20246#0" expanded="false" />
-                <element signature="e#21088#21089#0" expanded="false" />
-                <element signature="e#21137#21138#0" expanded="false" />
-                <element signature="e#21494#21495#0" expanded="false" />
-                <element signature="e#21549#21550#0" expanded="false" />
-                <element signature="e#26650#26651#0" expanded="false" />
-                <element signature="e#26705#26706#0" expanded="false" />
-                <element signature="e#27541#27542#0" expanded="false" />
-                <element signature="e#27600#27601#0" expanded="false" />
-                <element signature="e#28061#28062#0" expanded="false" />
-                <element signature="e#28117#28118#0" expanded="false" />
-                <element signature="e#28298#28299#0" expanded="false" />
-                <element signature="e#28328#28329#0" expanded="false" />
-                <element signature="e#29660#29661#0" expanded="false" />
-                <element signature="e#29698#29699#0" expanded="false" />
-                <element signature="e#30036#30037#0" expanded="false" />
-                <element signature="e#30072#30073#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoodModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Model/FoodModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#383#384#0" expanded="false" />
-                <element signature="e#432#433#0" expanded="false" />
-                <element signature="e#495#496#0" expanded="false" />
-                <element signature="e#525#526#0" expanded="false" />
-                <element signature="e#1147#1148#0" expanded="false" />
-                <element signature="e#1180#1181#0" expanded="false" />
-                <element signature="e#1215#1216#0" expanded="false" />
-                <element signature="e#1255#1256#0" expanded="false" />
-                <element signature="e#1290#1291#0" expanded="false" />
-                <element signature="e#1325#1326#0" expanded="false" />
-                <element signature="e#1366#1367#0" expanded="false" />
-                <element signature="e#1407#1408#0" expanded="false" />
-                <element signature="e#1440#1441#0" expanded="false" />
-                <element signature="e#1474#1475#0" expanded="false" />
-                <element signature="e#1511#1512#0" expanded="false" />
-                <element signature="e#1549#1550#0" expanded="false" />
-                <element signature="e#1584#1585#0" expanded="false" />
-                <element signature="e#1620#1621#0" expanded="false" />
-                <element signature="e#1653#1654#0" expanded="false" />
-                <element signature="e#1687#1688#0" expanded="false" />
-                <element signature="e#1723#1724#0" expanded="false" />
-                <element signature="e#1760#1761#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoodAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1445618880000" expanded="true" signature="2018:2122" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecyclerView.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/23.0.1/recyclerview-v7-23.0.1-sources.jar!/android/support/v7/widget/RecyclerView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5675" column="26" selection-start-line="5675" selection-start-column="26" selection-end-line="5675" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#439788#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#17491#17492#0" expanded="false" />
-                <element signature="e#17526#17527#0" expanded="false" />
-                <element signature="e#17600#17601#0" expanded="false" />
-                <element signature="e#17639#17640#0" expanded="false" />
-                <element signature="e#24024#24025#0" expanded="false" />
-                <element signature="e#24096#24097#0" expanded="false" />
-                <element signature="e#24365#24366#0" expanded="false" />
-                <element signature="e#24440#24441#0" expanded="false" />
-                <element signature="e#24831#24832#0" expanded="false" />
-                <element signature="e#24906#24907#0" expanded="false" />
-                <element signature="e#25301#25302#0" expanded="false" />
-                <element signature="e#25367#25368#0" expanded="false" />
-                <element signature="e#29204#29205#0" expanded="false" />
-                <element signature="e#29254#29255#0" expanded="false" />
-                <element signature="e#30177#30178#0" expanded="false" />
-                <element signature="e#30227#30228#0" expanded="false" />
-                <element signature="e#31162#31163#0" expanded="false" />
-                <element signature="e#31206#31207#0" expanded="false" />
-                <element signature="e#31394#31395#0" expanded="false" />
-                <element signature="e#31430#31431#0" expanded="false" />
-                <element signature="e#36861#36862#0" expanded="false" />
-                <element signature="e#36892#36893#0" expanded="false" />
-                <element signature="e#37423#37424#0" expanded="false" />
-                <element signature="e#37467#37468#0" expanded="false" />
-                <element signature="e#44433#44434#0" expanded="false" />
-                <element signature="e#44463#44464#0" expanded="false" />
-                <element signature="e#44923#44924#0" expanded="false" />
-                <element signature="e#44977#44978#0" expanded="false" />
-                <element signature="e#45515#45516#0" expanded="false" />
-                <element signature="e#45566#45567#0" expanded="false" />
-                <element signature="e#46562#46563#0" expanded="false" />
-                <element signature="e#46610#46611#0" expanded="false" />
-                <element signature="e#46846#46847#0" expanded="false" />
-                <element signature="e#46881#46882#0" expanded="false" />
-                <element signature="e#49268#49269#0" expanded="false" />
-                <element signature="e#49312#49313#0" expanded="false" />
-                <element signature="e#51455#51456#0" expanded="false" />
-                <element signature="e#51497#51498#0" expanded="false" />
-                <element signature="e#55978#55979#0" expanded="false" />
-                <element signature="e#56025#56026#0" expanded="false" />
-                <element signature="e#68259#68260#0" expanded="false" />
-                <element signature="e#68295#68296#0" expanded="false" />
-                <element signature="e#71855#71856#0" expanded="false" />
-                <element signature="e#71895#71896#0" expanded="false" />
-                <element signature="e#72097#72098#0" expanded="false" />
-                <element signature="e#72137#72138#0" expanded="false" />
-                <element signature="e#76981#76982#0" expanded="false" />
-                <element signature="e#77051#77052#0" expanded="false" />
-                <element signature="e#80574#80575#0" expanded="false" />
-                <element signature="e#80608#80609#0" expanded="false" />
-                <element signature="e#102461#102462#0" expanded="false" />
-                <element signature="e#102502#102503#0" expanded="false" />
-                <element signature="e#104710#104711#0" expanded="false" />
-                <element signature="e#104759#104760#0" expanded="false" />
-                <element signature="e#106470#106471#0" expanded="false" />
-                <element signature="e#106506#106507#0" expanded="false" />
-                <element signature="e#133951#133952#0" expanded="false" />
-                <element signature="e#134024#134025#0" expanded="false" />
-                <element signature="e#144270#144271#0" expanded="false" />
-                <element signature="e#144323#144324#0" expanded="false" />
-                <element signature="e#167121#167122#0" expanded="false" />
-                <element signature="e#167173#167174#0" expanded="false" />
-                <element signature="e#172435#172436#0" expanded="false" />
-                <element signature="e#172473#172474#0" expanded="false" />
-                <element signature="e#174171#174172#0" expanded="false" />
-                <element signature="e#174209#174210#0" expanded="false" />
-                <element signature="e#174234#174235#0" expanded="false" />
-                <element signature="e#174272#174273#0" expanded="false" />
-                <element signature="e#178175#178176#0" expanded="false" />
-                <element signature="e#178232#178233#0" expanded="false" />
-                <element signature="e#184725#184726#0" expanded="false" />
-                <element signature="e#184791#184792#0" expanded="false" />
-                <element signature="e#201716#201717#0" expanded="false" />
-                <element signature="e#201768#201769#0" expanded="false" />
-                <element signature="e#201810#201811#0" expanded="false" />
-                <element signature="e#201875#201876#0" expanded="false" />
-                <element signature="e#201904#201905#0" expanded="false" />
-                <element signature="e#201950#201951#0" expanded="false" />
-                <element signature="e#225450#225451#0" expanded="false" />
-                <element signature="e#225482#225483#0" expanded="false" />
-                <element signature="e#226587#226588#0" expanded="false" />
-                <element signature="e#226623#226624#0" expanded="false" />
-                <element signature="e#227263#227264#0" expanded="false" />
-                <element signature="e#227307#227308#0" expanded="false" />
-                <element signature="e#230936#230937#0" expanded="false" />
-                <element signature="e#230972#230973#0" expanded="false" />
-                <element signature="e#232278#232279#0" expanded="false" />
-                <element signature="e#232335#232336#0" expanded="false" />
-                <element signature="e#236319#236320#0" expanded="false" />
-                <element signature="e#236370#236371#0" expanded="false" />
-                <element signature="method#notifyItemMoved#0;class#Adapter#0;class#RecyclerView#0" expanded="false" />
-                <element signature="e#251002#251003#0" expanded="false" />
-                <element signature="e#251038#251039#0" expanded="false" />
-                <element signature="e#251704#251705#0" expanded="false" />
-                <element signature="e#251754#251755#0" expanded="false" />
-                <element signature="e#260222#260223#0" expanded="false" />
-                <element signature="e#260263#260264#0" expanded="false" />
-                <element signature="e#263054#263055#0" expanded="false" />
-                <element signature="e#263086#263087#0" expanded="false" />
-                <element signature="e#263956#263957#0" expanded="false" />
-                <element signature="e#263988#263989#0" expanded="false" />
-                <element signature="e#264282#264283#0" expanded="false" />
-                <element signature="e#264318#264319#0" expanded="false" />
-                <element signature="e#264606#264607#0" expanded="false" />
-                <element signature="e#264642#264643#0" expanded="false" />
-                <element signature="e#267096#267097#0" expanded="false" />
-                <element signature="e#267171#267172#0" expanded="false" />
-                <element signature="e#268483#268484#0" expanded="false" />
-                <element signature="e#268537#268538#0" expanded="false" />
-                <element signature="e#269443#269444#0" expanded="false" />
-                <element signature="e#269497#269498#0" expanded="false" />
-                <element signature="e#269837#269838#0" expanded="false" />
-                <element signature="e#269879#269880#0" expanded="false" />
-                <element signature="e#270276#270277#0" expanded="false" />
-                <element signature="e#270331#270332#0" expanded="false" />
-                <element signature="e#273584#273585#0" expanded="false" />
-                <element signature="e#273638#273639#0" expanded="false" />
-                <element signature="e#275031#275032#0" expanded="false" />
-                <element signature="e#275064#275065#0" expanded="false" />
-                <element signature="e#279096#279097#0" expanded="false" />
-                <element signature="e#279164#279165#0" expanded="false" />
-                <element signature="e#281318#281319#0" expanded="false" />
-                <element signature="e#281363#281364#0" expanded="false" />
-                <element signature="e#285058#285059#0" expanded="false" />
-                <element signature="e#285141#285142#0" expanded="false" />
-                <element signature="e#285302#285303#0" expanded="false" />
-                <element signature="e#285386#285387#0" expanded="false" />
-                <element signature="e#287248#287249#0" expanded="false" />
-                <element signature="e#287329#287330#0" expanded="false" />
-                <element signature="e#287597#287598#0" expanded="false" />
-                <element signature="e#287677#287678#0" expanded="false" />
-                <element signature="e#310878#310879#0" expanded="false" />
-                <element signature="e#310913#310914#0" expanded="false" />
-                <element signature="e#320958#320959#0" expanded="false" />
-                <element signature="e#320990#320991#0" expanded="false" />
-                <element signature="e#321545#321546#0" expanded="false" />
-                <element signature="e#321577#321578#0" expanded="false" />
-                <element signature="e#322147#322148#0" expanded="false" />
-                <element signature="e#322179#322180#0" expanded="false" />
-                <element signature="e#322690#322691#0" expanded="false" />
-                <element signature="e#322722#322723#0" expanded="false" />
-                <element signature="e#323269#323270#0" expanded="false" />
-                <element signature="e#323301#323302#0" expanded="false" />
-                <element signature="e#323863#323864#0" expanded="false" />
-                <element signature="e#323895#323896#0" expanded="false" />
-                <element signature="e#325349#325350#0" expanded="false" />
-                <element signature="e#325421#325422#0" expanded="false" />
-                <element signature="e#325561#325562#0" expanded="false" />
-                <element signature="e#325634#325635#0" expanded="false" />
-                <element signature="e#326356#326357#0" expanded="false" />
-                <element signature="e#326391#326392#0" expanded="false" />
-                <element signature="e#335077#335078#0" expanded="false" />
-                <element signature="e#335134#335135#0" expanded="false" />
-                <element signature="e#338474#338475#0" expanded="false" />
-                <element signature="e#338510#338511#0" expanded="false" />
-                <element signature="e#345119#345120#0" expanded="false" />
-                <element signature="e#345160#345161#0" expanded="false" />
-                <element signature="e#350935#350936#0" expanded="false" />
-                <element signature="e#350971#350972#0" expanded="false" />
-                <element signature="e#361078#361079#0" expanded="false" />
-                <element signature="e#361136#361137#0" expanded="false" />
-                <element signature="e#365399#365400#0" expanded="false" />
-                <element signature="e#365442#365443#0" expanded="false" />
-                <element signature="e#365692#365693#0" expanded="false" />
-                <element signature="e#365730#365731#0" expanded="false" />
-                <element signature="e#365853#365854#0" expanded="false" />
-                <element signature="e#365897#365898#0" expanded="false" />
-                <element signature="e#365926#365927#0" expanded="false" />
-                <element signature="e#365980#365981#0" expanded="false" />
-                <element signature="e#366006#366007#0" expanded="false" />
-                <element signature="e#366063#366064#0" expanded="false" />
-                <element signature="e#366105#366106#0" expanded="false" />
-                <element signature="e#366176#366177#0" expanded="false" />
-                <element signature="e#366221#366222#0" expanded="false" />
-                <element signature="e#366288#366289#0" expanded="false" />
-                <element signature="e#366325#366326#0" expanded="false" />
-                <element signature="e#366385#366386#0" expanded="false" />
-                <element signature="e#366416#366417#0" expanded="false" />
-                <element signature="e#366470#366471#0" expanded="false" />
-                <element signature="e#366523#366524#0" expanded="false" />
-                <element signature="e#366573#366574#0" expanded="false" />
-                <element signature="e#366604#366605#0" expanded="false" />
-                <element signature="e#366663#366664#0" expanded="false" />
-                <element signature="e#366696#366697#0" expanded="false" />
-                <element signature="e#366754#366755#0" expanded="false" />
-                <element signature="e#366785#366786#0" expanded="false" />
-                <element signature="e#366844#366845#0" expanded="false" />
-                <element signature="e#366873#366874#0" expanded="false" />
-                <element signature="e#366930#366931#0" expanded="false" />
-                <element signature="e#366961#366962#0" expanded="false" />
-                <element signature="e#367020#367021#0" expanded="false" />
-                <element signature="e#367067#367068#0" expanded="false" />
-                <element signature="e#367119#367120#0" expanded="false" />
-                <element signature="e#367154#367155#0" expanded="false" />
-                <element signature="e#367218#367219#0" expanded="false" />
-                <element signature="e#367401#367402#0" expanded="false" />
-                <element signature="e#367467#367468#0" expanded="false" />
-                <element signature="e#367503#367504#0" expanded="false" />
-                <element signature="e#367542#367543#0" expanded="false" />
-                <element signature="e#373366#373367#0" expanded="false" />
-                <element signature="e#373432#373433#0" expanded="false" />
-                <element signature="e#374694#374695#0" expanded="false" />
-                <element signature="e#374750#374751#0" expanded="false" />
-                <element signature="e#376708#376709#0" expanded="false" />
-                <element signature="e#376747#376748#0" expanded="false" />
-                <element signature="e#376801#376802#0" expanded="false" />
-                <element signature="e#376845#376846#0" expanded="false" />
-                <element signature="e#376903#376904#0" expanded="false" />
-                <element signature="e#376940#376941#0" expanded="false" />
-                <element signature="e#377002#377003#0" expanded="false" />
-                <element signature="e#377039#377040#0" expanded="false" />
-                <element signature="e#377091#377092#0" expanded="false" />
-                <element signature="e#377153#377154#0" expanded="false" />
-                <element signature="e#377446#377447#0" expanded="false" />
-                <element signature="e#377502#377503#0" expanded="false" />
-                <element signature="e#377793#377794#0" expanded="false" />
-                <element signature="e#377847#377848#0" expanded="false" />
-                <element signature="e#378287#378288#0" expanded="false" />
-                <element signature="e#378341#378342#0" expanded="false" />
-                <element signature="e#378761#378762#0" expanded="false" />
-                <element signature="e#378815#378816#0" expanded="false" />
-                <element signature="e#378976#378977#0" expanded="false" />
-                <element signature="e#379032#379033#0" expanded="false" />
-                <element signature="e#379334#379335#0" expanded="false" />
-                <element signature="e#379396#379397#0" expanded="false" />
-                <element signature="e#379833#379834#0" expanded="false" />
-                <element signature="e#379896#379897#0" expanded="false" />
-                <element signature="e#381567#381568#0" expanded="false" />
-                <element signature="e#381626#381627#0" expanded="false" />
-                <element signature="e#383014#383015#0" expanded="false" />
-                <element signature="e#383070#383071#0" expanded="false" />
-                <element signature="e#383320#383321#0" expanded="false" />
-                <element signature="e#383365#383366#0" expanded="false" />
-                <element signature="e#384639#384640#0" expanded="false" />
-                <element signature="e#384688#384689#0" expanded="false" />
-                <element signature="e#384813#384814#0" expanded="false" />
-                <element signature="e#384852#384853#0" expanded="false" />
-                <element signature="e#385116#385117#0" expanded="false" />
-                <element signature="e#385162#385163#0" expanded="false" />
-                <element signature="e#386949#386950#0" expanded="false" />
-                <element signature="e#387017#387018#0" expanded="false" />
-                <element signature="e#390866#390867#0" expanded="false" />
-                <element signature="e#390936#390937#0" expanded="false" />
-                <element signature="e#391220#391221#0" expanded="false" />
-                <element signature="e#391280#391281#0" expanded="false" />
-                <element signature="e#392849#392850#0" expanded="false" />
-                <element signature="e#392913#392914#0" expanded="false" />
-                <element signature="e#392952#392953#0" expanded="false" />
-                <element signature="e#393011#393012#0" expanded="false" />
-                <element signature="e#395010#395011#0" expanded="false" />
-                <element signature="e#395052#395053#0" expanded="false" />
-                <element signature="e#395199#395200#0" expanded="false" />
-                <element signature="e#395241#395242#0" expanded="false" />
-                <element signature="e#395394#395395#0" expanded="false" />
-                <element signature="e#395442#395443#0" expanded="false" />
-                <element signature="e#395632#395633#0" expanded="false" />
-                <element signature="e#395684#395685#0" expanded="false" />
-                <element signature="e#396969#396970#0" expanded="false" />
-                <element signature="e#397021#397022#0" expanded="false" />
-                <element signature="e#400174#400175#0" expanded="false" />
-                <element signature="e#400215#400216#0" expanded="false" />
-                <element signature="e#400452#400453#0" expanded="false" />
-                <element signature="e#400509#400510#0" expanded="false" />
-                <element signature="e#400716#400717#0" expanded="false" />
-                <element signature="e#400773#400774#0" expanded="false" />
-                <element signature="e#400849#400850#0" expanded="false" />
-                <element signature="e#400908#400909#0" expanded="false" />
-                <element signature="e#403203#403204#0" expanded="false" />
-                <element signature="e#403246#403247#0" expanded="false" />
-                <element signature="e#403584#403585#0" expanded="false" />
-                <element signature="e#403639#403640#0" expanded="false" />
-                <element signature="e#403965#403966#0" expanded="false" />
-                <element signature="e#404016#404017#0" expanded="false" />
-                <element signature="e#405989#405990#0" expanded="false" />
-                <element signature="e#406035#406036#0" expanded="false" />
-                <element signature="e#406592#406593#0" expanded="false" />
-                <element signature="e#406640#406641#0" expanded="false" />
-                <element signature="e#408813#408814#0" expanded="false" />
-                <element signature="e#408859#408860#0" expanded="false" />
-                <element signature="e#415373#415374#0" expanded="false" />
-                <element signature="e#415417#415418#0" expanded="false" />
-                <element signature="e#415628#415629#0" expanded="false" />
-                <element signature="e#415680#415681#0" expanded="false" />
-                <element signature="e#415875#415876#0" expanded="false" />
-                <element signature="e#415918#415919#0" expanded="false" />
-                <element signature="e#416124#416125#0" expanded="false" />
-                <element signature="e#416174#416175#0" expanded="false" />
-                <element signature="e#416378#416379#0" expanded="false" />
-                <element signature="e#416424#416425#0" expanded="false" />
-                <element signature="e#416645#416646#0" expanded="false" />
-                <element signature="e#416701#416702#0" expanded="false" />
-                <element signature="e#416905#416906#0" expanded="false" />
-                <element signature="e#416951#416952#0" expanded="false" />
-                <element signature="e#417172#417173#0" expanded="false" />
-                <element signature="e#417228#417229#0" expanded="false" />
-                <element signature="e#417478#417479#0" expanded="false" />
-                <element signature="e#417534#417535#0" expanded="false" />
-                <element signature="e#419049#419050#0" expanded="false" />
-                <element signature="e#419093#419094#0" expanded="false" />
-                <element signature="e#428355#428356#0" expanded="false" />
-                <element signature="e#428401#428402#0" expanded="false" />
-                <element signature="e#428632#428633#0" expanded="false" />
-                <element signature="e#428676#428677#0" expanded="false" />
-                <element signature="e#428906#428907#0" expanded="false" />
-                <element signature="e#428949#428950#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -524,151 +124,11 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.37037">
-              <caret line="182" column="31" selection-start-line="182" selection-start-column="31" selection-end-line="182" selection-end-column="31" />
+            <state vertical-scroll-proportion="45.37037">
+              <caret line="263" column="34" selection-start-line="263" selection-start-column="34" selection-end-line="263" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7126#7274#0" expanded="true" />
-                <element signature="e#7273#7274#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChartFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ChartFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36144578">
-              <caret line="283" column="33" selection-start-line="283" selection-start-column="33" selection-end-line="283" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KeyEvent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/view/KeyEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2384" column="21" selection-start-line="2384" selection-start-column="21" selection-end-line="2384" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#119106#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#54284#54285#0" expanded="false" />
-                <element signature="e#54319#54320#0" expanded="false" />
-                <element signature="e#68432#68433#0" expanded="false" />
-                <element signature="e#68467#68468#0" expanded="false" />
-                <element signature="e#72204#72205#0" expanded="false" />
-                <element signature="e#72255#72256#0" expanded="false" />
-                <element signature="e#72686#72687#0" expanded="false" />
-                <element signature="e#72731#72732#0" expanded="false" />
-                <element signature="e#72857#72858#0" expanded="false" />
-                <element signature="e#72901#72902#0" expanded="false" />
-                <element signature="e#72958#72959#0" expanded="false" />
-                <element signature="e#73000#73001#0" expanded="false" />
-                <element signature="e#78108#78109#0" expanded="false" />
-                <element signature="e#78140#78141#0" expanded="false" />
-                <element signature="e#78215#78216#0" expanded="false" />
-                <element signature="e#78245#78246#0" expanded="false" />
-                <element signature="e#78331#78332#0" expanded="false" />
-                <element signature="e#78363#78364#0" expanded="false" />
-                <element signature="e#79373#79374#0" expanded="false" />
-                <element signature="e#79406#79407#0" expanded="false" />
-                <element signature="e#80240#80241#0" expanded="false" />
-                <element signature="e#80314#80315#0" expanded="false" />
-                <element signature="e#80445#80446#0" expanded="false" />
-                <element signature="e#80474#80475#0" expanded="false" />
-                <element signature="e#82726#82727#0" expanded="false" />
-                <element signature="e#82767#82768#0" expanded="false" />
-                <element signature="e#91613#91614#0" expanded="false" />
-                <element signature="e#91671#91672#0" expanded="false" />
-                <element signature="e#93662#93663#0" expanded="false" />
-                <element signature="e#93716#93717#0" expanded="false" />
-                <element signature="e#94011#94012#0" expanded="false" />
-                <element signature="e#94067#94068#0" expanded="false" />
-                <element signature="e#94314#94315#0" expanded="false" />
-                <element signature="e#94368#94369#0" expanded="false" />
-                <element signature="e#94657#94658#0" expanded="false" />
-                <element signature="e#94712#94713#0" expanded="false" />
-                <element signature="e#95001#95002#0" expanded="false" />
-                <element signature="e#95056#95057#0" expanded="false" />
-                <element signature="e#95328#95329#0" expanded="false" />
-                <element signature="e#95387#95388#0" expanded="false" />
-                <element signature="e#95652#95653#0" expanded="false" />
-                <element signature="e#95712#95713#0" expanded="false" />
-                <element signature="e#95972#95973#0" expanded="false" />
-                <element signature="e#96031#96032#0" expanded="false" />
-                <element signature="e#96306#96307#0" expanded="false" />
-                <element signature="e#96368#96369#0" expanded="false" />
-                <element signature="e#96643#96644#0" expanded="false" />
-                <element signature="e#96673#96674#0" expanded="false" />
-                <element signature="e#96849#96850#0" expanded="false" />
-                <element signature="e#96899#96900#0" expanded="false" />
-                <element signature="e#97041#97042#0" expanded="false" />
-                <element signature="e#97080#97081#0" expanded="false" />
-                <element signature="e#97477#97478#0" expanded="false" />
-                <element signature="e#97522#97523#0" expanded="false" />
-                <element signature="e#97738#97739#0" expanded="false" />
-                <element signature="e#97788#97789#0" expanded="false" />
-                <element signature="e#97969#97970#0" expanded="false" />
-                <element signature="e#98021#98022#0" expanded="false" />
-                <element signature="e#98257#98258#0" expanded="false" />
-                <element signature="e#98288#98289#0" expanded="false" />
-                <element signature="e#98659#98660#0" expanded="false" />
-                <element signature="e#98693#98694#0" expanded="false" />
-                <element signature="e#98945#98946#0" expanded="false" />
-                <element signature="e#98977#98978#0" expanded="false" />
-                <element signature="e#100004#100005#0" expanded="false" />
-                <element signature="e#100036#100037#0" expanded="false" />
-                <element signature="e#100350#100351#0" expanded="false" />
-                <element signature="e#100383#100384#0" expanded="false" />
-                <element signature="e#100953#100954#0" expanded="false" />
-                <element signature="e#100997#100998#0" expanded="false" />
-                <element signature="e#101188#101189#0" expanded="false" />
-                <element signature="e#101220#101221#0" expanded="false" />
-                <element signature="e#101671#101672#0" expanded="false" />
-                <element signature="e#101725#101726#0" expanded="false" />
-                <element signature="e#101986#101987#0" expanded="false" />
-                <element signature="e#102055#102056#0" expanded="false" />
-                <element signature="e#102902#102903#0" expanded="false" />
-                <element signature="e#102951#102952#0" expanded="false" />
-                <element signature="e#104945#104946#0" expanded="false" />
-                <element signature="e#104986#104987#0" expanded="false" />
-                <element signature="e#106632#106633#0" expanded="false" />
-                <element signature="e#106695#106696#0" expanded="false" />
-                <element signature="e#106856#106857#0" expanded="false" />
-                <element signature="e#106923#106924#0" expanded="false" />
-                <element signature="e#107096#107097#0" expanded="false" />
-                <element signature="e#107149#107150#0" expanded="false" />
-                <element signature="e#112017#112018#0" expanded="false" />
-                <element signature="e#112082#112083#0" expanded="false" />
-                <element signature="e#118110#118111#0" expanded="false" />
-                <element signature="e#118159#118160#0" expanded="false" />
-                <element signature="e#118245#118246#0" expanded="false" />
-                <element signature="e#118284#118285#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.9655173">
-              <caret line="19" column="51" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Toolbar.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/22.2.1/appcompat-v7-22.2.1-sources.jar!/android/support/v7/widget/Toolbar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="106" column="13" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="13" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -3154,7 +2614,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="7209751354000" />
+        <entry key="$PROJECT_DIR$" value="7210176790000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -3721,9 +3181,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/lib/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FabFragment.java" />
         <option value="$PROJECT_DIR$/lib/src/main/java/com/rey/material/widget/TabPageIndicator.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FloatingActionButtonBehavior.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_button.xml" />
@@ -3743,26 +3200,20 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/NumberPicker.java" />
         <option value="$PROJECT_DIR$/lib/src/main/java/com/rey/material/widget/RadioButton.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/circle_black.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles_light.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/circle.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/DialogsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HistoryAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Model/HistoryModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-v14/fragment_home.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HomeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Service/HealthService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Model/UserModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/recycler_history_row.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/SpinnersFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/LoginFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_signup.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/SignupFragment.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_chart.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HistoryFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_food.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
@@ -3770,8 +3221,17 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_clear.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ChartFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HistoryFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/SignupFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_signup.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles_light.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HomeFragment.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ProfileFragment.java" />
       </list>
     </option>
   </component>
@@ -4018,6 +3478,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -4034,36 +3497,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
-      <pane id="Scratches">
-        <subPane />
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="health_android">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="health_android">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -4095,19 +3528,9 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="health_android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -4123,10 +3546,6 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -4142,7 +3561,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -4185,14 +3604,6 @@
               <option name="myItemId" value="health" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -4203,13 +3614,32 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches">
+        <subPane />
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="health" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="health_android">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="health_android">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -4217,7 +3647,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="recentsLimit" value="5" />
@@ -4226,7 +3656,7 @@
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="getCalInt&#9;PSI&#9;JAVA://com.yopachara.health.demo.Model.HistoryModel.History#getCalInt&#10;import&#9;ACTION&#9;WelcomeScreen.GoogleCloudTools.SampleImport&#10;animateToTab&#9;PSI&#9;JAVA://com.rey.material.widget.TabPageIndicator#animateToTab&#10;CheckedTextView&#9;PSI&#9;JAVA://com.rey.material.widget.CheckedTextView&#10;ic_done_white_24dp&#9;PSI&#9;JAVA://com.yopachara.health.demo.R.drawable#ic_done_all_white_24dp&#10;ic_done_white&#9;PSI&#9;JAVA://com.yopachara.health.demo.R.drawable#ic_done_white_24dp&#10;ic_autorenew_white_24dp&#9;FILE&#9;file:///Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/src/main/res/drawable-xhdpi/ic_autorenew_white_24dp.png&#10;mrecy&#9;PSI&#9;JAVA://com.rey.material.widget.Spinner#mRecycler&#10;listview&#9;PSI&#9;JAVA://com.rey.material.app.SimpleDialog.InternalListView&#10;recy&#9;PSI&#9;JAVA://com.rey.material.widget.ListView#setRecyclerListener&#10;git&#9;FILE&#9;file:///Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/.gitignore" />
+    <property name="SearchEverywhereHistoryKey" value="PagerAdapter&#9;PSI&#9;JAVA://com.yopachara.health.demo.MainActivity.PagerAdapter&#10;getCalInt&#9;PSI&#9;JAVA://com.yopachara.health.demo.Model.HistoryModel.History#getCalInt&#10;import&#9;ACTION&#9;WelcomeScreen.GoogleCloudTools.SampleImport&#10;animateToTab&#9;PSI&#9;JAVA://com.rey.material.widget.TabPageIndicator#animateToTab&#10;CheckedTextView&#9;PSI&#9;JAVA://com.rey.material.widget.CheckedTextView&#10;ic_done_white_24dp&#9;PSI&#9;JAVA://com.yopachara.health.demo.R.drawable#ic_done_all_white_24dp&#10;ic_done_white&#9;PSI&#9;JAVA://com.yopachara.health.demo.R.drawable#ic_done_white_24dp&#10;ic_autorenew_white_24dp&#9;FILE&#9;file:///Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/src/main/res/drawable-xhdpi/ic_autorenew_white_24dp.png&#10;mrecy&#9;PSI&#9;JAVA://com.rey.material.widget.Spinner#mRecycler&#10;listview&#9;PSI&#9;JAVA://com.rey.material.app.SimpleDialog.InternalListView&#10;recy&#9;PSI&#9;JAVA://com.rey.material.widget.ListView#setRecyclerListener&#10;git&#9;FILE&#9;file:///Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/.gitignore" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="last_opened_file_path" value="/usr/bin/git" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="370" />
@@ -4248,6 +3678,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="ToolWindowDocumentation.ShowToolbar" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -4569,18 +4000,19 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.3796446" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32956383" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" x="100" y="123" width="1080" height="573" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.7047184" sideWeight="0.6203554" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.70319635" sideWeight="0.6203554" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41518578" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32724506" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3141593" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32875606" sideWeight="0.49467275" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.3796446" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26332796" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2924071" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2458194" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24555735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32875606" sideWeight="0.5053272" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39878234" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -4589,7 +4021,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="100" y="123" width="1080" height="573" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.53424656" sideWeight="0.6987076" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -4658,129 +4089,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/decoviewlib/src/main/java/com/hookedonplay/decoviewlib/DecoView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="500" column="0" selection-start-line="500" selection-start-column="0" selection-end-line="500" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/circle.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-v14/fragment_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-97.24138">
-          <caret line="188" column="0" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ButtonFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-21/android.jar!/java/sql/Timestamp.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2222223">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Service/HealthService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Model/UserModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Model/HistoryModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="36" selection-start-line="105" selection-start-column="36" selection-end-line="105" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-21/android.jar!/java/text/SimpleDateFormat.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/main/java/com/rey/material/app/DatePickerDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="197" column="18" selection-start-line="197" selection-start-column="18" selection-end-line="197" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/app/ContactEditText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="36" selection-start-line="98" selection-start-column="36" selection-end-line="98" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="android-dummy:///Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android//Theme Editor">
-      <provider selected="true" editor-type-id="themeEditor">
-        <state theme-name="@style/Theme.AppCompat.NoActionBar" module-name="app" proportion="0.5" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.navigation/app/raw/main.nvg.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="navigationeditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.navigation/app/raw-v14/main.nvg.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="navigationeditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recycler_history_row.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recycler_view_row.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4820,23 +4128,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.31622517">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/SignupFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14900662">
-          <caret line="60" column="84" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="84" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/SliderFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4853,24 +4144,6 @@
       </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_signup.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/CustomViewPager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_history.xml">
@@ -4919,18 +4192,6 @@
             <element signature="e#36425#36426#0" expanded="false" />
             <element signature="e#57759#57760#0" expanded="false" />
             <element signature="e#57789#57790#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HomeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="25" selection-start-line="33" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#3360#3361#0" expanded="false" />
-            <element signature="e#3408#3409#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4991,64 +4252,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="58" selection-start-line="2" selection-start-column="58" selection-end-line="2" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_login.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_food.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HistoryFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="2" selection-start-line="98" selection-start-column="2" selection-end-line="98" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.0.1/support-v4-23.0.1-sources.jar!/android/support/v4/view/MenuItemCompat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="320" column="23" selection-start-line="320" selection-start-column="23" selection-end-line="320" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#15982#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#4460#4461#0" expanded="false" />
-            <element signature="e#4495#4496#0" expanded="false" />
-            <element signature="e#4580#4581#0" expanded="false" />
-            <element signature="e#4615#4616#0" expanded="false" />
-            <element signature="e#4685#4686#0" expanded="false" />
-            <element signature="e#4720#4721#0" expanded="false" />
-            <element signature="e#4796#4797#0" expanded="false" />
-            <element signature="e#4832#4833#0" expanded="false" />
-            <element signature="e#4910#4911#0" expanded="false" />
-            <element signature="e#4946#4947#0" expanded="false" />
-            <element signature="e#5026#5027#0" expanded="false" />
-            <element signature="e#5062#5063#0" expanded="false" />
-            <element signature="e#6097#6098#0" expanded="false" />
-            <element signature="e#6133#6134#0" expanded="false" />
-            <element signature="e#6211#6212#0" expanded="false" />
-            <element signature="e#6247#6248#0" expanded="false" />
-            <element signature="e#6327#6328#0" expanded="false" />
-            <element signature="e#6363#6364#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5368,121 +4575,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Model/FoodModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#383#384#0" expanded="false" />
-            <element signature="e#432#433#0" expanded="false" />
-            <element signature="e#495#496#0" expanded="false" />
-            <element signature="e#525#526#0" expanded="false" />
-            <element signature="e#1147#1148#0" expanded="false" />
-            <element signature="e#1180#1181#0" expanded="false" />
-            <element signature="e#1215#1216#0" expanded="false" />
-            <element signature="e#1255#1256#0" expanded="false" />
-            <element signature="e#1290#1291#0" expanded="false" />
-            <element signature="e#1325#1326#0" expanded="false" />
-            <element signature="e#1366#1367#0" expanded="false" />
-            <element signature="e#1407#1408#0" expanded="false" />
-            <element signature="e#1440#1441#0" expanded="false" />
-            <element signature="e#1474#1475#0" expanded="false" />
-            <element signature="e#1511#1512#0" expanded="false" />
-            <element signature="e#1549#1550#0" expanded="false" />
-            <element signature="e#1584#1585#0" expanded="false" />
-            <element signature="e#1620#1621#0" expanded="false" />
-            <element signature="e#1653#1654#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1723#1724#0" expanded="false" />
-            <element signature="e#1760#1761#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/os/Handler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="395" column="25" selection-start-line="395" selection-start-column="25" selection-end-line="395" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#31377#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#4519#4520#0" expanded="false" />
-            <element signature="e#4552#4553#0" expanded="false" />
-            <element signature="e#5003#5004#0" expanded="false" />
-            <element signature="e#5040#5041#0" expanded="false" />
-            <element signature="e#5218#5219#0" expanded="false" />
-            <element signature="e#5259#5260#0" expanded="false" />
-            <element signature="e#5605#5606#0" expanded="false" />
-            <element signature="e#5650#5651#0" expanded="false" />
-            <element signature="e#6442#6443#0" expanded="false" />
-            <element signature="e#6475#6476#0" expanded="false" />
-            <element signature="e#10258#10259#0" expanded="false" />
-            <element signature="e#10301#10302#0" expanded="false" />
-            <element signature="e#10614#10615#0" expanded="false" />
-            <element signature="e#10663#10664#0" expanded="false" />
-            <element signature="e#12859#12860#0" expanded="false" />
-            <element signature="e#12922#12923#0" expanded="false" />
-            <element signature="e#20193#20194#0" expanded="false" />
-            <element signature="e#20245#20246#0" expanded="false" />
-            <element signature="e#21088#21089#0" expanded="false" />
-            <element signature="e#21137#21138#0" expanded="false" />
-            <element signature="e#21494#21495#0" expanded="false" />
-            <element signature="e#21549#21550#0" expanded="false" />
-            <element signature="e#26650#26651#0" expanded="false" />
-            <element signature="e#26705#26706#0" expanded="false" />
-            <element signature="e#27541#27542#0" expanded="false" />
-            <element signature="e#27600#27601#0" expanded="false" />
-            <element signature="e#28061#28062#0" expanded="false" />
-            <element signature="e#28117#28118#0" expanded="false" />
-            <element signature="e#28298#28299#0" expanded="false" />
-            <element signature="e#28328#28329#0" expanded="false" />
-            <element signature="e#29660#29661#0" expanded="false" />
-            <element signature="e#29698#29699#0" expanded="false" />
-            <element signature="e#30036#30037#0" expanded="false" />
-            <element signature="e#30072#30073#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/22.2.1/appcompat-v7-22.2.1-sources.jar!/android/support/v7/widget/Toolbar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="106" column="13" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9655173">
-          <caret line="19" column="51" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1445618880000" expanded="true" signature="2018:2122" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1489#1605#0" expanded="true" />
-            <element signature="e#1604#1605#0" expanded="true" />
+            <element signature="e#0#77920#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#7620#7621#0" expanded="false" />
+            <element signature="e#7662#7663#0" expanded="false" />
+            <element signature="e#7753#7754#0" expanded="false" />
+            <element signature="e#7788#7789#0" expanded="false" />
+            <element signature="e#12413#12414#0" expanded="false" />
+            <element signature="e#12447#12448#0" expanded="false" />
+            <element signature="e#13086#13087#0" expanded="false" />
+            <element signature="e#13142#13143#0" expanded="false" />
+            <element signature="e#13981#13982#0" expanded="false" />
+            <element signature="e#14053#14054#0" expanded="false" />
+            <element signature="e#14245#14246#0" expanded="false" />
+            <element signature="e#14317#14318#0" expanded="false" />
+            <element signature="e#17368#17369#0" expanded="false" />
+            <element signature="e#17441#17442#0" expanded="false" />
+            <element signature="e#17717#17718#0" expanded="false" />
+            <element signature="e#17780#17781#0" expanded="false" />
+            <element signature="e#20024#20025#0" expanded="false" />
+            <element signature="e#20057#20058#0" expanded="false" />
+            <element signature="e#20365#20366#0" expanded="false" />
+            <element signature="e#20418#20419#0" expanded="false" />
+            <element signature="e#21903#21904#0" expanded="false" />
+            <element signature="e#21939#21940#0" expanded="false" />
+            <element signature="e#22178#22179#0" expanded="false" />
+            <element signature="e#22234#22235#0" expanded="false" />
+            <element signature="e#27240#27241#0" expanded="false" />
+            <element signature="e#27306#27307#0" expanded="false" />
+            <element signature="e#30726#30727#0" expanded="false" />
+            <element signature="e#30786#30787#0" expanded="false" />
+            <element signature="e#31090#31091#0" expanded="false" />
+            <element signature="e#31149#31150#0" expanded="false" />
+            <element signature="e#33129#33130#0" expanded="false" />
+            <element signature="e#33177#33178#0" expanded="false" />
+            <element signature="e#33834#33835#0" expanded="false" />
+            <element signature="e#33880#33881#0" expanded="false" />
+            <element signature="e#35390#35391#0" expanded="false" />
+            <element signature="e#35437#35438#0" expanded="false" />
+            <element signature="e#36092#36093#0" expanded="false" />
+            <element signature="e#36140#36141#0" expanded="false" />
+            <element signature="e#37345#37346#0" expanded="false" />
+            <element signature="e#37405#37406#0" expanded="false" />
+            <element signature="e#71518#71519#0" expanded="false" />
+            <element signature="e#71557#71558#0" expanded="false" />
+            <element signature="e#71920#71921#0" expanded="false" />
+            <element signature="e#71985#71986#0" expanded="false" />
+            <element signature="e#72179#72180#0" expanded="false" />
+            <element signature="e#72216#72217#0" expanded="false" />
+            <element signature="e#72562#72563#0" expanded="false" />
+            <element signature="e#72599#72600#0" expanded="false" />
+            <element signature="e#73241#73242#0" expanded="false" />
+            <element signature="e#73282#73283#0" expanded="false" />
+            <element signature="e#73684#73685#0" expanded="false" />
+            <element signature="e#73745#73746#0" expanded="false" />
+            <element signature="e#73821#73822#0" expanded="false" />
+            <element signature="e#73880#73881#0" expanded="false" />
+            <element signature="e#74454#74455#0" expanded="false" />
+            <element signature="e#74489#74490#0" expanded="false" />
+            <element signature="e#75506#75507#0" expanded="false" />
+            <element signature="e#75542#75543#0" expanded="false" />
+            <element signature="e#75713#75714#0" expanded="false" />
+            <element signature="e#75749#75750#0" expanded="false" />
+            <element signature="e#77681#77682#0" expanded="false" />
+            <element signature="e#77713#77714#0" expanded="false" />
+            <element signature="e#77782#77783#0" expanded="false" />
+            <element signature="e#77817#77818#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -5491,122 +4654,361 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2384" column="21" selection-start-line="2384" selection-start-column="21" selection-end-line="2384" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/os/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.85850555">
+          <caret line="404" column="27" selection-start-line="404" selection-start-column="27" selection-end-line="404" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_food.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_clear.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="30" selection-start-line="73" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
-            <element signature="e#0#119106#0" expanded="false" />
+            <element signature="e#1551#1552#0" expanded="false" />
+            <element signature="e#1598#1599#0" expanded="false" />
+            <element signature="e#2278#2279#0" expanded="false" />
+            <element signature="e#2321#2322#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/CustomViewPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/FoodAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1445618880000" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/SignupFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="318" column="65" selection-start-line="318" selection-start-column="65" selection-end-line="318" selection-end-column="65" />
+          <folding>
+            <element signature="e#4334#4538#0" expanded="true" />
+            <element signature="e#4537#4538#0" expanded="true" />
+            <element signature="e#4632#4836#0" expanded="true" />
+            <element signature="e#4835#4836#0" expanded="true" />
+            <element signature="e#4936#5140#0" expanded="true" />
+            <element signature="e#5139#5140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_signup.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.172414">
+          <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HistoryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="59" column="32" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Model/HistoryModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="105" column="36" selection-start-line="105" selection-start-column="36" selection-end-line="105" selection-end-column="36" />
+          <folding>
+            <element signature="e#2224#2225#0" expanded="true" />
+            <element signature="e#2276#2277#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Model/UserModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Service/HealthService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ChartFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="43" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/Model/FoodModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/circle_black.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/22.2.0/support-v4-22.2.0-sources.jar!/android/support/v4/view/ViewPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59618443">
+          <caret line="81" column="2" selection-start-line="81" selection-start-column="2" selection-end-line="81" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/main/java/com/rey/material/widget/TabPageIndicator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11923689">
+          <caret line="29" column="71" selection-start-line="29" selection-start-column="71" selection-end-line="29" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles_light.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.257475">
+          <caret line="211" column="38" selection-start-line="211" selection-start-column="38" selection-end-line="211" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/themes.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35714287">
+          <caret line="147" column="29" selection-start-line="147" selection-start-column="29" selection-end-line="147" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.525">
+          <caret line="31" column="40" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78333336">
+          <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1923689">
+          <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row_contact_replace.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row_contact_selected.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recycler_history_row.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/os/Bundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33227345">
+          <caret line="843" column="24" selection-start-line="843" selection-start-column="24" selection-end-line="843" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#32955#0" expanded="false" />
             <element signature="imports" expanded="false" />
-            <element signature="e#54284#54285#0" expanded="false" />
-            <element signature="e#54319#54320#0" expanded="false" />
-            <element signature="e#68432#68433#0" expanded="false" />
-            <element signature="e#68467#68468#0" expanded="false" />
-            <element signature="e#72204#72205#0" expanded="false" />
-            <element signature="e#72255#72256#0" expanded="false" />
-            <element signature="e#72686#72687#0" expanded="false" />
-            <element signature="e#72731#72732#0" expanded="false" />
-            <element signature="e#72857#72858#0" expanded="false" />
-            <element signature="e#72901#72902#0" expanded="false" />
-            <element signature="e#72958#72959#0" expanded="false" />
-            <element signature="e#73000#73001#0" expanded="false" />
-            <element signature="e#78108#78109#0" expanded="false" />
-            <element signature="e#78140#78141#0" expanded="false" />
-            <element signature="e#78215#78216#0" expanded="false" />
-            <element signature="e#78245#78246#0" expanded="false" />
-            <element signature="e#78331#78332#0" expanded="false" />
-            <element signature="e#78363#78364#0" expanded="false" />
-            <element signature="e#79373#79374#0" expanded="false" />
-            <element signature="e#79406#79407#0" expanded="false" />
-            <element signature="e#80240#80241#0" expanded="false" />
-            <element signature="e#80314#80315#0" expanded="false" />
-            <element signature="e#80445#80446#0" expanded="false" />
-            <element signature="e#80474#80475#0" expanded="false" />
-            <element signature="e#82726#82727#0" expanded="false" />
-            <element signature="e#82767#82768#0" expanded="false" />
-            <element signature="e#91613#91614#0" expanded="false" />
-            <element signature="e#91671#91672#0" expanded="false" />
-            <element signature="e#93662#93663#0" expanded="false" />
-            <element signature="e#93716#93717#0" expanded="false" />
-            <element signature="e#94011#94012#0" expanded="false" />
-            <element signature="e#94067#94068#0" expanded="false" />
-            <element signature="e#94314#94315#0" expanded="false" />
-            <element signature="e#94368#94369#0" expanded="false" />
-            <element signature="e#94657#94658#0" expanded="false" />
-            <element signature="e#94712#94713#0" expanded="false" />
-            <element signature="e#95001#95002#0" expanded="false" />
-            <element signature="e#95056#95057#0" expanded="false" />
-            <element signature="e#95328#95329#0" expanded="false" />
-            <element signature="e#95387#95388#0" expanded="false" />
-            <element signature="e#95652#95653#0" expanded="false" />
-            <element signature="e#95712#95713#0" expanded="false" />
-            <element signature="e#95972#95973#0" expanded="false" />
-            <element signature="e#96031#96032#0" expanded="false" />
-            <element signature="e#96306#96307#0" expanded="false" />
-            <element signature="e#96368#96369#0" expanded="false" />
-            <element signature="e#96643#96644#0" expanded="false" />
-            <element signature="e#96673#96674#0" expanded="false" />
-            <element signature="e#96849#96850#0" expanded="false" />
-            <element signature="e#96899#96900#0" expanded="false" />
-            <element signature="e#97041#97042#0" expanded="false" />
-            <element signature="e#97080#97081#0" expanded="false" />
-            <element signature="e#97477#97478#0" expanded="false" />
-            <element signature="e#97522#97523#0" expanded="false" />
-            <element signature="e#97738#97739#0" expanded="false" />
-            <element signature="e#97788#97789#0" expanded="false" />
-            <element signature="e#97969#97970#0" expanded="false" />
-            <element signature="e#98021#98022#0" expanded="false" />
-            <element signature="e#98257#98258#0" expanded="false" />
-            <element signature="e#98288#98289#0" expanded="false" />
-            <element signature="e#98659#98660#0" expanded="false" />
-            <element signature="e#98693#98694#0" expanded="false" />
-            <element signature="e#98945#98946#0" expanded="false" />
-            <element signature="e#98977#98978#0" expanded="false" />
-            <element signature="e#100004#100005#0" expanded="false" />
-            <element signature="e#100036#100037#0" expanded="false" />
-            <element signature="e#100350#100351#0" expanded="false" />
-            <element signature="e#100383#100384#0" expanded="false" />
-            <element signature="e#100953#100954#0" expanded="false" />
-            <element signature="e#100997#100998#0" expanded="false" />
-            <element signature="e#101188#101189#0" expanded="false" />
-            <element signature="e#101220#101221#0" expanded="false" />
-            <element signature="e#101671#101672#0" expanded="false" />
-            <element signature="e#101725#101726#0" expanded="false" />
-            <element signature="e#101986#101987#0" expanded="false" />
-            <element signature="e#102055#102056#0" expanded="false" />
-            <element signature="e#102902#102903#0" expanded="false" />
-            <element signature="e#102951#102952#0" expanded="false" />
-            <element signature="e#104945#104946#0" expanded="false" />
-            <element signature="e#104986#104987#0" expanded="false" />
-            <element signature="e#106632#106633#0" expanded="false" />
-            <element signature="e#106695#106696#0" expanded="false" />
-            <element signature="e#106856#106857#0" expanded="false" />
-            <element signature="e#106923#106924#0" expanded="false" />
-            <element signature="e#107096#107097#0" expanded="false" />
-            <element signature="e#107149#107150#0" expanded="false" />
-            <element signature="e#112017#112018#0" expanded="false" />
-            <element signature="e#112082#112083#0" expanded="false" />
-            <element signature="e#118110#118111#0" expanded="false" />
-            <element signature="e#118159#118160#0" expanded="false" />
-            <element signature="e#118245#118246#0" expanded="false" />
-            <element signature="e#118284#118285#0" expanded="false" />
+            <element signature="e#1415#1416#0" expanded="false" />
+            <element signature="e#1438#1439#0" expanded="false" />
+            <element signature="e#2313#2314#0" expanded="false" />
+            <element signature="e#2342#2343#0" expanded="false" />
+            <element signature="e#2579#2580#0" expanded="false" />
+            <element signature="e#2610#2611#0" expanded="false" />
+            <element signature="e#3087#3088#0" expanded="false" />
+            <element signature="e#3111#3112#0" expanded="false" />
+            <element signature="e#3625#3626#0" expanded="false" />
+            <element signature="e#3669#3670#0" expanded="false" />
+            <element signature="e#3811#3812#0" expanded="false" />
+            <element signature="e#3856#3857#0" expanded="false" />
+            <element signature="e#4212#4213#0" expanded="false" />
+            <element signature="e#4251#4252#0" expanded="false" />
+            <element signature="e#8086#8087#0" expanded="false" />
+            <element signature="e#8127#8128#0" expanded="false" />
+            <element signature="e#8403#8404#0" expanded="false" />
+            <element signature="e#8444#8445#0" expanded="false" />
+            <element signature="e#8715#8716#0" expanded="false" />
+            <element signature="e#8757#8758#0" expanded="false" />
+            <element signature="e#9028#9029#0" expanded="false" />
+            <element signature="e#9070#9071#0" expanded="false" />
+            <element signature="e#14234#14235#0" expanded="false" />
+            <element signature="e#14280#14281#0" expanded="false" />
+            <element signature="e#14620#14621#0" expanded="false" />
+            <element signature="e#14667#14668#0" expanded="false" />
+            <element signature="e#15003#15004#0" expanded="false" />
+            <element signature="e#15049#15050#0" expanded="false" />
+            <element signature="e#15389#15390#0" expanded="false" />
+            <element signature="e#15436#15437#0" expanded="false" />
+            <element signature="e#17801#17802#0" expanded="false" />
+            <element signature="e#17842#17843#0" expanded="false" />
+            <element signature="e#18196#18197#0" expanded="false" />
+            <element signature="e#18251#18252#0" expanded="false" />
+            <element signature="e#18517#18518#0" expanded="false" />
+            <element signature="e#18558#18559#0" expanded="false" />
+            <element signature="e#18912#18913#0" expanded="false" />
+            <element signature="e#18967#18968#0" expanded="false" />
+            <element signature="e#19237#19238#0" expanded="false" />
+            <element signature="e#19279#19280#0" expanded="false" />
+            <element signature="e#19958#19959#0" expanded="false" />
+            <element signature="e#20000#20001#0" expanded="false" />
+            <element signature="e#20779#20780#0" expanded="false" />
+            <element signature="e#20828#20829#0" expanded="false" />
+            <element signature="e#28037#28038#0" expanded="false" />
+            <element signature="e#28083#28084#0" expanded="false" />
+            <element signature="e#28436#28437#0" expanded="false" />
+            <element signature="e#28483#28484#0" expanded="false" />
+            <element signature="e#28833#28834#0" expanded="false" />
+            <element signature="e#28879#28880#0" expanded="false" />
+            <element signature="e#29232#29233#0" expanded="false" />
+            <element signature="e#29279#29280#0" expanded="false" />
+            <element signature="e#31226#31227#0" expanded="false" />
+            <element signature="e#31272#31273#0" expanded="false" />
+            <element signature="e#31336#31337#0" expanded="false" />
+            <element signature="e#31383#31384#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.37037">
-          <caret line="182" column="31" selection-start-line="182" selection-start-column="31" selection-end-line="182" selection-end-column="31" />
+        <state vertical-scroll-proportion="45.37037">
+          <caret line="263" column="34" selection-start-line="263" selection-start-column="34" selection-end-line="263" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7126#7274#0" expanded="true" />
-            <element signature="e#7273#7274#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ChartFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ProgressFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36144578">
-          <caret line="283" column="33" selection-start-line="283" selection-start-column="33" selection-end-line="283" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.09538951">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.4074073">
+          <caret line="224" column="39" selection-start-line="224" selection-start-column="35" selection-end-line="224" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yopachara/health/demo/ProfileFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4753577">
+          <caret line="56" column="35" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

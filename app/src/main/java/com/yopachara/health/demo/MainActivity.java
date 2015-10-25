@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     private FloatingActionButton fab_line;
 
 //    private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
-    private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.CHARTS};
+    private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.CHARTS, Tab.PROFILE};
 
 
     @Override
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
                 mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mItems, users.get(0));
                 vp.setAdapter(mPagerAdapter);
-                vp.setOffscreenPageLimit(3);
+                vp.setOffscreenPageLimit(5);
                 tpi.setViewPager(vp);
                 tpi.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
                 });
 
-                mDrawerAdapter.setSelected(Tab.PROGRESS);
+                mDrawerAdapter.setSelected(Tab.HOME);
                 vp.setCurrentItem(0);
 
                 ViewUtil.setBackground(getWindow().getDecorView(), new ThemeDrawable(R.array.bg_window));
@@ -323,6 +323,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         FOODS("Foods"),
         HISTORYS("Historys"),
         CHARTS("Charts"),
+        PROFILE("Profile"),
         PROGRESS("Progresses"),
         BUTTONS("Buttons"),
         FAB("FABs"),
@@ -484,6 +485,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                             setFragment(Tab.HOME, fragment);
                         else if (fragment instanceof ChartFragment)
                             setFragment(Tab.CHARTS, fragment);
+                        else if (fragment instanceof ProfileFragment)
+                            setFragment(Tab.PROFILE, fragment);
                     }
                 }
             } catch (Exception e) {
@@ -540,6 +543,9 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                         break;
                     case CHARTS:
                         mFragments[position] = ChartFragment.newInstance();
+                        break;
+                    case PROFILE:
+                        mFragments[position] = ProfileFragment.newInstance(user);
                         break;
                 }
             }

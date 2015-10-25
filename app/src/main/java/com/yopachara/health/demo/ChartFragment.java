@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -75,7 +77,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_chart, container, false);
-
+        setHasOptionsMenu(true);
 
         mChart = (LineChart) v.findViewById(R.id.chart1);
         mChart.setOnChartValueSelectedListener(this);
@@ -293,6 +295,12 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
             }
 
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_clear, menu);
     }
 
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue( Map<K, V> map ) {

@@ -3,11 +3,16 @@ package com.yopachara.health.demo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -52,6 +57,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_history, container, false);
+        setHasOptionsMenu(true);
         if (historyModel != null) {
             Log.d("Check Value in model", historyModel.getObjects().get(0).getFoodname());
         } else {
@@ -89,7 +95,7 @@ public class HistoryFragment extends Fragment {
                 mLayoutManager = new LinearLayoutManager(getActivity());
                 mRecyclerView.setLayoutManager(mLayoutManager);
 
-                mAdapter = new HistoryAdapter(getActivity(), history,getFragmentManager());
+                mAdapter = new HistoryAdapter(getActivity(), history, getFragmentManager());
                 mRecyclerView.setAdapter(mAdapter);
                 mSwipeRefreshLayout.setRefreshing(false);
 //                final HashMap<Integer, Integer> classes = new HashMap<Integer, Integer>();
@@ -130,6 +136,13 @@ public class HistoryFragment extends Fragment {
             }
 
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_clear, menu);
+
     }
 
 
