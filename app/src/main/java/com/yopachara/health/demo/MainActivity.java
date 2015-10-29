@@ -35,6 +35,7 @@ import android.speech.SpeechRecognizer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.greenfrvr.rubberloader.RubberLoaderView;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 import com.rey.material.app.Dialog;
@@ -87,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     private Drawable[] mDrawables = new Drawable[2];
     private int index = 0;
     public ArrayList<UserModel.User> users;
+    protected @Bind(R.id.loader)
+    RubberLoaderView l;
+    FrameLayout frame_loader;
+
 
     String API = "http://pachara.me:3000";
     Dialog.Builder builder = null;
@@ -102,8 +107,14 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
+        l.startLoading();
+
+        frame_loader = (FrameLayout)findViewById(R.id.frame_loader);
+
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -113,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
             String result = username;
             Toast.makeText(this, "Login complete : " + result, Toast.LENGTH_SHORT).show();
         }
+
+
 
         lv_drawer = (ListView) findViewById(R.id.main_lv_drawer);
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
@@ -164,7 +177,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         sr = SpeechRecognizer.createSpeechRecognizer(this);
         sr.setRecognitionListener(new listener());
 
-
+        l.setVisibility(View.INVISIBLE);
+        frame_loader.setVisibility(View.INVISIBLE);
 
     }
 
@@ -175,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
             super.onBackPressed();
             return;
         }
+
 
         this.doubleBackToExitPressedOnce = true;
 //        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
@@ -223,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                         mSnackBar.dismiss();
                         Log.d("onPageSelected", "Position " + position);
 //                        float currentY = fab_line.getY();
-                        switch(position){
+                        switch (position) {
                             case 0: {
                                 mToolbar.setTitle("Home");
                                 fab_line.setY(750);
@@ -271,7 +286,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                 ViewUtil.setBackground(getWindow().getDecorView(), new ThemeDrawable(R.array.bg_window));
                 ViewUtil.setBackground(mToolbar, new ThemeDrawable(R.array.bg_toolbar));
 
-
+//                l.setVisibility(View.GONE);
+//                frame_loader.setVisibility(View.GONE);
             }
 
             @Override

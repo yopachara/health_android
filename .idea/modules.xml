@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/decoviewlib/decoview.iml" filepath="$PROJECT_DIR$/decoviewlib/decoview.iml" />
       <module fileurl="file://$PROJECT_DIR$/health_android.iml" filepath="$PROJECT_DIR$/health_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nice-spinner/nice-spinner.iml" filepath="$PROJECT_DIR$/nice-spinner/nice-spinner.iml" />
     </modules>
   </component>
 </project>

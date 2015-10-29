@@ -98,43 +98,86 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.rey.material.widget.Spinner
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/weight_text"
+            android:text="ส่วนสูง"/>
+        <org.angmarch.views.NiceSpinner
             android:id="@+id/spinner_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="128dp"
-            android:padding="8dp"
-            app:spn_label="Height"
-            app:v_styleId="@array/spinner"/>
-
-        <com.rey.material.widget.Spinner
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/height_text"
+            android:text="น้ำหนัก"/>
+        <org.angmarch.views.NiceSpinner
             android:id="@+id/spinner_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:minWidth="128dp"
-            android:padding="8dp"
-            app:spn_label="Weight"
-            app:v_styleId="@array/spinner"/>
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 
 
-    <com.rey.material.widget.Spinner
+    <org.angmarch.views.NiceSpinner
         android:id="@+id/spinner_exercise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="128dp"
-        android:padding="8dp"
-        app:spn_label="Exercise Level"
-        app:v_styleId="@array/spinner"/>
-
+        android:layout_marginBottom="20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/result_text"
         android:text="พลังงานที่ต้องการ"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""/>
+        <TextView
+            android:id="@+id/value1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:paddingLeft="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "/>
+        <TextView
+            android:id="@+id/value2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "/>
+        <TextView
+            android:id="@+id/value3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+    </LinearLayout>
+
+    <io.apptik.widget.MultiSlider
+        android:id="@+id/multiSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        />
+
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

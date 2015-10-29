@@ -26,12 +26,18 @@ import com.rey.material.widget.Spinner;
 import com.yopachara.health.demo.Model.UserModel;
 import com.yopachara.health.demo.Service.HealthService;
 
+import org.angmarch.views.NiceSpinner;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
+import io.apptik.widget.MultiSlider;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -50,11 +56,13 @@ public class SignupFragment extends Fragment {
     EditText et_date;
     EditText password;
     EditText username;
-    Spinner spn_height;
-    Spinner spn_weight;
-    Spinner spn_exercise;
+    NiceSpinner spinnerWeight;
+    NiceSpinner spinnerHeight;
+    NiceSpinner spinnerExercise;
     TextView result_text;
-
+    TextView carboRatio;
+    TextView proteinRatio;
+    TextView fatRatio;
     public static SignupFragment newInstance() {
         SignupFragment fragment = new SignupFragment();
 
@@ -92,51 +100,59 @@ public class SignupFragment extends Fragment {
         male = (RadioButton) v.findViewById(R.id.switches_rb1);
         female = (RadioButton) v.findViewById(R.id.switches_rb2);
 
-        spn_height = (Spinner) v.findViewById(R.id.spinner_height);
-        spn_weight = (Spinner) v.findViewById(R.id.spinner_weight);
-        spn_exercise = (Spinner) v.findViewById(R.id.spinner_exercise);
 
         result_text = (TextView) v.findViewById(R.id.result_text);
 
         String[] itemsHeight = new String[50];
-        for (int i = 0; i < itemsHeight.length; i++)
+        for (int i = 0; i < itemsHeight.length; i++) {
             itemsHeight[i] = String.valueOf(i + 151);
-        ArrayAdapter<String> adapterHeight = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsHeight);
+        }
 
         String[] itemsWeight = new String[75];
-        for (int i = 0; i < itemsWeight.length; i++)
+        for (int i = 0; i < itemsWeight.length; i++) {
             itemsWeight[i] = String.valueOf(i + 31);
-        ArrayAdapter<String> adapterWeight = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsWeight);
-
+        }
         String[] itemsExercise = new String[]{"ออกกำลังกายน้อยมาก", "1-3 ครั้งต่อสัปดาห์", "4-5 ครั้งต่อสัปดาห์", "6-7 ครั้งต่อสัปดาห์", "วันละ 2 ครั้งขึ้นไป"};
         String[] itemsPlans = new String[]{"คงสภาพ", "สร้างกล้ามเนื้อ", "ลดน้ำหนัก"};
 
-        ArrayAdapter<String> adapterExercise = new ArrayAdapter<>(getActivity(), R.layout.row_spn, itemsExercise);
 
-        adapterHeight.setDropDownViewResource(R.layout.row_spn_dropdown);
-        adapterWeight.setDropDownViewResource(R.layout.row_spn_dropdown);
-        adapterExercise.setDropDownViewResource(R.layout.row_spn_dropdown);
-        spn_height.setAdapter(adapterHeight);
-        spn_height.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(Spinner parent, View view, int position, long id) {
-                getResult();
-            }
-        });
-        spn_weight.setAdapter(adapterWeight);
-        spn_weight.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(Spinner parent, View view, int position, long id) {
-                getResult();
-            }
-        });
-        spn_exercise.setAdapter(adapterExercise);
-        spn_exercise.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(Spinner parent, View view, int position, long id) {
-                getResult();
-            }
-        });
+        spinnerHeight = (NiceSpinner) v.findViewById(R.id.spinner_height);
+        spinnerWeight = (NiceSpinner) v.findViewById(R.id.spinner_weight);
+        spinnerExercise = (NiceSpinner) v.findViewById(R.id.spinner_exercise);
+
+        List<String> datasHeight = new LinkedList<>(Arrays.asList(itemsHeight));
+        List<String> datasWeight = new LinkedList<>(Arrays.asList(itemsWeight));
+        List<String> datasExercise = new LinkedList<>(Arrays.asList(itemsExercise));
+        List<String> datasPlan = new LinkedList<>(Arrays.asList(itemsPlans));
+
+
+        spinnerHeight.attachDataSource(datasHeight);
+        spinnerWeight.attachDataSource(datasWeight);
+        spinnerExercise.attachDataSource(datasExercise);
+
+
+
+//        spn_height.setAdapter(adapterHeight);
+//        spn_height.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(Spinner parent, View view, int position, long id) {
+//                getResult();
+//            }
+//        });
+//        spn_weight.setAdapter(adapterWeight);
+//        spn_weight.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(Spinner parent, View view, int position, long id) {
+//                getResult();
+//            }
+//        });
+//        spn_exercise.setAdapter(adapterExercise);
+//        spn_exercise.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(Spinner parent, View view, int position, long id) {
+//                getResult();
+//            }
+//        });
 
         CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
 
@@ -175,6 +191,32 @@ public class SignupFragment extends Fragment {
         });
 
 
+        MultiSlider multiSlider = (MultiSlider)v.findViewById(R.id.multiSlider);
+
+        carboRatio = (TextView)v.findViewById(R.id.value1);
+        fatRatio = (TextView)v.findViewById(R.id.value2);
+        proteinRatio = (TextView)v.findViewById(R.id.value3);
+
+        multiSlider.setOnThumbValueChangeListener(new MultiSlider.OnThumbValueChangeListener() {
+            @Override
+            public void onValueChanged(MultiSlider multiSlider, MultiSlider.Thumb thumb, int thumbIndex, int value) {
+                if (thumbIndex == 0) {
+                    carboRatio.setText(String.valueOf(value));
+                    fatRatio.setText(String.valueOf(multiSlider.getThumb(1).getValue()-value));
+                } else {
+                    proteinRatio.setText(String.valueOf(value));
+                }
+            }
+
+//            @Override
+//            public void onStartTrackingTouch(MultiSlider multiSlider, MultiSlider.Thumb thumb, int value) {
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(MultiSlider multiSlider, MultiSlider.Thumb thumb, int value) {
+//
+//            }
+        });
         lActicvity = (LoginActivity) getActivity();
 
         return v;
@@ -251,7 +293,7 @@ public class SignupFragment extends Fragment {
 
     private double calculateBmi(int weight, int height) {
         double bmi;
-        double dHeight = (double) height / 100;
+        float dHeight = (float)height / 100;
         Log.d("dHeight", dHeight + "");
         bmi = weight / (dHeight * dHeight);
         return bmi;
@@ -304,19 +346,25 @@ public class SignupFragment extends Fragment {
     }
 
     private void getResult(){
-        int height = Integer.parseInt(spn_weight.getSelectedItem().toString());
-        int weight = Integer.parseInt(spn_height.getSelectedItem().toString());
-        double bmr = calculateBmr(height, weight, calculateAge());
-        double bmi = calculateBmi(height, weight);
-        double tdee = calculateTdee(spn_exercise.getSelectedItemPosition(), bmr);
+        int height = Integer.parseInt(spinnerHeight.getText().toString());
+        int weight = Integer.parseInt(spinnerWeight.getText().toString());
+        double bmr = calculateBmr(weight, height, calculateAge());
+        double bmi = calculateBmi(weight, height);
+
+        double tdee = calculateTdee(spinnerExercise.getSelectedIndex(), bmr);
         Log.d("Signup", "Username : " + username.getText() + " Password : " + password.getText());
         Log.d("Radio But", "Male: " + male.isChecked() + " Female: " + female.isChecked());
-        Log.d("Height", spn_height.getSelectedItem().toString());
+        Log.d("Height", height+"");
+        Log.d("Weight",weight+"");
         Log.d("Age", "" + calculateAge());
         Log.d("BMR", bmr + "");
         Log.d("BMI", bmi + "");
         Log.d("TDEE", tdee + "");
         result_text.setText("พลังงานที่ต้องการ "+Math.round(tdee)+" แคลอรี่");
     }
+
+//    private void calculateExercise(){
+//
+//    }
 
 }

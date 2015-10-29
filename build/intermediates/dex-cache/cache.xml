@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.github.rey5137/lib/1.2.1/jars/classes.jar"
+        jar="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/exploded-aar/com.github.rey5137/nice-spinner/1.2.1/jars/classes.jar"
         jumboMode="false"
-        revision="21.1.1"
-        sha1="4fd1ca8ea214642621c9e81963705a27fcf9f5b3">
-        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/classes-88bb0cf1645e3dbbf6b886647a2b5ef57fd0b7ae.jar" />
+        revision="23.0.0"
+        sha1="aacbb7c12a791223a8e3fff4c87c9d4ac5d7ab76">
+        <dex dex="/Users/yopachara/Documents/seniorproject/AndroidStudioProjects/health_android/health_android/app/build/intermediates/pre-dexed/debug/classes-4b3df75e4fcab5c63fffa43f3da09e6ae979ce0b.jar" />
     </item>
 
 </items>
