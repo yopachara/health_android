@@ -52,7 +52,7 @@ public interface HealthService {
                             Callback<HistoryModel> response);
 
     @FormUrlEncoded
-    @POST("/api/user")
+    @POST("/api/users")
     public void postUser(@Field("username")String username,
                          @Field("password")String password,
                          @Field("sex")String sex,
@@ -60,8 +60,11 @@ public interface HealthService {
                          @Field("height")int height,
                          @Field("birthdate")String birthdate,
                          @Field("type")String type,
-                         @Field("bmr")int bmr,
-                         @Field("bmi")int bmi,
+                         @Field("bmr")double bmr,
+                         @Field("bmi")double bmi,
+                         @Field("carbo")int carbo,
+                         @Field("protein")int protein,
+                         @Field("fat")int fat,
                          Callback<UserModel> response);
 
     @GET("/api/users")

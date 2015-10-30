@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -59,10 +60,13 @@ public class SignupFragment extends Fragment {
     NiceSpinner spinnerWeight;
     NiceSpinner spinnerHeight;
     NiceSpinner spinnerExercise;
+    NiceSpinner spinnerPlan;
     TextView result_text;
     TextView carboRatio;
     TextView proteinRatio;
     TextView fatRatio;
+    MultiSlider multiSlider;
+
     public static SignupFragment newInstance() {
         SignupFragment fragment = new SignupFragment();
 
@@ -86,12 +90,6 @@ public class SignupFragment extends Fragment {
                 }
             }
         });
-//        et_date.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
 
         username = (EditText) v.findViewById(R.id.username);
         password = (EditText) v.findViewById(R.id.password);
@@ -113,12 +111,14 @@ public class SignupFragment extends Fragment {
             itemsWeight[i] = String.valueOf(i + 31);
         }
         String[] itemsExercise = new String[]{"ออกกำลังกายน้อยมาก", "1-3 ครั้งต่อสัปดาห์", "4-5 ครั้งต่อสัปดาห์", "6-7 ครั้งต่อสัปดาห์", "วันละ 2 ครั้งขึ้นไป"};
-        String[] itemsPlans = new String[]{"คงสภาพ", "สร้างกล้ามเนื้อ", "ลดน้ำหนัก"};
+        String[] itemsPlans = new String[]{"คงสภาพ", "สร้างกล้ามเนื้อ", "ลดน้ำหนัก","กำหนดเอง"};
 
 
         spinnerHeight = (NiceSpinner) v.findViewById(R.id.spinner_height);
         spinnerWeight = (NiceSpinner) v.findViewById(R.id.spinner_weight);
         spinnerExercise = (NiceSpinner) v.findViewById(R.id.spinner_exercise);
+        spinnerPlan = (NiceSpinner) v.findViewById(R.id.spinner_plans);
+
 
         List<String> datasHeight = new LinkedList<>(Arrays.asList(itemsHeight));
         List<String> datasWeight = new LinkedList<>(Arrays.asList(itemsWeight));
@@ -129,30 +129,11 @@ public class SignupFragment extends Fragment {
         spinnerHeight.attachDataSource(datasHeight);
         spinnerWeight.attachDataSource(datasWeight);
         spinnerExercise.attachDataSource(datasExercise);
+        spinnerPlan.attachDataSource(datasPlan);
+
+        spinnerListener();
 
 
-
-//        spn_height.setAdapter(adapterHeight);
-//        spn_height.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(Spinner parent, View view, int position, long id) {
-//                getResult();
-//            }
-//        });
-//        spn_weight.setAdapter(adapterWeight);
-//        spn_weight.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(Spinner parent, View view, int position, long id) {
-//                getResult();
-//            }
-//        });
-//        spn_exercise.setAdapter(adapterExercise);
-//        spn_exercise.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(Spinner parent, View view, int position, long id) {
-//                getResult();
-//            }
-//        });
 
         CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
 
@@ -191,36 +172,31 @@ public class SignupFragment extends Fragment {
         });
 
 
-        MultiSlider multiSlider = (MultiSlider)v.findViewById(R.id.multiSlider);
+        multiSlider = (MultiSlider) v.findViewById(R.id.multiSlider);
 
-        carboRatio = (TextView)v.findViewById(R.id.value1);
-        fatRatio = (TextView)v.findViewById(R.id.value2);
-        proteinRatio = (TextView)v.findViewById(R.id.value3);
+        carboRatio = (TextView) v.findViewById(R.id.value1);
+        fatRatio = (TextView) v.findViewById(R.id.value2);
+        proteinRatio = (TextView) v.findViewById(R.id.value3);
 
         multiSlider.setOnThumbValueChangeListener(new MultiSlider.OnThumbValueChangeListener() {
             @Override
             public void onValueChanged(MultiSlider multiSlider, MultiSlider.Thumb thumb, int thumbIndex, int value) {
-                if (thumbIndex == 0) {
-                    carboRatio.setText(String.valueOf(value));
-                    fatRatio.setText(String.valueOf(multiSlider.getThumb(1).getValue()-value));
-                } else {
-                    proteinRatio.setText(String.valueOf(value));
-                }
-            }
+                int carboR = multiSlider.getThumb(0).getValue();
+                int farR = multiSlider.getThumb(1).getValue() - carboR;
+                int proteinR = 100-(carboR+farR);
+                carboRatio.setText(String.valueOf(carboR));
+                fatRatio.setText(String.valueOf(farR));
+                proteinRatio.setText(String.valueOf(proteinR));
+                spinnerPlan.setSelectedIndex(3);
 
-//            @Override
-//            public void onStartTrackingTouch(MultiSlider multiSlider, MultiSlider.Thumb thumb, int value) {
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(MultiSlider multiSlider, MultiSlider.Thumb thumb, int value) {
-//
-//            }
+            }
         });
         lActicvity = (LoginActivity) getActivity();
 
         return v;
     }
+
+
 
 
     public void datePicker(final View v) {
@@ -293,7 +269,7 @@ public class SignupFragment extends Fragment {
 
     private double calculateBmi(int weight, int height) {
         double bmi;
-        float dHeight = (float)height / 100;
+        float dHeight = (float) height / 100;
         Log.d("dHeight", dHeight + "");
         bmi = weight / (dHeight * dHeight);
         return bmi;
@@ -325,17 +301,18 @@ public class SignupFragment extends Fragment {
         return tdee;
     }
 
-    public void postSignup(String username, String password, String sex, int weight, int height, String birthdate, int bmr, int bmi) {
+    private void postSignup(String username, String password, String sex, int weight, int height, String birthdate
+            , double bmr, double bmi, int carbo, int protein, int fat) {
         String type = "Android";
         Log.d("Signup", username);
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API).build();
         HealthService api = restAdapter.create(HealthService.class);
-        api.postUser(username, password, sex, weight, height, birthdate, type, bmr, bmi, new Callback<UserModel>() {
+        api.postUser(username, password, sex, weight, height, birthdate, type, bmr, bmi, carbo, protein, fat
+                , new Callback<UserModel>() {
             @Override
             public void success(UserModel userModel, Response response) {
-                UserModel.User user = userModel.getObjects().get(0);
-                Log.d("Success", user.getUsername() + "" + user.getCreateAt());
+                Log.d("Success", "");
             }
 
             @Override
@@ -345,26 +322,110 @@ public class SignupFragment extends Fragment {
         });
     }
 
-    private void getResult(){
+    private void getResult() {
+        String usernameText = username.getText().toString();
+        String passwordText = password.getText().toString();
+        String sex = getSex();
         int height = Integer.parseInt(spinnerHeight.getText().toString());
         int weight = Integer.parseInt(spinnerWeight.getText().toString());
+        String birthdate  = et_date.getText().toString();
         double bmr = calculateBmr(weight, height, calculateAge());
         double bmi = calculateBmi(weight, height);
+        int carbo = multiSlider.getThumb(0).getValue();
+        int fat = multiSlider.getThumb(1).getValue() - carbo;
+        int protein = 100-(carbo+fat);
 
         double tdee = calculateTdee(spinnerExercise.getSelectedIndex(), bmr);
         Log.d("Signup", "Username : " + username.getText() + " Password : " + password.getText());
         Log.d("Radio But", "Male: " + male.isChecked() + " Female: " + female.isChecked());
-        Log.d("Height", height+"");
-        Log.d("Weight",weight+"");
+        Log.d("Height", height + "");
+        Log.d("Weight", weight + "");
         Log.d("Age", "" + calculateAge());
+        Log.d("birthdate",birthdate);
         Log.d("BMR", bmr + "");
         Log.d("BMI", bmi + "");
         Log.d("TDEE", tdee + "");
-        result_text.setText("พลังงานที่ต้องการ "+Math.round(tdee)+" แคลอรี่");
+        result_text.setText("พลังงานที่ต้องการ " + Math.round(tdee) + " แคลอรี่");
+
+        postSignup(usernameText,passwordText,sex,weight,height,"13 July 1993",bmr,bmi,carbo,protein,fat);
     }
 
-//    private void calculateExercise(){
-//
-//    }
+    private String getSex(){
+        String sex;
+        if (male.isChecked()){
+            sex = "male";
+        }else{
+            sex = "female";
+        }
+        return sex;
+    }
+
+    private void changePlan(int planNo){
+        switch (planNo){
+            case 0: {
+                multiSlider.getThumb(0).setValue(30);
+                multiSlider.getThumb(1).setValue(70);
+                break;
+            }
+            case 1: {
+                multiSlider.getThumb(0).setValue(20);
+                multiSlider.getThumb(1).setValue(80);
+                break;
+            }
+            case 2: {
+                multiSlider.getThumb(0).setValue(10);
+                multiSlider.getThumb(1).setValue(90);
+                break;
+            }
+
+        }
+
+    }
+    private void spinnerListener(){
+        spinnerPlan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("spinnerPlan Index", "" + position);
+                changePlan(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerHeight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                changePlan(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerWeight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                changePlan(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerExercise.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getResult();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
 
 }

@@ -58,6 +58,15 @@ public class UserModel {
         @SerializedName("bmi")
         private Float bmi;
 
+        @SerializedName("carbo")
+        private Float carbo;
+
+        @SerializedName("protein")
+        private Float protein;
+
+        @SerializedName("fat")
+        private Float fat;
+
         public String getId() {
             return id;
         }
@@ -108,6 +117,18 @@ public class UserModel {
 
         public Float getBmi() {
             return bmi;
+        }
+
+        public Float getCarbo() {
+            return carbo;
+        }
+
+        public Float getProtein() {
+            return protein;
+        }
+
+        public Float getFat() {
+            return fat;
         }
 
     }
