@@ -57,7 +57,7 @@ public class SignupFragment extends Fragment {
     EditText et_date;
     EditText password;
     EditText username;
-    int exePos;
+    int exePos = 0;
     String birthdate;
     NiceSpinner spinnerWeight;
     NiceSpinner spinnerHeight;
@@ -193,6 +193,7 @@ public class SignupFragment extends Fragment {
             }
         });
         lActicvity = (LoginActivity) getActivity();
+        mSnackBar = ((LoginActivity)getActivity()).getSnackBar();
 
         return v;
     }
@@ -313,7 +314,11 @@ public class SignupFragment extends Fragment {
             @Override
             public void success(UserModel userModel, Response response) {
                 Log.d("Success", "");
+                mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+                        .text("Signup Complete")
+                        .show();
                 goToLogin();
+
             }
 
             @Override

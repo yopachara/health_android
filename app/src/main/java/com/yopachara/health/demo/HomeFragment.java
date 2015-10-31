@@ -54,6 +54,9 @@ public class HomeFragment extends Fragment {
     private float fatPercent;
     private float proteinPercent;
     private float carboPercent;
+    float proteinExpect;
+    float fatExpect;
+    float carboExpect;
     int totalcal = 0;
     private static final String USER_KEY = "user_key";
     private UserModel.User mUser;
@@ -62,6 +65,7 @@ public class HomeFragment extends Fragment {
     Float bmr;
     Float bmi;
     Typeface font;
+
 
     public static HomeFragment newInstance(UserModel.User user) {
         HomeFragment fragment = new HomeFragment();
@@ -86,6 +90,9 @@ public class HomeFragment extends Fragment {
         height = mUser.getHeight();
         bmr = mUser.getBmr();
         bmi = mUser.getBmi();
+        proteinExpect = mUser.getProtein();
+        fatExpect = mUser.getFat();
+        carboExpect = mUser.getCarbo();
         font = Typeface.createFromAsset(getContext().getAssets(), "supermarket.ttf");
         Log.d("User information","Weight "+weight+" Height "+height);
 
@@ -140,6 +147,7 @@ public class HomeFragment extends Fragment {
         float protein = 0;
         float fat = 0;
         float carbo = 0;
+
         if(histories.size()==0){
             Log.d("Success", "today is no food");
             textActivity1.setText("Today is no food");
@@ -232,7 +240,7 @@ public class HomeFragment extends Fragment {
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                float percentFilled = (percentComplete/100)*fatPercent*100f;
+                float percentFilled = (percentComplete/100)*(((fatPercent*100f)/fatExpect)*100);
                 textPercentage.setText(String.format("ไขมัน %.0f%%", percentFilled));
                 if(percentFilled>=20) {
                     fat1.setBackgroundResource(R.drawable.circle_black);
@@ -326,7 +334,8 @@ public class HomeFragment extends Fragment {
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textActivity2.setText(String.format("โปรตีน %.0f%%", (percentComplete/100)*proteinPercent*100f));
+                float percentFilled = (percentComplete/100)*(((proteinPercent*100f)/proteinExpect)*100);
+                textActivity2.setText(String.format("โปรตีน %.0f%%", percentFilled));
             }
 
             @Override
@@ -350,7 +359,8 @@ public class HomeFragment extends Fragment {
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textActivity3.setText(String.format("คาร์โบไฮเดรต %.0f%%", currentPosition));
+                float percentFilled = (percentComplete/100)*(((carboPercent*100f)/carboExpect)*100);
+                textActivity3.setText(String.format("คาร์โบไฮเดรต %.0f%%", percentFilled));
             }
 
             @Override
@@ -408,47 +418,6 @@ public class HomeFragment extends Fragment {
                 .setIndex(carboIndex)
                 .setDelay(3750).build());
 
-//        mDecoView.addEvent(new DecoEvent.Builder(0).setIndex(carboIndex).setDelay(18000).build());
-//
-//        mDecoView.addEvent(new DecoEvent.Builder(0).setIndex(proteinIndex).setDelay(18000).build());
-//
-//        mDecoView.addEvent(new DecoEvent.Builder(0)
-//                .setIndex(fatIndex)
-//                .setDelay(20000)
-//                .setDuration(1000)
-//                .setInterpolator(new AnticipateInterpolator())
-//                .setListener(new DecoEvent.ExecuteEventListener() {
-//                    @Override
-//                    public void onEventStart(DecoEvent decoEvent) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onEventEnd(DecoEvent decoEvent) {
-//                        resetText(getView());
-//                    }
-//                })
-//                .build());
-
-//        mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_EXPLODE)
-//                .setIndex(fatIndex)
-//                .setDelay(21000)
-//                .setDuration(3000)
-//                .setDisplayText("GOAL!")
-//                .setListener(new DecoEvent.ExecuteEventListener() {
-//                    @Override
-//                    public void onEventStart(DecoEvent decoEvent) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onEventEnd(DecoEvent decoEvent) {
-////                        createEvents(getView());
-//                    }
-//                })
-//                .build());
-
-//        resetText(getView());
     }
 
     private void resetText(View v) {
