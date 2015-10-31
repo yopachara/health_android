@@ -57,6 +57,8 @@ public class SignupFragment extends Fragment {
     EditText et_date;
     EditText password;
     EditText username;
+    int exePos;
+    String birthdate;
     NiceSpinner spinnerWeight;
     NiceSpinner spinnerHeight;
     NiceSpinner spinnerExercise;
@@ -111,7 +113,7 @@ public class SignupFragment extends Fragment {
             itemsWeight[i] = String.valueOf(i + 31);
         }
         String[] itemsExercise = new String[]{"ออกกำลังกายน้อยมาก", "1-3 ครั้งต่อสัปดาห์", "4-5 ครั้งต่อสัปดาห์", "6-7 ครั้งต่อสัปดาห์", "วันละ 2 ครั้งขึ้นไป"};
-        String[] itemsPlans = new String[]{"คงสภาพ", "สร้างกล้ามเนื้อ", "ลดน้ำหนัก","กำหนดเอง"};
+        String[] itemsPlans = new String[]{"คงสภาพ", "สร้างกล้ามเนื้อ", "ลดน้ำหนัก", "กำหนดเอง"};
 
 
         spinnerHeight = (NiceSpinner) v.findViewById(R.id.spinner_height);
@@ -132,7 +134,6 @@ public class SignupFragment extends Fragment {
         spinnerPlan.attachDataSource(datasPlan);
 
         spinnerListener();
-
 
 
         CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
@@ -167,7 +168,7 @@ public class SignupFragment extends Fragment {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getResult();
+                postSignup();
             }
         });
 
@@ -183,7 +184,7 @@ public class SignupFragment extends Fragment {
             public void onValueChanged(MultiSlider multiSlider, MultiSlider.Thumb thumb, int thumbIndex, int value) {
                 int carboR = multiSlider.getThumb(0).getValue();
                 int farR = multiSlider.getThumb(1).getValue() - carboR;
-                int proteinR = 100-(carboR+farR);
+                int proteinR = 100 - (carboR + farR);
                 carboRatio.setText(String.valueOf(carboR));
                 fatRatio.setText(String.valueOf(farR));
                 proteinRatio.setText(String.valueOf(proteinR));
@@ -195,8 +196,6 @@ public class SignupFragment extends Fragment {
 
         return v;
     }
-
-
 
 
     public void datePicker(final View v) {
@@ -214,6 +213,7 @@ public class SignupFragment extends Fragment {
                 day = dialog.getDay();
                 month = dialog.getMonth() + 1;
                 year = dialog.getYear();
+                birthdate = dialog.getDate()+"";
                 Toast.makeText(lActicvity, "Date is " + day + " " + month + " " + year, Toast.LENGTH_SHORT).show();
                 EditText test = (EditText) getView().findViewById(R.id.birthdate);
                 test.setText(date);
@@ -313,6 +313,7 @@ public class SignupFragment extends Fragment {
             @Override
             public void success(UserModel userModel, Response response) {
                 Log.d("Success", "");
+                goToLogin();
             }
 
             @Override
@@ -328,12 +329,39 @@ public class SignupFragment extends Fragment {
         String sex = getSex();
         int height = Integer.parseInt(spinnerHeight.getText().toString());
         int weight = Integer.parseInt(spinnerWeight.getText().toString());
-        String birthdate  = et_date.getText().toString();
+        String birthdate = et_date.getText().toString();
         double bmr = calculateBmr(weight, height, calculateAge());
         double bmi = calculateBmi(weight, height);
         int carbo = multiSlider.getThumb(0).getValue();
         int fat = multiSlider.getThumb(1).getValue() - carbo;
-        int protein = 100-(carbo+fat);
+        int protein = 100 - (carbo + fat);
+
+        double tdee = calculateTdee(exePos, bmr);
+        Log.d("Signup", "Username : " + username.getText() + " Password : " + password.getText());
+        Log.d("Radio But", "Male: " + male.isChecked() + " Female: " + female.isChecked());
+        Log.d("Height", height + "");
+        Log.d("Weight", weight + "");
+        Log.d("Age", "" + calculateAge());
+        Log.d("birthdate", birthdate);
+        Log.d("BMR", bmr + "");
+        Log.d("BMI", bmi + "");
+        Log.d("TDEE", tdee + "");
+        result_text.setText("พลังงานที่ต้องการ " + Math.round(tdee) + " แคลอรี่");
+
+        //postSignup(usernameText,passwordText,sex,weight,height,"13 July 1993",bmr,bmi,carbo,protein,fat);
+    }
+
+    private void postSignup() {
+        String usernameText = username.getText().toString();
+        String passwordText = password.getText().toString();
+        String sex = getSex();
+        int height = Integer.parseInt(spinnerHeight.getText().toString());
+        int weight = Integer.parseInt(spinnerWeight.getText().toString());
+        double bmr = calculateBmr(weight, height, calculateAge());
+        double bmi = calculateBmi(weight, height);
+        int carbo = multiSlider.getThumb(0).getValue();
+        int fat = multiSlider.getThumb(1).getValue() - carbo;
+        int protein = 100 - (carbo + fat);
 
         double tdee = calculateTdee(spinnerExercise.getSelectedIndex(), bmr);
         Log.d("Signup", "Username : " + username.getText() + " Password : " + password.getText());
@@ -341,27 +369,27 @@ public class SignupFragment extends Fragment {
         Log.d("Height", height + "");
         Log.d("Weight", weight + "");
         Log.d("Age", "" + calculateAge());
-        Log.d("birthdate",birthdate);
+        Log.d("birthdate", birthdate);
         Log.d("BMR", bmr + "");
         Log.d("BMI", bmi + "");
         Log.d("TDEE", tdee + "");
         result_text.setText("พลังงานที่ต้องการ " + Math.round(tdee) + " แคลอรี่");
 
-        postSignup(usernameText,passwordText,sex,weight,height,"13 July 1993",bmr,bmi,carbo,protein,fat);
+        postSignup(usernameText, passwordText, sex, weight, height, birthdate, bmr, bmi, carbo, protein, fat);
     }
 
-    private String getSex(){
+    private String getSex() {
         String sex;
-        if (male.isChecked()){
+        if (male.isChecked()) {
             sex = "male";
-        }else{
+        } else {
             sex = "female";
         }
         return sex;
     }
 
-    private void changePlan(int planNo){
-        switch (planNo){
+    private void changePlan(int planNo) {
+        switch (planNo) {
             case 0: {
                 multiSlider.getThumb(0).setValue(30);
                 multiSlider.getThumb(1).setValue(70);
@@ -381,41 +409,22 @@ public class SignupFragment extends Fragment {
         }
 
     }
-    private void spinnerListener(){
+
+    private void spinnerListener() {
         spinnerPlan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("spinnerPlan Index", "" + position);
                 changePlan(position);
+                getResult();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
         spinnerHeight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                changePlan(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spinnerWeight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                changePlan(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spinnerExercise.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 getResult();
@@ -426,6 +435,38 @@ public class SignupFragment extends Fragment {
 
             }
         });
+        spinnerWeight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getResult();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerExercise.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                exePos = position;
+                getResult();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
+
+    public void goToLogin() {
+        Fragment loginFragment = new LoginFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, loginFragment);
+        fragmentTransaction.commit();
+    }
+
 
 }
