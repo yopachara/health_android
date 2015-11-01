@@ -98,6 +98,7 @@ public class HistoryFragment extends Fragment {
                 mAdapter = new HistoryAdapter(getActivity(), history, getFragmentManager());
                 mRecyclerView.setAdapter(mAdapter);
                 mSwipeRefreshLayout.setRefreshing(false);
+
 //                final HashMap<Integer, Integer> classes = new HashMap<Integer, Integer>();
 //
 //                for(int i = 0 ;i < history.size()-1;i++){

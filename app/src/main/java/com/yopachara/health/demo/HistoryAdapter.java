@@ -1,6 +1,5 @@
 package com.yopachara.health.demo;
 
-import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -18,9 +17,6 @@ import com.rey.material.app.ThemeManager;
 import com.yopachara.health.demo.Model.HistoryModel;
 import com.yopachara.health.demo.Service.HealthService;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +34,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     FragmentManager fragmentManager;
     RecyclerView recyclerView;
     private HistoryModel historyModel;
+    public List<Boolean> isExpanded;
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public TextView mTextView;
         public TextView name;
         public TextView date;
@@ -54,8 +51,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         private HistoryAdapter ha;
         String API = "http://pachara.me:3000";
         Dialog.Builder builder = null;
+        ViewGroup expandableLayout;
         FragmentManager fragmentManager;
-        private ViewHolder(View view,FragmentManager fragmentManagers) {
+
+        private ViewHolder(View view, FragmentManager fragmentManagers) {
             super(view);
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
@@ -67,6 +66,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             pro = (TextView) view.findViewById(R.id.pro);
             fat = (TextView) view.findViewById(R.id.fat);
             carbo = (TextView) view.findViewById(R.id.carbo);
+            expandableLayout = (ViewGroup) itemView.findViewById(R.id.expandable_part_layout);
+
             fragmentManager = fragmentManagers;
 
 
@@ -74,25 +75,45 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         @Override
         public void onClick(View view) {
-            Log.d("History Short Click", getAdapterPosition() + view.toString());
+//            Log.d("History Short Click", getAdapterPosition() + view.toString());
             Toast.makeText(view.getContext(), "Short click position = " + getPosition(), Toast.LENGTH_SHORT).show();
+
+            int position = getAdapterPosition();
+            Log.d("onClick History " + position, isExpanded.get(position) + "");
+            if (!isExpanded.get(position)) {
+                expandableLayout.setVisibility(View.VISIBLE);
+            } else {
+                expandableLayout.setVisibility(View.GONE);
+
+            }
+            isExpanded.set(position, !isExpanded.get(position));
+
+
+//            if (!isExpanded ){
+//                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, 300, 1f);
+//                this.name.setLayoutParams(lp);
+//                this.isExpanded = true;
+//            } else if (isExpanded){
+//                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT, 1f);
+//                this.name.setLayoutParams(lp);
+//                this.isExpanded = false;
+//            }
+
         }
 
         @Override
         public boolean onLongClick(View view) {
             Log.d("History Long Click", getPosition() + view.toString());
             Toast.makeText(view.getContext(), "Delete food history = " + name.getText(), Toast.LENGTH_SHORT).show();
-            createDialog(id,view);
+            createDialog(id, view);
 
             return true;
-
-
         }
 
-        private void createDialog(final String id,View view) {
+        private void createDialog(final String id, View view) {
             boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
 
-            builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog){
+            builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog) {
                 @Override
                 public void onPositiveActionClicked(DialogFragment fragment) {
                     super.onPositiveActionClicked(fragment);
@@ -106,15 +127,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             };
 
             ((SimpleDialog.Builder) builder)
-                    .message(name.getText()+" is add on "+date.getText())
+                    .message(name.getText() + " is add on " + date.getText())
                     .title("You want to delete food history?")
                     .positiveAction("Yes")
                     .negativeAction("No");
             DialogFragment fragment = DialogFragment.newInstance(builder);
 
-            fragment.show(fragmentManager ,null);
+            fragment.show(fragmentManager, null);
 
         }
+
         private void delHistory(String id) {
             RestAdapter restAdapter = new RestAdapter.Builder()
                     .setEndpoint(API).build();
@@ -136,10 +158,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     }
 
-    public HistoryAdapter(Context context, ArrayList<HistoryModel.History> dataset,FragmentManager fragmentManagers) {
+    public HistoryAdapter(Context context, ArrayList<HistoryModel.History> dataset, FragmentManager fragmentManagers) {
         history = dataset;
         mContext = context;
         fragmentManager = fragmentManagers;
+
+        isExpanded = new ArrayList<>(history.size());
+        for (int i = 0; i < history.size(); i++) {
+            isExpanded.add(false);
+        }
+        Log.d("isExpanded Size", isExpanded.size() + "");
 
     }
 
@@ -148,7 +176,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         View view = LayoutInflater.from(mContext)
                 .inflate(R.layout.recycler_history_row, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view,fragmentManager);
+        ViewHolder viewHolder = new ViewHolder(view, fragmentManager);
         return viewHolder;
     }
 
@@ -165,15 +193,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         viewHolder.carbo.setText(player.getCarbo());
         viewHolder.pro.setText(player.getProtein());
         viewHolder.id = player.getId();
+//        System.out.println("EXPANDED" + viewHolder. + " " + history.get(position).getDate());
+        // TODO : Ensure this following method working correctly
+
+        if (isExpanded.get(position)) {
+            viewHolder.expandableLayout.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.expandableLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public int getItemCount() {
         return history.size();
     }
-
-
-
-
-
 }

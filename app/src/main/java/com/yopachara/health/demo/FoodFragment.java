@@ -16,7 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
+import com.greenfrvr.rubberloader.RubberLoaderView;
 import com.rey.material.widget.SnackBar;
 import com.yopachara.health.demo.Model.FoodModel;
 import com.yopachara.health.demo.Service.HealthService;
@@ -98,6 +100,13 @@ public class FoodFragment extends Fragment implements SearchView.OnQueryTextList
                 mAdapter = new FoodAdapter(v.getContext(), foods);
                 mRecyclerView.setAdapter(mAdapter);
                 mSwipeRefreshLayout.setRefreshing(false);
+
+                RubberLoaderView l;
+                FrameLayout frame_loader;
+                l = (RubberLoaderView)getActivity().findViewById(R.id.loader);
+                frame_loader = (FrameLayout)getActivity().findViewById(R.id.frame_loader);
+                l.setVisibility(View.GONE);
+                frame_loader.setVisibility(View.GONE);
 
 
             }

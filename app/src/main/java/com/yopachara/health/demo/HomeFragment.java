@@ -27,7 +27,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.converter.GsonConverter;
 
 
 public class HomeFragment extends Fragment {
@@ -93,7 +92,8 @@ public class HomeFragment extends Fragment {
         proteinExpect = mUser.getProtein();
         fatExpect = mUser.getFat();
         carboExpect = mUser.getCarbo();
-        font = Typeface.createFromAsset(getContext().getAssets(), "supermarket.ttf");
+//        font = Typeface.createFromAsset(getContext().getAssets(), "supermarket.ttf");
+        font = Typeface.createFromAsset(getContext().getAssets(), "Sukhumvit-Medium.ttf");
         Log.d("User information","Weight "+weight+" Height "+height);
 
 

@@ -12,33 +12,38 @@
         android:layout_height="match_parent">
 
 
-        <LinearLayout
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/main_toolbar"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize"
-                app:theme="@style/AppBar"/>
+                android:layout_height="wrap_content">
 
-            <com.rey.material.widget.TabPageIndicator
-                android:id="@+id/main_tpi"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:clipToPadding="false"
-                android:elevation="4dp"
-                app:v_styleId="@array/tab_indicator"/>
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/main_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?attr/actionBarSize"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:theme="@style/AppBar"/>
+
+                <com.rey.material.widget.TabPageIndicator
+                    android:id="@+id/main_tpi"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:clipToPadding="false"
+                    app:v_styleId="@array/tab_indicator"/>
+            </android.support.design.widget.AppBarLayout>
 
             <com.yopachara.health.demo.CustomViewPager
                 android:id="@+id/main_vp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
-        </LinearLayout>
+        </android.support.design.widget.CoordinatorLayout>
 
 
         <com.rey.material.widget.FloatingActionButton
@@ -59,10 +64,10 @@
             android:visibility="invisible"/>
 
         <FrameLayout
+            android:id="@+id/frame_loader"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/tile_bg"
-            android:id="@+id/frame_loader">
+            android:background="@drawable/tile_bg">
 
             <com.greenfrvr.rubberloader.RubberLoaderView
                 android:id="@+id/loader"
@@ -74,7 +79,6 @@
                 />
 
         </FrameLayout>
-
 
 
     </FrameLayout>

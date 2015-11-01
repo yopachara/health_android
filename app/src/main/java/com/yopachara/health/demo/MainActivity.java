@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     private Drawable[] mDrawables = new Drawable[2];
     private int index = 0;
     public ArrayList<UserModel.User> users;
-    protected @Bind(R.id.loader)
+//    protected @Bind(R.id.loader)
     RubberLoaderView l;
     FrameLayout frame_loader;
 
@@ -110,7 +111,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
         setContentView(R.layout.activity_main);
 
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
+        l = (RubberLoaderView)findViewById(R.id.loader);
         l.startLoading();
 
         frame_loader = (FrameLayout)findViewById(R.id.frame_loader);
@@ -177,8 +179,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         sr = SpeechRecognizer.createSpeechRecognizer(this);
         sr.setRecognitionListener(new listener());
 
-        l.setVisibility(View.INVISIBLE);
-        frame_loader.setVisibility(View.INVISIBLE);
+//        l.setVisibility(View.VISIBLE);
+//        frame_loader.setVisibility(View.VISIBLE);
 
     }
 
