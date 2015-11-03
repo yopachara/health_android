@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     DrawerLayout dl_navigator;
     @Bind(R.id.main_fl_drawer)
     FrameLayout fl_drawer;
+    AppBarLayout ab;
     private ListView lv_drawer;
     private CustomViewPager vp;
     private TabPageIndicator tpi;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     private SnackBar mSnackBar;
 
     private SpeechRecognizer sr;
+
     private static final String TAG = "Speech Recognizer";
     private Drawable[] mDrawables = new Drawable[2];
     private int index = 0;
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         }
 
 
-
+        ab = (AppBarLayout) findViewById(R.id.appbar);
         lv_drawer = (ListView) findViewById(R.id.main_lv_drawer);
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         vp = (CustomViewPager) findViewById(R.id.main_vp);

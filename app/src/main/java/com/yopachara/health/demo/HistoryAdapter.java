@@ -2,11 +2,13 @@ package com.yopachara.health.demo;
 
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +55,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         Dialog.Builder builder = null;
         ViewGroup expandableLayout;
         FragmentManager fragmentManager;
+        CardView cv;
 
         private ViewHolder(View view, FragmentManager fragmentManagers) {
             super(view);
@@ -67,6 +70,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             fat = (TextView) view.findViewById(R.id.fat);
             carbo = (TextView) view.findViewById(R.id.carbo);
             expandableLayout = (ViewGroup) itemView.findViewById(R.id.expandable_part_layout);
+            cv = (CardView) view.findViewById(R.id.card_view);
 
             fragmentManager = fragmentManagers;
 
@@ -82,11 +86,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             Log.d("onClick History " + position, isExpanded.get(position) + "");
             if (!isExpanded.get(position)) {
                 expandableLayout.setVisibility(View.VISIBLE);
+//                cv.setElevation(16);
+
+//                cv.setLayoutParams(CardView.MarginLayoutParams("5dp"));
             } else {
                 expandableLayout.setVisibility(View.GONE);
-
+//                cv.setElevation(8);
             }
             isExpanded.set(position, !isExpanded.get(position));
+
 
 
 //            if (!isExpanded ){
