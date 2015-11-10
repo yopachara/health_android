@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -27,6 +28,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.rey.material.widget.SnackBar;
 import com.yopachara.health.demo.Model.HistoryModel;
 import com.yopachara.health.demo.Service.HealthService;
+
+import org.joda.time.DateTime;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -48,9 +51,12 @@ import retrofit.client.Response;
 
 public class ChartFragment extends Fragment implements OnChartValueSelectedListener {
 
-    private LineChart mChart;
+    private LineChart mChartAll;
+    private LineChart mChartWeek;
+    private LineChart mChartMonth;
     private HistoryAdapter mAdapter;
     private HistoryModel historyModel;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     String API = "http://pachara.me:3000";
     SnackBar mSnackBar;
     int totalcal = 0;
@@ -78,13 +84,268 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_chart, container, false);
         setHasOptionsMenu(true);
+        ScrollView mScrollView = (ScrollView) v.findViewById(R.id.mScrollView);
+        mChartAll = (LineChart) v.findViewById(R.id.chart1);
+        mChartWeek = (LineChart) v.findViewById(R.id.chartWeek);
+        mChartMonth = (LineChart) v.findViewById(R.id.chartMonth);
+        mScrollView.setEnabled(false);
+        mChartAll.setDescription("ช่วงเวลาทั้งหมด");
+        mChartAll.setNoDataTextDescription("โปรดใส่ข้อมูลเพื่อพล็อตกราฟ.");
+        mChartWeek.setDescription("อาทิตย์ที่ผ่านมา");
+        mChartWeek.setNoDataTextDescription("โปรดใส่ข้อมูลเพื่อพล็อตกราฟ.");
+        mChartMonth.setDescription("เดือนที่ผ่านมา");
+        mChartMonth.setNoDataTextDescription("โปรดใส่ข้อมูลเพื่อพล็อตกราฟ.");
 
-        mChart = (LineChart) v.findViewById(R.id.chart1);
+        setupChart(mChartAll, v);
+        setupChart(mChartWeek, v);
+        setupChart(mChartMonth, v);
+
+        getHistory(v);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeChartContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getHistory(v);
+            }
+        });
+
+
+        return v;
+    }
+
+    @Override
+    public void onNothingSelected() {
+        Log.i("Nothing selected", "Nothing selected.");
+    }
+
+    @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+        Log.i("Entry selected", e.toString());
+    }
+
+    private void setData(int count, float range, ArrayList<Entry> chart, ArrayList<String> index, LineChart mChart) {
+
+        ArrayList<String> xVals = new ArrayList<String>();
+        for (int i = 0; i < count; i++) {
+            xVals.add((index.get(i)) + "");
+        }
+
+        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+
+        for (int i = 0; i < count; i++) {
+            float mult = range / 2f;
+            float val = (float) (Math.random() * mult) + 50;// + (float)
+            // ((mult *
+            // 0.1) / 10);
+            yVals1.add(new Entry(val, i));
+        }
+
+        // create a dataset and give it a type
+        LineDataSet set1 = new LineDataSet(chart, "แคลอรี่");
+        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set1.setColor(ColorTemplate.getHoloBlue());
+        set1.setCircleColor(Color.WHITE);
+        set1.setLineWidth(2f);
+        set1.setCircleSize(3f);
+        set1.setFillAlpha(65);
+        set1.setFillColor(ColorTemplate.getHoloBlue());
+        set1.setHighLightColor(Color.rgb(244, 117, 117));
+        set1.setDrawCircleHole(false);
+
+        ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
+//        dataSets.add(set2);
+        dataSets.add(set1); // add the datasets
+
+        // create a data object with the datasets
+        LineData data = new LineData(xVals, dataSets);
+        data.setValueTextColor(Color.WHITE);
+        data.setValueTextSize(9f);
+
+        // set data
+        mChart.setData(data);
+    }
+
+    public void getHistory(final View v) {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(API).build();
+        HealthService api = restAdapter.create(HealthService.class);
+        api.getHistorys(new Callback<HistoryModel>() {
+            @Override
+            public void success(HistoryModel historyModel, Response response) {
+                ArrayList<HistoryModel.History> history = historyModel.getObjects();
+
+                Log.d("Success", "Chart size " + history.size());
+
+                final HashMap<DateTime, Integer> classes = new HashMap<DateTime, Integer>();
+
+                for (int i = 0; i < history.size() - 1; i++) {
+                    Log.d("Date", history.get(i).getDate());
+
+                    String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+                    String patternShort = "yyyy-MM-dd";
+                    SimpleDateFormat format = new SimpleDateFormat(pattern);
+                    SimpleDateFormat formatShort = new SimpleDateFormat(patternShort);
+
+                    try {
+                        DateTime date = new DateTime(format.parse(history.get(i).getDate()));
+                        Log.d("Day", date.getDayOfMonth() + "");
+                        DateTime x = new DateTime(formatShort.parse(date.getYear() + "-" + date.getMonthOfYear() + "-" + date.getDayOfMonth()));
+                        int cal = Integer.parseInt(history.get(i).getCal());
+
+                        if (!classes.containsKey(x)) {
+                            classes.put(x, cal);
+                        } else {
+                            classes.put(x, classes.get(x) + cal);
+                        }
+
+
+                    } catch (java.text.ParseException e) {
+                        //handle exception
+                        Log.d("Error ", e.toString());
+                    }
+
+                    totalcal = totalcal + Integer.parseInt(history.get(i).getCal());
+                }
+                ArrayList<Entry> chartAll = new ArrayList<Entry>();
+                ArrayList<String> indexAll = new ArrayList<String>();
+
+                ArrayList<Entry> chartMonth = new ArrayList<Entry>();
+                ArrayList<String> indexMonth = new ArrayList<String>();
+
+                ArrayList<Entry> chartWeek = new ArrayList<Entry>();
+                ArrayList<String> indexWeek = new ArrayList<String>();
+
+                int count = 0;
+                //Map<Integer,Integer> s = sortByValue(classes);
+                Map<DateTime, Integer> treeMap = new TreeMap<DateTime, Integer>(classes);
+                DateTime lastWeek = new DateTime().minusDays(7);
+                DateTime lastMonth = new DateTime().minusDays(30);
+                Log.d("Last Week", lastWeek + " " + lastWeek.getDayOfMonth() + "");
+
+                for (Map.Entry<DateTime, Integer> entry : treeMap.entrySet()) {
+                    Log.d("Day " + entry.getKey(), " total " + entry.getValue() + " cals.");
+                    indexAll.add(entry.getKey().getDayOfMonth() + "");
+                    chartAll.add(new Entry(entry.getValue(), count));
+                    if (lastWeek.isBefore(entry.getKey())) {
+                        indexWeek.add(entry.getKey().getDayOfMonth() + "");
+                        chartWeek.add(new Entry(entry.getValue(), count));
+                    }
+                    if (lastMonth.isBefore(entry.getKey())) {
+                        indexMonth.add(entry.getKey().getDayOfMonth() + "");
+                        chartMonth.add(new Entry(entry.getValue(), count));
+                    }
+                    count++;
+                }
+                Log.d("Size of month", indexMonth.size() + "");
+                Log.d("Size of week", indexWeek.size() + "");
+                for (int i = 0; i < indexMonth.size() ; i++) {
+                    int dayMonth = lastMonth.plusDays(i+ 1).getDayOfMonth();
+                    if (!indexMonth.contains(dayMonth + "")) {
+                        indexMonth.add(i, dayMonth + "");
+                        chartMonth.add(i, new Entry(0, i));
+                    } else {
+                        float val = chartMonth.get(i).getVal();
+                        chartMonth.set(i,new Entry(val,i));
+                    }
+                }
+                for (int i = 0; i < indexWeek.size(); i++) {
+                    int dayWeek = lastWeek.plusDays(i+ 1).getDayOfMonth();
+                    Log.d("dayWeek", dayWeek + "");
+                    if (!indexWeek.contains(dayWeek + "")) {
+                        Log.d("Day is not contains", dayWeek + "");
+                        indexWeek.add(i, dayWeek + "");
+                        chartWeek.add(i, new Entry(0, i));
+                    }else {
+                        float val = chartWeek.get(i).getVal();
+                        chartWeek.set(i, new Entry(val, i));
+                    }
+                }
+                for (int i = 0; i < indexAll.size(); i++) {
+                    Log.d("Index All", indexAll.get(i));
+                    Log.d("Chart All", chartAll.get(i) + "");
+                }
+
+                for (int i = 0; i < indexMonth.size(); i++) {
+                    Log.d("Index Month", indexMonth.get(i));
+                    Log.d("Chart Month", chartMonth.get(i) + "");
+                }
+                for (int i = 0; i < indexWeek.size(); i++) {
+                    Log.d("Index Week", indexWeek.get(i));
+                    Log.d("Chart Week", chartWeek.get(i) + "");
+                }
+                Log.d("Size of month", indexMonth.size() + "");
+                Log.d("Size of week", indexWeek.size() + "");
+
+                int size = classes.size();
+                setData(size, size, chartAll, indexAll, mChartAll);
+                setData(indexWeek.size(), indexWeek.size(), chartWeek, indexWeek, mChartWeek);
+                setData(indexMonth.size(), indexMonth.size(), chartMonth, indexMonth, mChartMonth);
+
+                Log.d("Size", size + "");
+                Log.d("TOTALCAL", totalcal + "");
+                mSwipeRefreshLayout.setRefreshing(false);
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+                Log.d("Error", error.toString());
+                mSwipeRefreshLayout.setRefreshing(false);
+
+            }
+
+        });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_clear, menu);
+    }
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> list =
+                new LinkedList<>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+            @Override
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByKey(Map<K, V> map) {
+        List<Map.Entry<K, V>> list =
+                new LinkedList<>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+            @Override
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
+    private void setupChart(LineChart mChart, View v) {
+
         mChart.setOnChartValueSelectedListener(this);
 
         // no description text
-        mChart.setDescription("");
-        mChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+
 
         // enable touch gestures
         mChart.setTouchEnabled(true);
@@ -138,205 +399,10 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setTypeface(tf);
-        leftAxis.setTextColor(Color.RED);
+        leftAxis.setTextColor(ColorTemplate.getHoloBlue());
         leftAxis.setAxisMaxValue(2500);
-        leftAxis.setStartAtZero(false);
-        leftAxis.setAxisMinValue(-200);
         leftAxis.setDrawGridLines(false);
 
-        getHistory(v);
-
-        return v;
-    }
-
-    @Override
-    public void onNothingSelected() {
-        Log.i("Nothing selected", "Nothing selected.");
-    }
-
-    @Override
-    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-        Log.i("Entry selected", e.toString());
-    }
-
-    private void setData(int count, float range, ArrayList<Entry> chart, ArrayList<String> index) {
-
-        ArrayList<String> xVals = new ArrayList<String>();
-        for (int i = 0; i < count; i++) {
-            xVals.add((index.get(i)) + "");
-        }
-
-        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
-
-        for (int i = 0; i < count; i++) {
-            float mult = range / 2f;
-            float val = (float) (Math.random() * mult) + 50;// + (float)
-            // ((mult *
-            // 0.1) / 10);
-            yVals1.add(new Entry(val, i));
-        }
-
-        // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(chart, "แคลอรี่");
-        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set1.setColor(ColorTemplate.getHoloBlue());
-        set1.setCircleColor(Color.WHITE);
-        set1.setLineWidth(2f);
-        set1.setCircleSize(3f);
-        set1.setFillAlpha(65);
-        set1.setFillColor(ColorTemplate.getHoloBlue());
-        set1.setHighLightColor(Color.rgb(244, 117, 117));
-        set1.setDrawCircleHole(false);
-        //set1.setFillFormatter(new MyFillFormatter(0f));
-//        set1.setDrawHorizontalHighlightIndicator(false);
-//        set1.setVisible(false);
-//        set1.setCircleHoleColor(Color.WHITE);
-
-//        ArrayList<Entry> yVals2 = new ArrayList<Entry>();
-//
-//        for (int i = 0; i < count; i++) {
-//            float mult = range;
-//            float val = (float) (Math.random() * mult) + 450;// + (float)
-//            // ((mult *
-//            // 0.1) / 10);
-//            yVals2.add(new Entry(val, i));
-//        }
-//
-//        // create a dataset and give it a type
-//        LineDataSet set2 = new LineDataSet(yVals2, "DataSet 2");
-//        set2.setAxisDependency(YAxis.AxisDependency.RIGHT);
-//        set2.setColor(Color.RED);
-//        set2.setCircleColor(Color.WHITE);
-//        set2.setLineWidth(2f);
-//        set2.setCircleSize(3f);
-//        set2.setFillAlpha(65);
-//        set2.setFillColor(Color.RED);
-//        set2.setDrawCircleHole(false);
-//        set2.setHighLightColor(Color.rgb(244, 117, 117));
-//        //set2.setFillFormatter(new MyFillFormatter(900f));
-
-        ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
-//        dataSets.add(set2);
-        dataSets.add(set1); // add the datasets
-
-        // create a data object with the datasets
-        LineData data = new LineData(xVals, dataSets);
-        data.setValueTextColor(Color.WHITE);
-        data.setValueTextSize(9f);
-
-        // set data
-        mChart.setData(data);
-    }
-
-    public void getHistory(final View v) {
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(API).build();
-        HealthService api = restAdapter.create(HealthService.class);
-        api.getHistorys(new Callback<HistoryModel>() {
-            @Override
-            public void success(HistoryModel historyModel, Response response) {
-                ArrayList<HistoryModel.History> history = historyModel.getObjects();
-
-                Log.d("Success", "Chart size " + history.size());
-
-                final HashMap<Date, Integer> classes = new HashMap<Date, Integer>();
-
-                for(int i = 0 ;i < history.size()-1;i++){
-                    Log.d("Date",history.get(i).getDate());
-
-                    String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
-                    String patternShort = "yyyy-MM-dd";
-                    SimpleDateFormat format = new SimpleDateFormat(pattern);
-                    SimpleDateFormat formatShort = new SimpleDateFormat(patternShort);
-
-                    try {
-                        Date date = format.parse(history.get(i).getDate());
-                        Log.d("Day", date.getDate() + "");
-                        Date x = formatShort.parse(date.getYear()+"-"+date.getMonth()+"-"+date.getDate());
-                        int cal = Integer.parseInt(history.get(i).getCal());
-
-                        if (!classes.containsKey(x)) {
-                            classes.put(x,cal );
-                        } else {
-                            classes.put(x, classes.get(x) + cal);
-                        }
-
-
-                    } catch (java.text.ParseException e) {
-                        //handle exception
-                        Log.d("Error ",e.toString());
-                    }
-
-                    totalcal = totalcal+ Integer.parseInt(history.get(i).getCal());
-                }
-                ArrayList<Entry> chart = new ArrayList<Entry>();
-                ArrayList<String> index = new ArrayList<String>();
-                int count = 0;
-                //Map<Integer,Integer> s = sortByValue(classes);
-                Map<Date, Integer> treeMap = new TreeMap<Date, Integer>(classes);
-
-                for (Map.Entry<Date, Integer> entry : treeMap.entrySet()) {
-                    Log.d("Day " + entry.getKey(), " total " + entry.getValue() + " cals.");
-                    index.add(entry.getKey().getDate()+"");
-                    chart.add(new Entry(entry.getValue(),count));
-                    count++;
-
-                }
-                int size = classes.size();
-                setData(size,size,chart,index);
-                Log.d("Size",size+"");
-                Log.d("TOTALCAL", totalcal+"");
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-                Log.d("Error", error.toString());
-            }
-
-        });
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.menu_clear, menu);
-    }
-
-    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue( Map<K, V> map ) {
-        List<Map.Entry<K, V>> list =
-                new LinkedList<>( map.entrySet() );
-        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
-            @Override
-            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
-                return (o1.getValue()).compareTo(o2.getValue());
-            }
-        });
-
-        Map<K, V> result = new LinkedHashMap<>();
-        for (Map.Entry<K, V> entry : list)
-        {
-            result.put( entry.getKey(), entry.getValue() );
-        }
-        return result;
-    }
-
-    public static <K, V extends Comparable<? super V>> Map<K, V> sortByKey( Map<K, V> map ) {
-        List<Map.Entry<K, V>> list =
-                new LinkedList<>( map.entrySet() );
-        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
-            @Override
-            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
-                return (o1.getValue()).compareTo(o2.getValue());
-            }
-        });
-
-        Map<K, V> result = new LinkedHashMap<>();
-        for (Map.Entry<K, V> entry : list)
-        {
-            result.put( entry.getKey(), entry.getValue() );
-        }
-        return result;
     }
 
 }
