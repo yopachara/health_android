@@ -3,6 +3,8 @@ package com.yopachara.health.demo;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +13,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
+import com.rey.material.app.SimpleDialog;
+import com.rey.material.app.ThemeManager;
 import com.yopachara.health.demo.Model.FoodModel;
+import com.yopachara.health.demo.Model.HistoryModel;
+import com.yopachara.health.demo.Service.HealthService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by yopachara on 9/19/15 AD.
@@ -24,6 +37,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     private final List<FoodModel.Foods> mPlayers;
     private Context mContext;
     public List<Boolean> isExpanded;
+    FragmentManager fragmentManager;
+
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener  {
@@ -33,10 +48,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         public TextView pro;
         public TextView fat;
         public TextView carbo;
+        Dialog.Builder builder = null;
+        String API = "http://pachara.me:3000";
+        FragmentManager fragmentManager;
+
         ViewGroup expandableLayout;
 
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, FragmentManager fragmentManagers) {
             super(view);
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
@@ -48,6 +67,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             fat = (TextView) view.findViewById(R.id.foodfat);
             carbo = (TextView) view.findViewById(R.id.foodcarbo);
             expandableLayout = (ViewGroup) itemView.findViewById(R.id.food_expandable_part_layout);
+            fragmentManager = fragmentManagers;
+
         }
 
         @Override
@@ -80,14 +101,64 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         public boolean onLongClick(View view) {
             Log.d("History Long Click", getPosition() + view.toString());
             Toast.makeText(view.getContext(), "long click food = " + name.getText(), Toast.LENGTH_SHORT).show();
-
+            createDialog();
             return true;
+        }
+
+
+        private void createDialog() {
+            boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
+
+            builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog) {
+                @Override
+                public void onPositiveActionClicked(DialogFragment fragment) {
+                    super.onPositiveActionClicked(fragment);
+                    postHistory("yopachara",mPlayers.get(getPosition()).getName(),mPlayers.get(getPosition()).getCal(),mPlayers.get(getPosition()).getProtein(),mPlayers.get(getPosition()).getCarbo(),mPlayers.get(getPosition()).getFat());
+                }
+
+                @Override
+                public void onNegativeActionClicked(DialogFragment fragment) {
+                    super.onNegativeActionClicked(fragment);
+                }
+            };
+
+            ((SimpleDialog.Builder) builder)
+                    .title("คุณต้องการที่จะเพิ่ม"+name.getText()+"หรือไม่?")
+                    .positiveAction("Yes")
+                    .negativeAction("No");
+            DialogFragment fragment = DialogFragment.newInstance(builder);
+
+            fragment.show(fragmentManager, null);
+
+        }
+
+        private void postHistory(String id,String name,float cal,float pro,float carbo, float fat) {
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(API).build();
+            HealthService api = restAdapter.create(HealthService.class);
+
+            api.postHistory("yopachara", name, cal, pro, carbo, fat, new Callback<HistoryModel>() {
+                @Override
+                public void success(HistoryModel historyModel, Response response) {
+                    Log.d("Success", response.getBody().toString());
+//                    Fragment currentFragment = (Fragment) vp.getAdapter().instantiateItem(vp, 0);//gets current fragment
+                    //now you have to cast it to your fragment, let's say it's name is SenapatiFragment
+//                    ((HomeFragment) currentFragment).getRefreshDeco();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.d("Error", error.toString());
+                }
+            });
         }
     }
 
-    public FoodAdapter(Context context, ArrayList<FoodModel.Foods> dataset) {
+    public FoodAdapter(Context context, ArrayList<FoodModel.Foods> dataset, FragmentManager fragmentManagers) {
         mPlayers = dataset;
         mContext = context;
+        fragmentManager = fragmentManagers;
+
 
         isExpanded = new ArrayList<>(mPlayers.size());
         for (int i = 0; i < mPlayers.size(); i++) {
@@ -102,7 +173,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         View view = LayoutInflater.from(mContext)
                 .inflate(R.layout.recycler_view_row, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view,fragmentManager);
         return viewHolder;
     }
 

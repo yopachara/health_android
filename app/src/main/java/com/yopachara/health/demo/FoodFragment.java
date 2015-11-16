@@ -97,7 +97,7 @@ public class FoodFragment extends Fragment implements SearchView.OnQueryTextList
                 mLayoutManager = new LinearLayoutManager(v.getContext());
                 mRecyclerView.setLayoutManager(mLayoutManager);
 
-                mAdapter = new FoodAdapter(v.getContext(), foods);
+                mAdapter = new FoodAdapter(v.getContext(), foods,getFragmentManager());
                 mRecyclerView.setAdapter(mAdapter);
                 mSwipeRefreshLayout.setRefreshing(false);
 
