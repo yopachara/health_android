@@ -333,7 +333,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                 Toast.makeText(this, "Current theme: " + theme, Toast.LENGTH_SHORT).show();
                 break;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
+
     }
 
     @Override
@@ -652,7 +653,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
         public void onBeginningOfSpeech() {
             Log.d(TAG, "onBeginningOfSpeech");
-            Toast.makeText(MainActivity.this, "เริ่มต้นการพูด", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "กำลังฟัง..", Toast.LENGTH_SHORT).show();
 
         }
 

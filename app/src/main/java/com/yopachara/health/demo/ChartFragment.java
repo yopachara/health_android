@@ -3,14 +3,17 @@ package com.yopachara.health.demo;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
@@ -54,6 +57,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     private LineChart mChartAll;
     private LineChart mChartWeek;
     private LineChart mChartMonth;
+    private CustomViewPager vp;
     private HistoryAdapter mAdapter;
     private HistoryModel historyModel;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -83,6 +87,8 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_chart, container, false);
+        vp=(CustomViewPager) getActivity().findViewById(R.id.main_vp);
+
         setHasOptionsMenu(true);
         ScrollView mScrollView = (ScrollView) v.findViewById(R.id.mScrollView);
         mChartAll = (LineChart) v.findViewById(R.id.chart1);
@@ -239,24 +245,24 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
                 }
                 Log.d("Size of month", indexMonth.size() + "");
                 Log.d("Size of week", indexWeek.size() + "");
-                for (int i = 0; i < indexMonth.size() ; i++) {
-                    int dayMonth = lastMonth.plusDays(i+ 1).getDayOfMonth();
+                for (int i = 0; i < indexMonth.size(); i++) {
+                    int dayMonth = lastMonth.plusDays(i + 1).getDayOfMonth();
                     if (!indexMonth.contains(dayMonth + "")) {
                         indexMonth.add(i, dayMonth + "");
                         chartMonth.add(i, new Entry(0, i));
                     } else {
                         float val = chartMonth.get(i).getVal();
-                        chartMonth.set(i,new Entry(val,i));
+                        chartMonth.set(i, new Entry(val, i));
                     }
                 }
                 for (int i = 0; i < indexWeek.size(); i++) {
-                    int dayWeek = lastWeek.plusDays(i+ 1).getDayOfMonth();
+                    int dayWeek = lastWeek.plusDays(i + 1).getDayOfMonth();
                     Log.d("dayWeek", dayWeek + "");
                     if (!indexWeek.contains(dayWeek + "")) {
                         Log.d("Day is not contains", dayWeek + "");
                         indexWeek.add(i, dayWeek + "");
                         chartWeek.add(i, new Entry(0, i));
-                    }else {
+                    } else {
                         float val = chartWeek.get(i).getVal();
                         chartWeek.set(i, new Entry(val, i));
                     }
@@ -302,8 +308,24 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.menu_clear, menu);
+        inflater.inflate(R.menu.menu_chart, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem lock = menu.findItem(R.id.locker);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("Item", item.getItemId() + "");
+        if (vp.getPagingEnabled()) {
+            vp.setPagingEnabled(false);
+            item.setIcon(R.drawable.ic_action_name);
+        } else {
+            vp.setPagingEnabled(true);
+            item.setIcon(R.drawable.ic_unlock);
+        }
+        return false;
+    }
+
 
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
         List<Map.Entry<K, V>> list =

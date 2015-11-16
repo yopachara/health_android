@@ -3,6 +3,7 @@ package com.yopachara.health.demo;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.rey.material.widget.Slider;
@@ -12,6 +13,8 @@ import com.rey.material.widget.Switch;
  * Created by yopachara on 3/18/2015.
  */
 public class CustomViewPager extends ViewPager{
+    private boolean isPagingEnabled = true;
+
 
     public CustomViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -29,6 +32,31 @@ public class CustomViewPager extends ViewPager{
         if (v instanceof Slider || v instanceof Switch)
             return true;
         return false;
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (this.isPagingEnabled) {
+            return super.onTouchEvent(event);
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        if (this.isPagingEnabled) {
+            return super.onInterceptTouchEvent(event);
+        }
+
+        return false;
+    }
+
+    public void setPagingEnabled(boolean b) {
+        this.isPagingEnabled = b;
+    }
+
+    public boolean getPagingEnabled(){
+        return this.isPagingEnabled;
     }
 
 
