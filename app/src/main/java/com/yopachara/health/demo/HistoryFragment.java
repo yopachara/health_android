@@ -21,6 +21,8 @@ import com.rey.material.widget.SnackBar;
 import com.yopachara.health.demo.Model.HistoryModel;
 import com.yopachara.health.demo.Service.HealthService;
 
+import org.joda.time.DateTime;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -87,6 +89,11 @@ public class HistoryFragment extends Fragment {
                 ArrayList<HistoryModel.History> history = historyModel.getObjects();
 
                 Log.d("Success", "History size " + history.size());
+
+                DateTime dj = new DateTime(history.get(0).getDateFormat());
+                DateTime dj1 = new DateTime(history.get(1).getDateFormat());
+
+                Log.d("Date Time dj", dj.getDayOfMonth()+" "+ dj.isEqual(dj1)+"");
 
                 mRecyclerView = (RecyclerView) v.findViewById(R.id.historyList);
 

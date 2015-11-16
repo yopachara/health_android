@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     private Drawable[] mDrawables = new Drawable[2];
     private int index = 0;
     public ArrayList<UserModel.User> users;
-//    protected @Bind(R.id.loader)
+    //    protected @Bind(R.id.loader)
     RubberLoaderView l;
     FrameLayout frame_loader;
 
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
     private FloatingActionButton fab_line;
 
-//    private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
+    //    private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
     private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.CHARTS, Tab.PROFILE};
 
 
@@ -115,10 +115,10 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         setContentView(R.layout.activity_main);
 
 //        ButterKnife.bind(this);
-        l = (RubberLoaderView)findViewById(R.id.loader);
+        l = (RubberLoaderView) findViewById(R.id.loader);
         l.startLoading();
 
-        frame_loader = (FrameLayout)findViewById(R.id.frame_loader);
+        frame_loader = (FrameLayout) findViewById(R.id.frame_loader);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                 Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
                 intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getApplication().getPackageName());
+
                 sr.startListening(intent);
                 Log.i("RecognizerIntent", "startListening");
             }
@@ -549,8 +550,9 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                 ArrayList<FoodModel.Foods> text = foodModel.getObjects();
                 //Log.d("Response",text.get(0).getName());
                 createDialog(text);
-                Snackbar.make(getWindow().getDecorView().getRootView(), "Hello Snackbar", Snackbar.LENGTH_LONG).show();
                 Log.d("Success", response.getBody().toString());
+                Log.d("Score", foodModel.getScore() + "");
+                Log.d("Count", foodModel.getCount() + "");
             }
 
             @Override
@@ -573,13 +575,11 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
             @Override
             public void success(HistoryModel historyModel, Response response) {
                 Log.d("Success", response.getBody().toString());
-                mSnackBar.applyStyle(R.style.SnackBarSingleLine)
-                        .text(response.toString())
-                        .show();
-
                 Fragment currentFragment = (Fragment) vp.getAdapter().instantiateItem(vp, 0);//gets current fragment
                 //now you have to cast it to your fragment, let's say it's name is SenapatiFragment
-
+                mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+                        .text("บันทึกสำเร็จ")
+                        .show();
                 ((HomeFragment) currentFragment).getRefreshDeco();
             }
 
@@ -638,9 +638,6 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         DialogFragment fragment = DialogFragment.newInstance(builder);
         fragment.show(getSupportFragmentManager(), null);
 
-        mSnackBar.applyStyle(R.style.SnackBarSingleLine)
-                .text("results: " + String.valueOf(dialog))
-                .show();
     }
 
     class listener implements RecognitionListener {
@@ -649,14 +646,31 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
         public void onReadyForSpeech(Bundle params) {
             Log.d(TAG, "onReadyForSpeech");
+            Toast.makeText(MainActivity.this, "กรุณาพูดรายการอาหาร", Toast.LENGTH_SHORT).show();
+
         }
 
         public void onBeginningOfSpeech() {
             Log.d(TAG, "onBeginningOfSpeech");
+            Toast.makeText(MainActivity.this, "เริ่มต้นการพูด", Toast.LENGTH_SHORT).show();
+
         }
 
         public void onRmsChanged(float rmsdB) {
             Log.d(TAG, "onRmsChanged");
+            float quiet_max = 0f;
+            float medium_max = 6f;
+
+            if (rmsdB < quiet_max) {
+                Log.d("Quiet", rmsdB + "");
+                // quiet
+            } else if (rmsdB >= quiet_max && rmsdB < medium_max) {
+                Log.d("Medium", rmsdB + "");
+                // medium
+            } else {
+                Log.d("Loud", rmsdB + "");
+                // loud
+            }
         }
 
         public void onBufferReceived(byte[] buffer) {
@@ -665,15 +679,15 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
         public void onEndOfSpeech() {
             Log.d(TAG, "onEndofSpeech");
+            Toast.makeText(MainActivity.this, "เสร็จสิ้นการพูด", Toast.LENGTH_SHORT).show();
+
         }
 
         public void onError(int error) {
             Log.d(TAG, "error " + error);
-            if (error == 4) {
-                mSnackBar.applyStyle(R.style.SnackBarSingleLine)
-                        .text("โปรดเชื่อมต่ออินเตอร์เน็ต")
-                        .show();
-            }
+            mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+                    .text("โปรดพูดใหม่อีกครั้ง")
+                    .show();
 //			mSnackBar.applyStyle(R.style.SnackBarSingleLine)
 //					.text("error " + error)
 //					.show();
@@ -687,35 +701,33 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                 Log.d(TAG, "result " + data.get(i));
                 str += data.get(i);
             }
-            boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
+            postSearch(data.get(0).toString());
+//            boolean isLightTheme = ThemeManager.getInstance().getCurrentTheme() == 0;
+//
+//            builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog) {
+//                @Override
+//                public void onPositiveActionClicked(DialogFragment fragment) {
+//                    Toast.makeText(MainActivity.this, "คุณได้เลือก " + getSelectedValue(), Toast.LENGTH_SHORT).show();
+//                    postSearch(getSelectedValue().toString());
+//                    super.onPositiveActionClicked(fragment);
+//                }
+//
+//                @Override
+//                public void onNegativeActionClicked(DialogFragment fragment) {
+//                    Toast.makeText(MainActivity.this, "ยกเลิก", Toast.LENGTH_SHORT).show();
+//                    super.onNegativeActionClicked(fragment);
+//                }
+//            };
+//            CharSequence[] cs = new CharSequence[data.size()];
+//            data.toArray(cs);
+//
+//            ((SimpleDialog.Builder) builder).items(cs, 0)
+//                    .title("รายการอาหาร")
+//                    .positiveAction("เลือก")
+//                    .negativeAction("ยกเลิก");
+//            DialogFragment fragment = DialogFragment.newInstance(builder);
+//            fragment.show(getSupportFragmentManager(), null);
 
-            builder = new SimpleDialog.Builder(isLightTheme ? R.style.SimpleDialogLight : R.style.SimpleDialog) {
-                @Override
-                public void onPositiveActionClicked(DialogFragment fragment) {
-                    Toast.makeText(MainActivity.this, "คุณได้เลือก " + getSelectedValue(), Toast.LENGTH_SHORT).show();
-                    postSearch(getSelectedValue().toString());
-                    super.onPositiveActionClicked(fragment);
-                }
-
-                @Override
-                public void onNegativeActionClicked(DialogFragment fragment) {
-                    Toast.makeText(MainActivity.this, "ยกเลิก", Toast.LENGTH_SHORT).show();
-                    super.onNegativeActionClicked(fragment);
-                }
-            };
-            CharSequence[] cs = new CharSequence[data.size()];
-            data.toArray(cs);
-
-            ((SimpleDialog.Builder) builder).items(cs, 0)
-                    .title("รายการอาหาร")
-                    .positiveAction("เลือก")
-                    .negativeAction("ยกเลิก");
-            DialogFragment fragment = DialogFragment.newInstance(builder);
-            fragment.show(getSupportFragmentManager(), null);
-
-            mSnackBar.applyStyle(R.style.SnackBarSingleLine)
-                    .text("results: " + String.valueOf(data))
-                    .show();
         }
 
         public void onPartialResults(Bundle partialResults) {

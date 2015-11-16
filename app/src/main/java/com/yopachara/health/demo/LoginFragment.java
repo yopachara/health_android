@@ -56,10 +56,7 @@ public class LoginFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
         Button button_bt_raise = (Button)v.findViewById(R.id.button_bt_raise);
-        Button button_bt_raise_color = (Button)v.findViewById(R.id.button_bt_raise_color);
         Button login_but = (Button)v.findViewById(R.id.login_but);
-        final TextInputLayout textTest = (TextInputLayout)v.findViewById(R.id.usernameWrapper);
-        Button testBut = (Button)v.findViewById(R.id.testBut);
         usernameText = (TextInputLayout)v.findViewById(R.id.usernameWrapper);
         passwordText = (TextInputLayout)v.findViewById(R.id.passwordWrapper);
 
@@ -75,35 +72,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        button_bt_raise_color.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                goToMainActivity(v);
 
-            }
-        });
-
-        testBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RestAdapter restAdapter = new RestAdapter.Builder()
-                        .setEndpoint(API).build();
-                HealthService api = restAdapter.create(HealthService.class);
-
-                api.getFeeds(new Callback<FoodModel>() {
-                    @Override
-                    public void success(FoodModel foodModel, Response response) {
-//                        ArrayList<UserModel.User> users = user.getObjects();
-                        Log.d("Success", users.get(1).getUsername());
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        textTest.setHint(error.toString());
-                    }
-                });
-            }
-        });
 
         login_but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +131,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void failure(RetrofitError error) {
                 Log.d("Fail",error.toString());
+                passwordText.setHint(error.toString());
 
             }
         });

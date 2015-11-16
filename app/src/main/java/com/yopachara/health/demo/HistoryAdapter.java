@@ -84,16 +84,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
             int position = getAdapterPosition();
             Log.d("onClick History " + position, isExpanded.get(position) + "");
-            if (!isExpanded.get(position)) {
-                expandableLayout.setVisibility(View.VISIBLE);
-//                cv.setElevation(16);
-
-//                cv.setLayoutParams(CardView.MarginLayoutParams("5dp"));
-            } else {
-                expandableLayout.setVisibility(View.GONE);
-//                cv.setElevation(8);
-            }
-            isExpanded.set(position, !isExpanded.get(position));
+//            if (!isExpanded.get(position)) {
+//                expandableLayout.setVisibility(View.VISIBLE);
+////                cv.setElevation(16);
+//
+////                cv.setLayoutParams(CardView.MarginLayoutParams("5dp"));
+//            } else {
+//                expandableLayout.setVisibility(View.GONE);
+////                cv.setElevation(8);
+//            }
+//            isExpanded.set(position, !isExpanded.get(position));
 
 
 

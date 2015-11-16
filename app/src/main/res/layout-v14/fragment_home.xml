@@ -98,7 +98,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_alignParentTop="true"
-                                android:text="cal"
+                                android:text="แคลลอรี่"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:layout_marginLeft="15dp"
                                 android:layout_marginTop="15dp"
@@ -107,7 +107,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="19dp"
-                                android:layout_marginLeft="15dp"
+                                android:layout_marginLeft="0dp"
                                 android:orientation="horizontal">
                                 <View android:layout_width="15dp"
                                       android:layout_height="15dp"
@@ -148,6 +148,15 @@
                                       android:elevation="3dp"
                                       android:id="@+id/cal5"
                                     />
+
+                                <TextView
+                                    android:id="@+id/calPercent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="cal"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="-3dp"/>
                             </LinearLayout>
 
 
@@ -158,15 +167,15 @@
                                 android:layout_alignEnd="@+id/calText"
                                 android:layout_alignRight="@+id/calText"
                                 android:layout_below="@+id/calText"
-                                android:text="fat"
+                                android:text="ไขมัน"
                                 android:layout_marginLeft="15dp"
                                 android:layout_marginTop="15dp"
                                 android:textAppearance="?android:attr/textAppearanceMedium"/>
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="53dp"
-                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginLeft="0dp"
                                 android:orientation="horizontal">
                                 <View android:layout_width="15dp"
                                       android:layout_height="15dp"
@@ -206,6 +215,14 @@
                                       android:elevation="3dp"
                                       android:id="@+id/fat5"
                                     />
+                                <TextView
+                                    android:id="@+id/fatPercent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="fat"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="-3dp"/>
                             </LinearLayout>
                             <TextView
                                 android:id="@+id/proteinText"
@@ -214,10 +231,64 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_below="@+id/fatText"
-                                android:text="protein"
+                                android:text="โปรตีน"
                                 android:layout_marginLeft="15dp"
                                 android:layout_marginTop="15dp"
                                 android:textAppearance="?android:attr/textAppearanceMedium"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="96dp"
+                                android:layout_marginLeft="0dp"
+                                android:orientation="horizontal">
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="85dp"
+                                      android:layout_marginStart="85dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/protein1"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/protein2"
+
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/protein3"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/protein4"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/protein5"
+                                    />
+                                <TextView
+                                    android:id="@+id/proteinPercent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="pro"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="-3dp"/>
+                            </LinearLayout>
 
                             <TextView
                                 android:id="@+id/carboText"
@@ -226,10 +297,64 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_below="@+id/proteinText"
-                                android:text="carbo"
+                                android:text="คาร์โบ"
                                 android:layout_marginLeft="15dp"
                                 android:layout_marginTop="15dp"
                                 android:textAppearance="?android:attr/textAppearanceMedium"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="132dp"
+                                android:layout_marginLeft="0dp"
+                                android:orientation="horizontal">
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="85dp"
+                                      android:layout_marginStart="85dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/carbo1"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/carbo2"
+
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:layout_marginStart="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/carbo3"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/carbo4"
+                                    />
+                                <View android:layout_width="15dp"
+                                      android:layout_height="15dp"
+                                      android:background="@drawable/circle"
+                                      android:layout_marginLeft="30dp"
+                                      android:elevation="3dp"
+                                      android:id="@+id/carbo5"
+                                    />
+                                <TextView
+                                    android:id="@+id/carboPercent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="car"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="-3dp"/>
+                            </LinearLayout>
                         </RelativeLayout>
 
                     </android.support.v7.widget.CardView>

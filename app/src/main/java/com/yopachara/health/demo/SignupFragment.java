@@ -185,9 +185,9 @@ public class SignupFragment extends Fragment {
                 int carboR = multiSlider.getThumb(0).getValue();
                 int farR = multiSlider.getThumb(1).getValue() - carboR;
                 int proteinR = 100 - (carboR + farR);
-                carboRatio.setText(String.valueOf(carboR));
-                fatRatio.setText(String.valueOf(farR));
-                proteinRatio.setText(String.valueOf(proteinR));
+                carboRatio.setText("คาร์โบไฮเดรต "+String.valueOf(carboR)+" %");
+                fatRatio.setText("ไขมัน "+String.valueOf(farR)+" %");
+                proteinRatio.setText("โปรตีน "+String.valueOf(proteinR)+" %");
                 spinnerPlan.setSelectedIndex(3);
 
             }

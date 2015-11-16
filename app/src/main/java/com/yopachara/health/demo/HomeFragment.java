@@ -92,8 +92,8 @@ public class HomeFragment extends Fragment {
         proteinExpect = mUser.getProtein();
         fatExpect = mUser.getFat();
         carboExpect = mUser.getCarbo();
-//        font = Typeface.createFromAsset(getContext().getAssets(), "supermarket.ttf");
-        font = Typeface.createFromAsset(getContext().getAssets(), "Sukhumvit-Medium.ttf");
+        font = Typeface.createFromAsset(getContext().getAssets(), "supermarket.ttf");
+//        font = Typeface.createFromAsset(getContext().getAssets(), "Sukhumvit-Medium.ttf");
         Log.d("User information","Weight "+weight+" Height "+height);
 
 
@@ -147,10 +147,11 @@ public class HomeFragment extends Fragment {
         float protein = 0;
         float fat = 0;
         float carbo = 0;
-
+        resetText(getView(),"all");
         if(histories.size()==0){
             Log.d("Success", "today is no food");
             textActivity1.setText("Today is no food");
+            resetText(getView(),"all");
             createEvents(cal, protein, fat, carbo);
         }
         for(int i=0;i<histories.size();i++){
@@ -223,14 +224,17 @@ public class HomeFragment extends Fragment {
         mBackIndex = mDecoView.addSeries(seriesItem);
     }
 
-    private void createDataSeries1(View v) {
+    private void createDataSeries1(final View v) {
         final SeriesItem seriesItem = new SeriesItem.Builder(Color.parseColor("#FFFF8800"))
                 .setRange(0, mSeriesMax, 0)
                 .setInitialVisibility(false)
                 .build();
 
         final TextView textPercentage = (TextView) v.findViewById(R.id.fatText);
+        final TextView fatPercentage = (TextView) v.findViewById(R.id.fatPercent);
         textPercentage.setTypeface(font);
+        fatPercentage.setTypeface(font);
+        textPercentage.setText("ไขมัน");
         final View fat1 = (View)v.findViewById(R.id.fat1);
         final View fat2 = (View)v.findViewById(R.id.fat2);
         final View fat3 = (View)v.findViewById(R.id.fat3);
@@ -241,21 +245,23 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
                 float percentFilled = (percentComplete/100)*(((fatPercent*100f)/fatExpect)*100);
-                textPercentage.setText(String.format("ไขมัน %.0f%%", percentFilled));
+                fatPercentage.setText(String.format("%.0f%%", percentFilled));
+                resetText(v,"fat");
+
                 if(percentFilled>=20) {
-                    fat1.setBackgroundResource(R.drawable.circle_black);
+                    fat1.setBackgroundResource(R.drawable.circle_orange);
                 }
                 if(percentFilled>=40) {
-                    fat2.setBackgroundResource(R.drawable.circle_black);
+                    fat2.setBackgroundResource(R.drawable.circle_orange);
                 }
                 if(percentFilled>=60) {
-                    fat3.setBackgroundResource(R.drawable.circle_black);
+                    fat3.setBackgroundResource(R.drawable.circle_orange);
                 }
                 if(percentFilled>=80) {
-                    fat4.setBackgroundResource(R.drawable.circle_black);
+                    fat4.setBackgroundResource(R.drawable.circle_orange);
                 }
                 if(percentFilled>=100) {
-                    fat5.setBackgroundResource(R.drawable.circle_black);
+                    fat5.setBackgroundResource(R.drawable.circle_orange);
                 }
             }
 
@@ -271,7 +277,7 @@ public class HomeFragment extends Fragment {
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textToGo.setText(String.format("%.0f เหลือแคลอรี่", ((seriesItem.getMaxValue() - currentPosition)/100)*1814));
+                textToGo.setText(String.format("%.0f เหลือแคลอรี่", ((seriesItem.getMaxValue() - currentPosition)/100)*bmr));
 
             }
 
@@ -283,19 +289,22 @@ public class HomeFragment extends Fragment {
 
         textActivity1 = (TextView) v.findViewById(R.id.textValue);
         final TextView textCal = (TextView) v.findViewById(R.id.calText);
+        final TextView percenCal = (TextView) v.findViewById(R.id.calPercent);
+
         final View cal1 = (View)v.findViewById(R.id.cal1);
         final View cal2 = (View)v.findViewById(R.id.cal2);
         final View cal3 = (View)v.findViewById(R.id.cal3);
         final View cal4 = (View)v.findViewById(R.id.cal4);
         final View cal5 = (View)v.findViewById(R.id.cal5);
-
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                textActivity1.setText(String.format("%.0f แคลอรี่", (currentPosition/100)*1814));
-                textCal.setText(String.format("%.0f แคลอรี่", (currentPosition/100)*1814));
+                textActivity1.setText(String.format("%.0f แคลอรี่", (currentPosition/100)*bmr));
+                percenCal.setText(String.format("%.0f%%", currentPosition));
                 textActivity1.setTypeface(font);
                 textCal.setTypeface(font);
+                percenCal.setTypeface(font);
+
                 if(currentPosition>=20) {
                     cal1.setBackgroundResource(R.drawable.circle_black);
                 }
@@ -322,20 +331,47 @@ public class HomeFragment extends Fragment {
         fatIndex = mDecoView.addSeries(seriesItem);
     }
 
-    private void createDataSeries2(View v) {
+    private void createDataSeries2(final View v) {
         final SeriesItem seriesItem = new SeriesItem.Builder(Color.parseColor("#FFFF4444"))
                 .setRange(0, mSeriesMax, 0)
                 .setInitialVisibility(false)
                 .build();
 
         final TextView textActivity2 = (TextView) v.findViewById(R.id.proteinText);
+        final TextView proteinPer = (TextView) v.findViewById(R.id.proteinPercent);
         textActivity2.setTypeface(font);
+        proteinPer.setTypeface(font);
+
+        final View pro1 = (View)v.findViewById(R.id.protein1);
+        final View pro2 = (View)v.findViewById(R.id.protein2);
+        final View pro3 = (View)v.findViewById(R.id.protein3);
+        final View pro4 = (View)v.findViewById(R.id.protein4);
+        final View pro5 = (View)v.findViewById(R.id.protein5);
 
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
                 float percentFilled = (percentComplete/100)*(((proteinPercent*100f)/proteinExpect)*100);
-                textActivity2.setText(String.format("โปรตีน %.0f%%", percentFilled));
+                proteinPer.setText(String.format("%.0f%%", percentFilled));
+                textActivity2.setText("โปรตีน");
+
+                resetText(v,"pro");
+
+                if(percentFilled>=20) {
+                    pro1.setBackgroundResource(R.drawable.circle_red);
+                }
+                if(percentFilled>=40) {
+                    pro2.setBackgroundResource(R.drawable.circle_red);
+                }
+                if(percentFilled>=60) {
+                    pro3.setBackgroundResource(R.drawable.circle_red);
+                }
+                if(percentFilled>=80) {
+                    pro4.setBackgroundResource(R.drawable.circle_red);
+                }
+                if(percentFilled>=100) {
+                    pro5.setBackgroundResource(R.drawable.circle_red);
+                }
             }
 
             @Override
@@ -347,20 +383,45 @@ public class HomeFragment extends Fragment {
         proteinIndex = mDecoView.addSeries(seriesItem);
     }
 
-    private void createDataSeries3(View v) {
+    private void createDataSeries3(final View v) {
         final SeriesItem seriesItem = new SeriesItem.Builder(Color.parseColor("#FF6699FF"))
                 .setRange(0, mSeriesMax, 0)
                 .setInitialVisibility(false)
                 .build();
 
         final TextView textActivity3 = (TextView) v.findViewById(R.id.carboText);
+        final TextView carboPer = (TextView) v.findViewById(R.id.carboPercent);
+
         textActivity3.setTypeface(font);
+        carboPer.setTypeface(font);
+
+        final View car1 = (View)v.findViewById(R.id.carbo1);
+        final View car2 = (View)v.findViewById(R.id.carbo2);
+        final View car3 = (View)v.findViewById(R.id.carbo3);
+        final View car4 = (View)v.findViewById(R.id.carbo4);
+        final View car5 = (View)v.findViewById(R.id.carbo5);
 
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
                 float percentFilled = (percentComplete/100)*(((carboPercent*100f)/carboExpect)*100);
-                textActivity3.setText(String.format("คาร์โบไฮเดรต %.0f%%", percentFilled));
+                carboPer.setText(String.format("%.0f%%", percentFilled));
+                resetText(v,"car");
+                if(percentFilled>=20) {
+                    car1.setBackgroundResource(R.drawable.circle_blue);
+                }
+                if(percentFilled>=40) {
+                    car2.setBackgroundResource(R.drawable.circle_blue);
+                }
+                if(percentFilled>=60) {
+                    car3.setBackgroundResource(R.drawable.circle_blue);
+                }
+                if(percentFilled>=80) {
+                    car4.setBackgroundResource(R.drawable.circle_blue);
+                }
+                if(percentFilled>=100) {
+                    car5.setBackgroundResource(R.drawable.circle_blue);
+                }
             }
 
             @Override
@@ -420,12 +481,81 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void resetText(View v) {
-        ((TextView) v.findViewById(R.id.calText)).setText("");
-        ((TextView) v.findViewById(R.id.fatText)).setText("");
-        ((TextView) v.findViewById(R.id.carboText)).setText("");
-        ((TextView) v.findViewById(R.id.proteinText)).setText("");
-//        ((TextView) findViewById(R.id.textRemaining)).setText("");
+    private void resetText(View v, String text) {
+        int circle = R.drawable.circle;
+
+        final View cal1 = v.findViewById(R.id.cal1);
+        final View cal2 = v.findViewById(R.id.cal2);
+        final View cal3 = v.findViewById(R.id.cal3);
+        final View cal4 = v.findViewById(R.id.cal4);
+        final View cal5 = v.findViewById(R.id.cal5);
+        final View fat1 = v.findViewById(R.id.fat1);
+        final View fat2 = v.findViewById(R.id.fat2);
+        final View fat3 = v.findViewById(R.id.fat3);
+        final View fat4 = v.findViewById(R.id.fat4);
+        final View fat5 = v.findViewById(R.id.fat5);
+        final View pro1 = v.findViewById(R.id.protein1);
+        final View pro2 = v.findViewById(R.id.protein2);
+        final View pro3 = v.findViewById(R.id.protein3);
+        final View pro4 = v.findViewById(R.id.protein4);
+        final View pro5 = v.findViewById(R.id.protein5);
+        final View car1 = v.findViewById(R.id.carbo1);
+        final View car2 = v.findViewById(R.id.carbo2);
+        final View car3 = v.findViewById(R.id.carbo3);
+        final View car4 = v.findViewById(R.id.carbo4);
+        final View car5 = v.findViewById(R.id.carbo5);
+
+        switch (text){
+            case "cal":
+                cal1.setBackgroundResource(circle);
+                cal2.setBackgroundResource(circle);
+                cal3.setBackgroundResource(circle);
+                cal4.setBackgroundResource(circle);
+                cal5.setBackgroundResource(circle);
+                break;
+            case "fat":
+                fat1.setBackgroundResource(circle);
+                fat2.setBackgroundResource(circle);
+                fat3.setBackgroundResource(circle);
+                fat4.setBackgroundResource(circle);
+                fat5.setBackgroundResource(circle);
+                break;
+            case "pro":
+                pro1.setBackgroundResource(circle);
+                pro2.setBackgroundResource(circle);
+                pro3.setBackgroundResource(circle);
+                pro4.setBackgroundResource(circle);
+                pro5.setBackgroundResource(circle);
+                break;
+            case "car":
+                car1.setBackgroundResource(circle);
+                car2.setBackgroundResource(circle);
+                car3.setBackgroundResource(circle);
+                car4.setBackgroundResource(circle);
+                car5.setBackgroundResource(circle);
+                break;
+            case "all":
+                cal1.setBackgroundResource(circle);
+                cal2.setBackgroundResource(circle);
+                cal3.setBackgroundResource(circle);
+                cal4.setBackgroundResource(circle);
+                cal5.setBackgroundResource(circle);
+                fat1.setBackgroundResource(circle);
+                fat2.setBackgroundResource(circle);
+                fat3.setBackgroundResource(circle);
+                fat4.setBackgroundResource(circle);
+                fat5.setBackgroundResource(circle);
+                pro1.setBackgroundResource(circle);
+                pro2.setBackgroundResource(circle);
+                pro3.setBackgroundResource(circle);
+                pro4.setBackgroundResource(circle);
+                pro5.setBackgroundResource(circle);
+                car1.setBackgroundResource(circle);
+                car2.setBackgroundResource(circle);
+                car3.setBackgroundResource(circle);
+                car4.setBackgroundResource(circle);
+                car5.setBackgroundResource(circle);
+        }
     }
 
 

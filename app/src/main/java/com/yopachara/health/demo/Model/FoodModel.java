@@ -10,6 +10,12 @@ import java.util.List;
  */
 public class FoodModel {
 
+    @SerializedName("score")
+    private float score;
+
+    @SerializedName("counts")
+    private int count;
+
     @SerializedName("result")
     private ArrayList<Foods> foods;
 
@@ -25,6 +31,14 @@ public class FoodModel {
 
     public String getMessage() {
         return message;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     public class Foods {
