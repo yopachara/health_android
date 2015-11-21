@@ -103,7 +103,9 @@ public class HistoryModel {
         }
 
         public int getCalInt() {
-            return Integer.parseInt(cal);
+            String tmp = cal;
+            double calInt = Double.parseDouble(cal);
+            return (int)calInt;
         }
 
         public float getProteinInt() {
