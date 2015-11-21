@@ -197,7 +197,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
                         DateTime date = new DateTime(format.parse(history.get(i).getDate()));
                         Log.d("Day", date.getDayOfMonth() + "");
                         DateTime x = new DateTime(formatShort.parse(date.getYear() + "-" + date.getMonthOfYear() + "-" + date.getDayOfMonth()));
-                        int cal = Integer.parseInt(history.get(i).getCal());
+                        int cal = history.get(i).getCalInt();
 
                         if (!classes.containsKey(x)) {
                             classes.put(x, cal);
@@ -211,7 +211,7 @@ public class ChartFragment extends Fragment implements OnChartValueSelectedListe
                         Log.d("Error ", e.toString());
                     }
 
-                    totalcal = totalcal + Integer.parseInt(history.get(i).getCal());
+                    totalcal = totalcal + history.get(i).getCalInt();
                 }
                 ArrayList<Entry> chartAll = new ArrayList<Entry>();
                 ArrayList<String> indexAll = new ArrayList<String>();

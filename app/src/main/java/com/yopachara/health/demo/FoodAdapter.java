@@ -124,8 +124,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
             ((SimpleDialog.Builder) builder)
                     .title("คุณต้องการที่จะเพิ่ม"+name.getText()+"หรือไม่?")
-                    .positiveAction("Yes")
-                    .negativeAction("No");
+                    .positiveAction("ใช่")
+                    .negativeAction("ไม่");
             DialogFragment fragment = DialogFragment.newInstance(builder);
 
             fragment.show(fragmentManager, null);

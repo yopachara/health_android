@@ -77,7 +77,7 @@ public class LoginFragment extends Fragment {
         login_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postLogin("yopachara","yopachara");
+                postLogin(usernameText.getEditText().getText().toString(),passwordText.getEditText().getText().toString());
             }
         });
 
