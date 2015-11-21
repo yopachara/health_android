@@ -105,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
     //    private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.PROGRESS, Tab.BUTTONS, Tab.FAB, Tab.SWITCHES, Tab.SLIDERS, Tab.SPINNERS, Tab.TEXTFIELDS, Tab.SNACKBARS, Tab.DIALOGS};
     private Tab[] mItems = new Tab[]{Tab.HOME, Tab.FOODS, Tab.HISTORYS, Tab.CHARTS, Tab.PROFILE};
-
+    String username;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +124,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            String username = bundle.getString("username");
-            String password = bundle.getString("password");
+            username = bundle.getString("username");
+            password = bundle.getString("password");
             postLogin(username, password);
             String result = username;
             Toast.makeText(this, "Login complete : " + result, Toast.LENGTH_SHORT).show();
@@ -307,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        mToolbarManager.createMenu(R.menu.menu_main);
+        mToolbarManager.createMenu(R.menu.menu_clear);
         return true;
     }
 
@@ -604,7 +605,7 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
                 //postSearch(getSelectedValue().toString());
                 //TODO: Do correct username
                 postHistory(dialog.get(getSelectedIndex()).getName(),
-                        "yopachara",
+                        username,
                         dialog.get(getSelectedIndex()).getCal(),
                         dialog.get(getSelectedIndex()).getCarbo(),
                         dialog.get(getSelectedIndex()).getFat(),
