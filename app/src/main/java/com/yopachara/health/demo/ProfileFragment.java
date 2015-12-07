@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -41,6 +44,7 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         mUser = (UserModel.User) getArguments().getSerializable(USER_KEY);
         font = Typeface.createFromAsset(getContext().getAssets(), "supermarket.ttf");
+        setHasOptionsMenu(true);
 
         username_text = (EditText)v.findViewById(R.id.username_text);
         sex_text = (EditText)v.findViewById(R.id.sex_text);
@@ -67,6 +71,15 @@ public class ProfileFragment extends Fragment {
         return v;
 
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_profile, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem menu_save = menu.findItem(R.id.save);
+    }
+
 
 
 }
