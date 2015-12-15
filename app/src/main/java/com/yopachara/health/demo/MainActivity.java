@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
     String username;
     String password;
 
+    private boolean isVoice = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,15 +144,26 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         fab_line.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDrawables[1] = v.getResources().getDrawable(R.drawable.ic_voice);
-                mDrawables[0] = v.getResources().getDrawable(R.drawable.ic_done_white_24dp);
-                fab_line.setLineMorphingState((fab_line.getLineMorphingState() + 1) % 2, true);
-                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getApplication().getPackageName());
 
-                sr.startListening(intent);
-                Log.i("RecognizerIntent", "startListening");
+                if(isVoice){
+                    Log.d("isVoice","True");
+                    sr.stopListening();
+                    isVoice = false;
+                }
+                else {
+                    isVoice = true;
+                    Log.d("isVoice","False");
+                    mDrawables[1] = v.getResources().getDrawable(R.drawable.ic_voice);
+                    mDrawables[0] = v.getResources().getDrawable(R.drawable.ic_done_white_24dp);
+                    fab_line.setLineMorphingState((fab_line.getLineMorphingState() + 1) % 2, true);
+                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                    intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getApplication().getPackageName());
+
+                    sr.startListening(intent);
+                    Log.i("RecognizerIntent", "startListening");
+                }
+
             }
 
         });
