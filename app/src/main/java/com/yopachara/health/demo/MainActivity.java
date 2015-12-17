@@ -22,6 +22,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -141,32 +142,72 @@ public class MainActivity extends AppCompatActivity implements ToolbarManager.On
         tpi = (TabPageIndicator) findViewById(R.id.main_tpi);
         mSnackBar = (SnackBar) findViewById(R.id.main_sn);
         fab_line = (FloatingActionButton) findViewById(R.id.fab_line);
-        fab_line.setOnClickListener(new View.OnClickListener() {
+        fab_line.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
 
-                if(isVoice){
-                    Log.d("isVoice","True");
-                    sr.stopListening();
-                    isVoice = false;
+                    case MotionEvent.ACTION_DOWN:
+                        v.setPressed(true);
+                        isVoice = true;
+                        Log.d("isVoice","False");
+                        mDrawables[1] = v.getResources().getDrawable(R.drawable.ic_voice);
+                        mDrawables[0] = v.getResources().getDrawable(R.drawable.ic_done_white_24dp);
+                        fab_line.setLineMorphingState((fab_line.getLineMorphingState() + 1) % 2, true);
+                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getApplication().getPackageName());
+
+                        sr.startListening(intent);
+                        Log.i("RecognizerIntent", "startListening");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_OUTSIDE:
+                    case MotionEvent.ACTION_CANCEL:
+                        v.setPressed(false);
+                        if(isVoice){
+                            Log.d("isVoice","True");
+                            sr.stopListening();
+                            isVoice = false;
+                        }
+                        break;
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        break;
+                    case MotionEvent.ACTION_POINTER_UP:
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        break;
                 }
-                else {
-                    isVoice = true;
-                    Log.d("isVoice","False");
-                    mDrawables[1] = v.getResources().getDrawable(R.drawable.ic_voice);
-                    mDrawables[0] = v.getResources().getDrawable(R.drawable.ic_done_white_24dp);
-                    fab_line.setLineMorphingState((fab_line.getLineMorphingState() + 1) % 2, true);
-                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                    intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getApplication().getPackageName());
 
-                    sr.startListening(intent);
-                    Log.i("RecognizerIntent", "startListening");
-                }
-
+                return true;
             }
-
         });
+//        fab_line.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if(isVoice){
+//                    Log.d("isVoice","True");
+//                    sr.stopListening();
+//                    isVoice = false;
+//                }
+//                else {
+//                    isVoice = true;
+//                    Log.d("isVoice","False");
+//                    mDrawables[1] = v.getResources().getDrawable(R.drawable.ic_voice);
+//                    mDrawables[0] = v.getResources().getDrawable(R.drawable.ic_done_white_24dp);
+//                    fab_line.setLineMorphingState((fab_line.getLineMorphingState() + 1) % 2, true);
+//                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+//                    intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getApplication().getPackageName());
+//
+//                    sr.startListening(intent);
+//                    Log.i("RecognizerIntent", "startListening");
+//                }
+//
+//            }
+//
+//        });
         mToolbarManager = new ToolbarManager(getDelegate(), mToolbar, R.id.tb_group_main, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
         mToolbarManager.setNavigationManager(new ToolbarManager.ThemableNavigationManager(R.array.navigation_drawer, getSupportFragmentManager(), mToolbar, dl_navigator) {
             @Override
